@@ -4,7 +4,7 @@ import CartIcon from "../../img/cart-icon.png";
 
 const Navbar = () => {
   return (
-    <nav class="flex sticky w-screen h-36 top-0">
+    <nav class="flex sticky w-screen h-36 top-0 z-50">
       <div class="absolute top-0 flex w-screen h-24 bg-fuchsia-400 justify-between border-b-2">
         <div class="w-16 h-16 m-auto">
           <img src={Logo} alt="" />
