@@ -1,4 +1,6 @@
 import Logo from "../../img/thedapia-logo.png";
+import UserIcon from "../../img/user-icon.png";
+import CartIcon from "../../img/cart-icon.png";
 
 const Navbar = () => {
   return (
@@ -31,17 +33,30 @@ const Navbar = () => {
           </button>
         </div>
 
-        <div class="w-44 h-16 bg-amber-200 m-auto flex items-center justify-around ">
-          <div class="w-14 h-14 bg-black  "></div>
+        <div class="w-44 m-auto flex items-center justify-around ">
+          <div class="w-12 h-12 ">
+            <a href="">
+              <img src={UserIcon} alt="" />
+            </a>
+            
+          </div>
 
-          <div class="w-14 h-14 bg-white  "></div>
+          <div class="w-12 h-12 ">
+            <a href="">
+              <img src={CartIcon} alt="" />
+            </a>
+            
+          </div>
         </div>
       </div>
-      <div class="absolute bottom-0 flex w-screen h-12 bg-emerald-400 flex items-center justify-center ">
+
+
+      <div class="absolute bottom-0 flex w-screen h-12 bg-emerald-400 flex items-center justify-center">
         <ul class= "space-x-14">
             <li class="inline-block"> <a href="" class="text-lg text-black  hover:text-white">Inicio</a> </li>
-            <li class="inline-block"> <a href="" class="text-lg text-black  hover:text-white">Catalogo</a> </li>
+            <li class="inline-block"> <a href="" class="text-lg text-black  hover:text-white">Libreria</a> </li>
             <li class="inline-block"> <a href="" class="text-lg text-black  hover:text-white">Juguetes</a> </li>
+            <li class="inline-block"> <a href="" class="text-lg text-black  hover:text-white">Marcas</a> </li>
             <li class="inline-block"> <a href="" class="text-lg text-black  hover:text-white">Contacto</a> </li>
             <li class="inline-block"> <a href="" class="text-lg text-black  hover:text-white">Nosotros</a> </li>
         </ul>

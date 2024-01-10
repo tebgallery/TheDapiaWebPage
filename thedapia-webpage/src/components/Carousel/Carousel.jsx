@@ -1,0 +1,31 @@
+import { useState, useEffect } from 'react';
+
+const Carousel = ({ images }) => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
+    }, 3000); // Cambia la imagen cada 3 segundos (ajusta este valor según sea necesario)
+
+    return () => clearInterval(interval);
+  }, [images.length]);
+
+  return (
+    <div className="relative w-full max-h-96">
+      {images.map((image, i) => (
+        <img
+          key={i}
+          src={image}
+          alt={`Slide ${i}`}
+          className={`absolute transition-opacity duration-1000 w-full max-h-96 object-cover ${
+            i === index ? 'opacity-100' : 'opacity-0'
+          }`}
+          
+        />
+      ))}
+    </div>
+  );
+};
+
+export default Carousel;
