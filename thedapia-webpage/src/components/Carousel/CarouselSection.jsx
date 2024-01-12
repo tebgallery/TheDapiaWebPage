@@ -11,7 +11,7 @@ const CarouselSection = () => {
     ];
     
   return (
-    <section className="w-full h-128 mb-16">
+    <section className="w-full h-128 mb-28">
       <Carousel images={images}/>
     </section>
   );
