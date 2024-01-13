@@ -53,12 +53,12 @@ const Navbar = () => {
 
       <div class="absolute bottom-0 flex w-screen h-12 bg-emerald-400 flex items-center justify-center">
         <ul class= "space-x-14">
-            <li class="inline-block"> <a href="" class="text-lg text-black  hover:text-white">Inicio</a> </li>
-            <li class="inline-block"> <a href="" class="text-lg text-black  hover:text-white">Libreria</a> </li>
-            <li class="inline-block"> <a href="" class="text-lg text-black  hover:text-white">Juguetes</a> </li>
-            <li class="inline-block"> <a href="" class="text-lg text-black  hover:text-white">Marcas</a> </li>
-            <li class="inline-block"> <a href="" class="text-lg text-black  hover:text-white">Contacto</a> </li>
-            <li class="inline-block"> <a href="" class="text-lg text-black  hover:text-white">Nosotros</a> </li>
+            <li class="inline-block"> <a href="" class="text-base text-black  hover:text-white">INICIO</a> </li>
+            <li class="inline-block"> <a href="" class="text-base text-black  hover:text-white">LIBRERIA</a> </li>
+            <li class="inline-block"> <a href="" class="text-base text-black  hover:text-white">JUGUETES</a> </li>
+            <li class="inline-block"> <a href="" class="text-base text-black  hover:text-white">MARCAS</a> </li>
+            <li class="inline-block"> <a href="" class="text-base text-black  hover:text-white">NOSOTROS</a> </li>
+            <li class="inline-block"> <a href="" class="text-base text-black  hover:text-white">CONTACTO</a> </li>
         </ul>
 
       </div>

@@ -8,7 +8,11 @@ export default {
     extend: {
       height: {
         128: '32rem',
+        192: '48rem',
         256: '64rem',
+      },
+      transitionDuration: {
+        '1800': '1800ms',
       },
     },
   },

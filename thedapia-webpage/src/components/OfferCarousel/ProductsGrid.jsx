@@ -1,36 +1,37 @@
 import React, { useState } from "react";
 
-const ProductsCarousel = () => {
+const ProductsGrid = () => {
+  let cant = 0;
   const articles = [
     {
       id: 1,
       title: "Cartuchera Mooving 1 Piso Eva Bart Simpson",
-      price: "$19.99",
+      price: "$19.990",
       imageUrl: "https://tiendup.b-cdn.net/business/48/products/gyNKV0_656f73ae4d4a9_large.jpg",
     },
     {
       id: 2,
       title: "Carpeta Mooving Nº3 3x40 Escolar AFA HEROES",
-      price: "$29.99",
+      price: "$15.600",
       imageUrl: "https://http2.mlstatic.com/D_NQ_NP_750944-MLU73023483961_112023-O.webp",
     },
     {
       id: 3,
-      title: "Producto 3",
-      price: "$39.99",
-      imageUrl: "url_imagen_3.jpg",
+      title: "Botella de silicona plegable con pico cool Cresko",
+      price: "$18.750",
+      imageUrl: "https://acdn.mitiendanube.com/stores/001/040/110/products/ck7471-fcc20f1fa38f74ea0616720674154410-1024-1024.webp",
     },
     {
       id: 4,
-      title: "Producto 4",
-      price: "$49.99",
-      imageUrl: "url_imagen_4.jpg",
+      title: "Mochila Urbana Harry Potter plataforma magia Cresko",
+      price: "$70.000",
+      imageUrl: "https://acdn.mitiendanube.com/stores/001/040/110/products/hp1271-e33442c5be65e3ae6d16945327896568-1024-1024.webp",
     },
     {
         id: 5,
-        title: "Producto 5",
-        price: "$49.99",
-        imageUrl: "url_imagen_5.jpg",
+        title: "Cuaderno Mickey Mouse A5",
+        price: "$13.990",
+        imageUrl: "https://acdn.mitiendanube.com/stores/001/173/683/products/magic31-a4a52d4f26c2ef8fa316621359875272-1024-1024.webp",
       },
     // Agrega más productos según sea necesario
   ];
@@ -63,16 +64,16 @@ const ProductsCarousel = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-between m-auto w-11/12">
+    <div className="relative flex items-center justify-between w-11/12">
       <button
         onClick={handlePrev}
         className="px-4 py-2 bg-gray-200 text-gray-700 mr-2"
       >
         Prev
       </button>
-      <div className="flex overflow-hidden justify-around">
+      <div className="flex overflow-hidden justify-around p-8 min-h-96">
         {articles.slice(currentIndex, currentIndex + 4).map((article) => (
-          <div key={article.id} className="flex-none w-72 h-128 border-gray-300 border-2 rounded-xl mx-4">
+          <div key={article.id} className="flex-none w-72 h-128 border-gray-300 border-4 rounded-xl mx-4 bg-white transition-transform transform hover:scale-105 cursor-pointer">
             <img
               src={article.imageUrl}
               alt={article.title}
@@ -84,13 +85,13 @@ const ProductsCarousel = () => {
             </div>
             
             <div class="flex justify-around h-20 m-auto p-4">
-              <div class="w-32 flex justify-center items-center">
-                <button class ="text-center text-lg rounded-full border-white bg-emerald-500 w-14 h-10" onClick={incrementQuantity}>+</button>
-          
-                <button class ="text-center text-lg rounded-full border-white bg-red-600 w-14 h-10" onClick={decrementQuantity}>-</button>
+              <div class="w-32 flex justify-between items-center">
+                <button class ="text-center text-lg rounded-full border-white bg-emerald-500 w-12 h-8 hover:bg-emerald-300 duration-300" onClick={incrementQuantity}>+</button>
+                
+                <button class ="text-center text-lg rounded-full border-white bg-red-500 w-12 h-8 transition-colors duration-300 hover:bg-red-300 duration-300" onClick={decrementQuantity}>-</button>
               </div>
-              <div class="flex items-center">
-                <button class="border-2 rounded-3xl bg-gray-200 border-gray-500 p-2" onClick={() => handleAddToCart(article)}>Agregar</button>
+              <div class="flex items-center w-32 justify-end">
+                <button class="text-center text-sm border-2 rounded-lg bg-gray-200 border-gray-500 w-24 h-8 hover:bg-gray-500 duration-300" onClick={() => handleAddToCart(article)}>COMPRAR</button>
               </div>
                 
             </div>
@@ -107,5 +108,5 @@ const ProductsCarousel = () => {
   );
 };
 
-export default ProductsCarousel;
+export default ProductsGrid;
 
