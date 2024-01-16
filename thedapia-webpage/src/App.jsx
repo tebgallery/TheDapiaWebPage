@@ -16,7 +16,6 @@ const App = () => {
     <Features/>
     <Aboutus/>
     <ProductsCarousel/>
-    <ProductsCarousel/>
     <Contact/>
     </>
   );
