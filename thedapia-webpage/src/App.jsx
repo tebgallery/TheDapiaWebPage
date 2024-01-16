@@ -1,24 +1,32 @@
-import Login from './components/Login/Login';
-import Register from './components/Register/Register';
-import Navbar from './components/Navbar/Navbar';
-import CarouselSection from './components/Carousel/CarouselSection';
-import ProductsCarousel from './components/OfferCarousel/ProductsCarrousel';
-import Features from './components/Features/Features';
-import Aboutus from './components/Aboutus/Aboutus';
-import Contact from  './components/Contact/Form';
-import Footer from './components/Footer/Footer';
+import Home from './components/Home/Home';
+import Articulos from './components/Articulos/Articulos';
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 const App = () => {
 
   return (
     <>
-    <Navbar/>
-    <CarouselSection/>
-    <Features/>
-    <Aboutus/>
-    <ProductsCarousel/>
-    <Contact/>
-    <Footer/>
+      <Router>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={<Home/>}
+          />
+          <Route
+            exact
+            path="/articulos"
+            element={<Articulos/>}
+          />
+          
+        </Routes>
+      </Router>
     </>
   );
 };
