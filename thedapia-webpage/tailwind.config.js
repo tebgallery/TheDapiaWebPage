@@ -7,8 +7,11 @@ export default {
   theme: {
     extend: {
       height: {
+        104: '26rem',
         128: '32rem',
         192: '48rem',
+        208: '52rem',
+        224: '56rem',
         256: '64rem',
       },
       transitionDuration: {
