@@ -1,4 +1,5 @@
-import { Link, Button, Element, Events, animateScroll as scroll, scrollSpy } from 'react-scroll';
+import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
+import {Link} from 'react-router-dom';
 import { useRef } from 'react';
 import Aboutus from '../../components/Aboutus/Aboutus'
 
@@ -7,6 +8,8 @@ import UserIcon from "../../img/user-icon.png";
 import CartIcon from "../../img/cart-icon.png";
 
 const Navbar = () => {
+
+  
  
   return (
     <nav class="flex sticky w-screen h-36 top-0 z-50">
@@ -67,14 +70,14 @@ const Navbar = () => {
             <li class="inline-block"> <a href="" class="text-base text-black  hover:text-white">JUGUETES</a> </li>
             <li class="inline-block"> <a href="" class="text-base text-black  hover:text-white">MARCAS</a> </li>
             <li class="inline-block"> 
-              <Link class="hover:text-white cursor-pointer"activeClass="active" smooth spy to="aboutus-section">
+              <a class="hover:text-white cursor-pointer"activeClass="active"href="/#aboutus-section">
                 NOSOTROS
-              </Link>
+              </a>
             </li>
             <li class="inline-block"> 
-              <Link class="hover:text-white cursor-pointer"activeClass="active" smooth spy to="contact-section">
+              <a class="hover:text-white cursor-pointer"activeClass="active"href="/#contact-section">
                 CONTACTO
-              </Link>
+              </a>
             </li>
         </ul>
 

@@ -4,7 +4,7 @@ import ArticulosGrid from './ArticulosGrid';
 
 const Articulos = () => {
     const articulos = [
-        { id: 1, title: 'Artículo 1', img: "https://www.tiendaforeva.com.ar/media/catalog/product/cache/5be8613c49569c873a50ed7e321cb477/4/0/4064524_20231130160006.jpg" /* Otros detalles del artículo */ },
+        { id: 1, title: 'Cartuchera Mooving Homero Simpsons', img: "https://www.tiendaforeva.com.ar/media/catalog/product/cache/5be8613c49569c873a50ed7e321cb477/4/0/4064524_20231130160006.jpg" /* Otros detalles del artículo */ },
         { id: 2, title: 'Artículo 2', /* Otros detalles del artículo */ },
         { id: 3, title: 'Artículo 3', /* Otros detalles del artículo */ },
         { id: 4, title: 'Artículo 4', /* Otros detalles del artículo */ },
