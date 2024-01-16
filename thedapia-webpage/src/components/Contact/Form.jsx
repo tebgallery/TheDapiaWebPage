@@ -26,7 +26,7 @@ const Contact = () => {
         }
       };
     return (
-      <section class="h-192 flex justify-center items-center">
+      <section id="contact-section"class="h-192 flex justify-center items-center">
         <div className="contact-container">
             <form onSubmit={onSubmit} className="contact-form">
                 <h3>Contacto</h3>

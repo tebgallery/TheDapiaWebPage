@@ -1,8 +1,13 @@
+import { Link, Button, Element, Events, animateScroll as scroll, scrollSpy } from 'react-scroll';
+import { useRef } from 'react';
+import Aboutus from '../../components/Aboutus/Aboutus'
+
 import Logo from "../../img/thedapia-logo.png";
 import UserIcon from "../../img/user-icon.png";
 import CartIcon from "../../img/cart-icon.png";
 
 const Navbar = () => {
+ 
   return (
     <nav class="flex sticky w-screen h-36 top-0 z-50">
       <div class="absolute top-0 flex w-screen h-24 bg-fuchsia-400 justify-between border-b-2">
@@ -57,8 +62,16 @@ const Navbar = () => {
             <li class="inline-block"> <a href="" class="text-base text-black  hover:text-white">LIBRERIA</a> </li>
             <li class="inline-block"> <a href="" class="text-base text-black  hover:text-white">JUGUETES</a> </li>
             <li class="inline-block"> <a href="" class="text-base text-black  hover:text-white">MARCAS</a> </li>
-            <li class="inline-block"> <a href="" class="text-base text-black  hover:text-white">NOSOTROS</a> </li>
-            <li class="inline-block"> <a href="" class="text-base text-black  hover:text-white">CONTACTO</a> </li>
+            <li class="inline-block"> 
+              <Link class="hover:text-white cursor-pointer"activeClass="active" smooth spy to="aboutus-section">
+                NOSOTROS
+              </Link>
+            </li>
+            <li class="inline-block"> 
+              <Link class="hover:text-white cursor-pointer"activeClass="active" smooth spy to="contact-section">
+                CONTACTO
+              </Link>
+            </li>
         </ul>
 
       </div>

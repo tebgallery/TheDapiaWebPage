@@ -27,7 +27,7 @@ const Aboutus = () => {
   }, []);
 
   return (
-    <section className="w-full h-192 flex items-center justify-center bg-gradient-to-r from-fuchsia-200 to-purple-400">
+    <section id="aboutus-section" className="w-full h-192 flex items-center justify-center bg-gradient-to-r from-fuchsia-200 to-purple-400">
       <div className="w-8/12 h-128 border-gray-500 p-4 flex justify-center items-center">
         <div className="p-4 w-96 h-96 flex justify-center items-center">
           <img
