@@ -26,6 +26,7 @@ const Contact = () => {
         }
       };
     return (
+      <section class="h-192 flex justify-center items-center">
         <div className="contact-container">
             <form onSubmit={onSubmit} className="contact-form">
                 <h3>Contacto</h3>
@@ -43,6 +44,7 @@ const Contact = () => {
                 <p><FontAwesomeIcon icon={faEnvelope}/> thedapia23@gmail.com</p>
             </div>
         </div>
+      </section>
     )
 }
 
