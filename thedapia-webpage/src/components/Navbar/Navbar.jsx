@@ -53,7 +53,7 @@ const Navbar = () => {
 
       <div class="absolute bottom-0 flex w-screen h-12 bg-emerald-400 flex items-center justify-center">
         <ul class= "space-x-14">
-            <li class="inline-block"> <a href="" class="text-base text-black  hover:text-white">INICI</a> </li>
+            <li class="inline-block"> <a href="" class="text-base text-black  hover:text-white">INICIO</a> </li>
             <li class="inline-block"> <a href="" class="text-base text-black  hover:text-white">LIBRERIA</a> </li>
             <li class="inline-block"> <a href="" class="text-base text-black  hover:text-white">JUGUETES</a> </li>
             <li class="inline-block"> <a href="" class="text-base text-black  hover:text-white">MARCAS</a> </li>

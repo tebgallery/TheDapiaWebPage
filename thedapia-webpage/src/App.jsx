@@ -5,6 +5,7 @@ import CarouselSection from './components/Carousel/CarouselSection';
 import ProductsCarousel from './components/OfferCarousel/ProductsCarrousel';
 import Features from './components/Features/Features';
 import Aboutus from './components/Aboutus/Aboutus';
+import Contact from  './components/Contact/Form';
 
 const App = () => {
 
@@ -16,6 +17,7 @@ const App = () => {
     <Aboutus/>
     <ProductsCarousel/>
     <ProductsCarousel/>
+    <Contact/>
     </>
   );
 };
