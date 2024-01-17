@@ -17,8 +17,18 @@ export default {
       transitionDuration: {
         '1800': '1800ms',
       },
-    },
+      animation: {
+        'slide': 'slide 35s linear infinite',
+      },
+      keyframes: {
+        slide: {
+          '0%': { transform: 'translateX(0) ' },
+          '100%': { transform: 'translateX(-100%)' }  /* Cambia el porcentaje según la cantidad de imágenes */
+        }
+      }
+    }
   },
   plugins: [],
 }
+
 
