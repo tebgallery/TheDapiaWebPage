@@ -78,7 +78,7 @@ const ProductsGrid = () => {
       </button>
       <div className="flex overflow-hidden justify-around py-8 min-h-104 mx-8">
         {articles.slice(currentIndex, currentIndex + 4).map((article) => (
-          <div key={article.id} className="flex-none w-80 border-gray-100 border-x-2 border-t-2 rounded-xl mx-4 bg-white cursor-pointer hover:shadow-2xl duration-500 hover:border-gray-300">
+          <div key={article.id} className="flex-none w-80 border-gray-100 border-x-2 border-t-2 rounded-xl mx-4 bg-white cursor-pointer hover:shadow-2xl duration-500 transition-transform transform hover:scale-105 hover:border-gray-300 ">
             <img
               src={article.imageUrl}
               alt={article.title}
