@@ -15,18 +15,18 @@ const ArticulosGrid = ({ articulos }) => {
   };
 
   return (
-    <div>
-      <div className="grid grid-cols-4 gap-12">
+    <div className="w-4/5 p-8">
+      <div className="grid grid-cols-4 gap-y-12">
         {currentArticulos.map((articulo, index) => (
-          <div key={index} className="flex-none w-80 border-gray-100 border-x-2 border-t-2 rounded-xl bg-white cursor-pointer hover:shadow-2xl duration-500 hover:border-gray-300">
+          <div key={index} className="flex-none w-72 border-gray-300 border-x-2 border-t-2 rounded-t-3xl bg-white cursor-pointer hover:shadow-2xl duration-500 transition-transform transform hover:scale-105 hover:border-gray-300">
           <img
             src={articulo.img}
             alt={articulo.title}
-            className="w-full h-72 object-contain border-black border-b-2 "
+            className="w-full h-72 p-2 object-contain border-black border-b-2 "
           />
           <div class="h-36 p-4 ">
             <h3 className="text-lg text-gray-500 text-center font-semibold block mb-2">{articulo.title}</h3>
-            <p className="text-center text-black text-2xl">{articulo.price}</p>
+            <p className="text-center text-black text-2xl">${articulo.precio}</p>
           </div>
                    
             <div class="relative flex items-center w-full h-10 ">
