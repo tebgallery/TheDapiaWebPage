@@ -1,8 +1,8 @@
 import Navbar from './components/Navbar/Navbar';
-import Home from './pages/home/home'
-import Products from './pages/products/Products'
-import Marcas from './pages/marcas/Marcas'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Home from './pages/home/home';
+import Productos from './pages/Productos/Productos';
+import Marcas from './pages/marcas/Marcas';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
 
@@ -12,7 +12,7 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
+          <Route path="/productos" element={<Productos />} />
           <Route path="/marcas" element={<Marcas />} />
         </Routes>
       </Router>

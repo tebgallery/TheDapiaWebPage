@@ -7,7 +7,7 @@ import Footer from '../../components/Footer/Footer';
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const Home= () => {
+const Home = () => {
     const location = useLocation();
     useEffect(() => {
         const { state } = location;

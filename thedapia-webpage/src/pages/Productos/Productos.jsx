@@ -1,8 +1,8 @@
 import React from "react";
-import Navbar from '../Navbar/Navbar';
-import ArticulosGrid from './ArticulosGrid';
+import ArticulosGrid from '../../components/Articulos/ArticulosGrid';
+import Footer from '../../components/Footer/Footer';
 
-const Articulos = () => {
+const Productos = () => {
     const articulos = [
         { id: 1, title: 'Cartuchera Mooving Homero Simpsons', img: "https://www.tiendaforeva.com.ar/media/catalog/product/cache/5be8613c49569c873a50ed7e321cb477/4/0/4064524_20231130160006.jpg" /* Otros detalles del artículo */ },
         { id: 2, title: 'Artículo 2', /* Otros detalles del artículo */ },
@@ -26,13 +26,12 @@ const Articulos = () => {
 
     return (
         <>
-        <Navbar/>
         <section className="w-full min-h-256 bg-gray-200 flex items-center justify-center">
             <ArticulosGrid articulos={articulos} />
         </section>
-        
+        <Footer/>
         </>
     )
 }
 
-export default Articulos;
+export default Productos;

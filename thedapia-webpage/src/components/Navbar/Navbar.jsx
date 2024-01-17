@@ -60,8 +60,8 @@ const Navbar = () => {
       <div className="absolute bottom-0 flex w-screen h-12 bg-emerald-400 flex items-center justify-center">
         <ul className= "space-x-14">
             <li className="inline-block"> <RouterLink to='/' className="text-base text-black  hover:text-white">INICIO</RouterLink> </li>
-            <li className="inline-block"> <RouterLink to='/products' className="text-base text-black  hover:text-white">LIBRERIA</RouterLink> </li>
-            <li className="inline-block"> <RouterLink to='/products' className="text-base text-black  hover:text-white">JUGUETES</RouterLink> </li>
+            <li className="inline-block"> <RouterLink to='/productos' className="text-base text-black  hover:text-white">LIBRERIA</RouterLink> </li>
+            <li className="inline-block"> <RouterLink to='/productos' className="text-base text-black  hover:text-white">JUGUETES</RouterLink> </li>
             <li className="inline-block"> <RouterLink to='/marcas' className="text-base text-black  hover:text-white">MARCAS</RouterLink> </li>
             <li className="inline-block"> 
               <a onClick={() => handleNavigateToSection('aboutus-section')} className="hover:text-white cursor-pointer"  >
