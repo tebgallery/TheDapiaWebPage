@@ -4,13 +4,13 @@ import CartIcon from "../../img/cart-icon.png";
 import {Link as RouterLink, useNavigate} from 'react-router-dom'
 
 const Navbar = () => {
+
   const navigate = useNavigate();
 
   const handleNavigateToSection = (sectionId) => {
     navigate('/', { state: { sectionId } });
     console.log(sectionId)
-  };
- 
+  }; 
   return (
     <nav className="flex sticky w-screen h-36 top-0 z-50">
       <div className="absolute top-0 flex w-screen h-24 bg-fuchsia-400 justify-between border-b-2">
@@ -57,8 +57,6 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-
-
       <div className="absolute bottom-0 flex w-screen h-12 bg-emerald-400 flex items-center justify-center">
         <ul className= "space-x-14">
             <li className="inline-block"> <RouterLink to='/' className="text-base text-black  hover:text-white">INICIO</RouterLink> </li>
@@ -79,7 +77,7 @@ const Navbar = () => {
 
       </div>
     </nav>
-  );
+  )
 };
 
 export default Navbar;
