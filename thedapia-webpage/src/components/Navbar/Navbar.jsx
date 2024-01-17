@@ -1,21 +1,33 @@
 import Logo from "../../img/thedapia-logo.png";
 import UserIcon from "../../img/user-icon.png";
 import CartIcon from "../../img/cart-icon.png";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from "react";
 import {Link as RouterLink, useNavigate} from 'react-router-dom'
+import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap'
+import './Navbar.css'
 
 const Navbar = () => {
 
+  const [dropdown, setDropdown] = useState(false)
   const navigate = useNavigate();
 
   const handleNavigateToSection = (sectionId) => {
     navigate('/', { state: { sectionId } });
     console.log(sectionId)
   }; 
+
+  const abrirCerrarDropdown=()=>{
+    setDropdown(!dropdown);
+  }
+
+  const marcas = ['marca1', 'marca2', 'marca3', 'marca4','marca5', 'marca6', 'marca7', 'marca8','marca9', 'marca10', 'marca11', 'marca12','marca13', 'marca14', 'marca15', 'marca16','marca17', 'marca18', 'marca19', 'marca20'];
+
   return (
     <nav className="flex sticky w-screen h-36 top-0 z-50">
       <div className="absolute top-0 flex w-screen h-24 bg-fuchsia-400 justify-between border-b-2">
         <div className="w-16 h-16 m-auto">
-          <img src={Logo} alt="" />
+          <RouterLink to='/' ><img src={Logo} alt="" /></RouterLink>
         </div>
 
         <div className="w-1/2 h-12 m-auto relative flex">
@@ -62,7 +74,19 @@ const Navbar = () => {
             <li className="inline-block"> <RouterLink to='/' className="text-base text-black  hover:text-white">INICIO</RouterLink> </li>
             <li className="inline-block"> <RouterLink to='/productos' className="text-base text-black  hover:text-white">LIBRERIA</RouterLink> </li>
             <li className="inline-block"> <RouterLink to='/productos' className="text-base text-black  hover:text-white">JUGUETES</RouterLink> </li>
-            <li className="inline-block"> <RouterLink to='/marcas' className="text-base text-black  hover:text-white">MARCAS</RouterLink> </li>
+            <li className="inline-block">
+              <Dropdown isOpen={dropdown} toggle={abrirCerrarDropdown}>
+                <DropdownToggle caret className="text-base text-black  hover:text-white">
+                  MARCAS
+                </DropdownToggle>
+                <DropdownMenu>
+                  {marcas.map((item, index) => (
+                    <DropdownItem key={index} >{item}</DropdownItem>
+                  ))}
+                </DropdownMenu>
+              </Dropdown>
+            </li>
+
             <li className="inline-block"> 
               <a onClick={() => handleNavigateToSection('aboutus-section')} className="hover:text-white cursor-pointer"  >
                 NOSOTROS
@@ -74,7 +98,6 @@ const Navbar = () => {
               </a>
             </li>
         </ul>
-
       </div>
     </nav>
   )
