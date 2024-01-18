@@ -5,7 +5,7 @@ import CreditCardLogo from '../../img/creditcard-logo.png';
 
 const Features = () => {
     return (
-        <section class="w-full h-36 bg-white">
+        <section class="w-full h-36 bg-gray-100">
             <div class="w-full h-36 flex items-center justify-center">
                 <div class =" flex items-center w-80 h-20 p-2 text-center">
                     <div class="w-16 h-16">
