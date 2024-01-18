@@ -1,6 +1,8 @@
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faUser} from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+
 import Logo from "../../img/thedapia-logo.png";
-import UserIcon from "../../img/user-icon.png";
-import CartIcon from "../../img/cart-icon.png";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from "react";
 import {Link as RouterLink, useNavigate} from 'react-router-dom'
@@ -25,19 +27,19 @@ const Navbar = () => {
 
   return (
     <nav className="flex sticky w-screen h-36 top-0 z-50">
-      <div className="absolute top-0 flex w-screen h-24 bg-fuchsia-400 justify-between border-b-2">
-        <div className="w-16 h-16 m-auto">
-          <RouterLink to='/' ><img src={Logo} alt="" /></RouterLink>
+      <div className="absolute top-0 flex items-center w-screen h-24 bg-gradient-to-r from-fuchsia-300 to-fuchsia-400 justify-around border-b-2">
+        <div className="w-64">
+          <RouterLink to='/' ><img className = "w-16 h-16"src={Logo} alt="" /></RouterLink>
         </div>
 
-        <div className="w-1/2 h-12 m-auto relative flex">
+        <div className="w-1/2 h-12 relative flex">
           <input
             type="search"
-            className="w-full pl-4 rounded-l-2xl outline-none"
+            className="w-full pl-4 outline-none"
             placeholder="Buscar productos..."
           />
           <button
-            className="w-16 rounded-r-2xl bg-white flex items-center justify-center"
+            className="w-16 bg-white flex items-center justify-center"
             type="button"
           >
             <svg className="w-7 h-7" viewBox="0 0 1000 1000">
@@ -53,30 +55,32 @@ const Navbar = () => {
           </button>
         </div>
 
-        <div className="w-44 m-auto flex items-center justify-around ">
-          <div className="w-12 h-12 ">
+        <div className="w-64 flex text-center justify-around pt-2 ">
+          <div className="w-32 h-full">
             <a href="">
-              <img src={UserIcon} alt="" />
+              <FontAwesomeIcon icon={faUser} className='w-8 h-8' />
             </a>
+            <p>Iniciar Sesión </p>
             
           </div>
 
-          <div className="w-12 h-12 ">
+          <div className="w-32">
             <a href="">
-              <img src={CartIcon} alt="" />
+             <FontAwesomeIcon icon={faShoppingCart} className='w-8 h-8'  />
             </a>
+            <p>Ver carrito</p>
             
           </div>
         </div>
       </div>
-      <div className="absolute bottom-0 flex w-screen h-12 bg-emerald-400 flex items-center justify-center">
-        <ul className= "space-x-14">
-            <li className="inline-block"> <RouterLink to='/' className="text-base text-black  hover:text-white">INICIO</RouterLink> </li>
-            <li className="inline-block"> <RouterLink to='/productos' className="text-base text-black  hover:text-white">LIBRERIA</RouterLink> </li>
-            <li className="inline-block"> <RouterLink to='/productos' className="text-base text-black  hover:text-white">JUGUETES</RouterLink> </li>
+      <div className="absolute bottom-0 flex w-screen h-12 bg-gradient-to-r from-teal-400 to-emerald-400 flex items-center justify-center">
+        <ul className= "space-x-14 font-bold">
+            <li className="inline-block"> <RouterLink to='/' className="hover:text-white cursor-pointer">INICIO</RouterLink> </li>
+            <li className="inline-block"> <RouterLink to='/productos' className="hover:text-white cursor-pointer">LIBRERIA</RouterLink> </li>
+            <li className="inline-block"> <RouterLink to='/productos' className="hover:text-white cursor-pointer">JUGUETES</RouterLink> </li>
             <li className="inline-block">
               <Dropdown isOpen={dropdown} toggle={abrirCerrarDropdown}>
-                <DropdownToggle caret className="text-base text-black  hover:text-white">
+                <DropdownToggle caret className="font-bold text-base text-black hover:text-white cursor-pointer">
                   MARCAS
                 </DropdownToggle>
                 <DropdownMenu>

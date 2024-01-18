@@ -1,61 +1,20 @@
 import React, { useState } from "react";
-import AddToCartLogo from '../../img/addtocart.png';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faChevronRight,faChevronLeft} from '@fortawesome/free-solid-svg-icons'
 
-const ProductsGrid = () => {
-  let cant = 0;
-  const articles = [
-    {
-      id: 1,
-      title: "Cartuchera Mooving 1 Piso Eva Bart Simpson",
-      price: "$19.990",
-      imageUrl: "https://tiendup.b-cdn.net/business/48/products/gyNKV0_656f73ae4d4a9_large.jpg",
-    },
-    {
-      id: 2,
-      title: "Carpeta Mooving Nº3 3x40 Escolar AFA HEROES",
-      price: "$15.600",
-      imageUrl: "https://http2.mlstatic.com/D_NQ_NP_750944-MLU73023483961_112023-O.webp",
-    },
-    {
-      id: 3,
-      title: "Botella de silicona plegable con pico cool Cresko",
-      price: "$18.750",
-      imageUrl: "https://acdn.mitiendanube.com/stores/001/040/110/products/ck7471-fcc20f1fa38f74ea0616720674154410-1024-1024.webp",
-    },
-    {
-      id: 4,
-      title: "Mochila Urbana Harry Potter plataforma magia Cresko",
-      price: "$70.000",
-      imageUrl: "https://acdn.mitiendanube.com/stores/001/040/110/products/hp1271-e33442c5be65e3ae6d16945327896568-1024-1024.webp",
-    },
-    {
-        id: 5,
-        title: "Cuaderno Mickey Mouse A5",
-        price: "$13.990",
-        imageUrl: "https://acdn.mitiendanube.com/stores/001/173/683/products/magic31-a4a52d4f26c2ef8fa316621359875272-1024-1024.webp",
-      },
-    // Agrega más productos según sea necesario
-  ];
-
+const ProductosGrid = ({productos}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex < articles.length - 4 ? prevIndex + 1 : 0
+      prevIndex < productos.length - 4 ? prevIndex + 1 : 0
     );
   };
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex > 0 ? prevIndex - 1 : articles.length - 4
+      prevIndex > 0 ? prevIndex - 1 : productos.length - 4
     );
-  };
-
-  const handleAddToCart = (article) => {
-    // Implementa la lógica para agregar al carrito aquí
-    console.log(`Añadido al carrito: ${article.title}, Cantidad: 1`);
   };
 
   const incrementQuantity = () => {
@@ -77,20 +36,20 @@ const ProductsGrid = () => {
 
       </button>
       <div className="flex overflow-hidden justify-around py-8 min-h-104 mx-8">
-        {articles.slice(currentIndex, currentIndex + 4).map((article) => (
-          <div key={article.id} className="flex-none w-80 border-gray-100 border-x-2 border-t-2 rounded-xl mx-4 bg-white cursor-pointer hover:shadow-2xl duration-500 transition-transform transform hover:scale-105 hover:border-gray-300 ">
+        {productos.slice(currentIndex, currentIndex + 4).map((producto) => (
+          <div key={producto.id} className="flex-none w-80 border-gray-100 border-x-2 border-t-2 mx-4 bg-white cursor-pointer hover:shadow-2xl duration-500 transition-transform transform hover:scale-105 hover:border-gray-300 ">
             <img
-              src={article.imageUrl}
-              alt={article.title}
+              src={producto.imageUrl}
+              alt={producto.title}
               className="w-full h-72 object-contain border-black border-b-2 "
             />
             <div class="h-36 p-4 ">
-              <h3 className="text-lg text-gray-500 text-center font-semibold block mb-2">{article.title}</h3>
-              <p className="text-center text-black text-2xl">{article.price}</p>
+              <h3 className="text-lg text-gray-500 text-center font-semibold block mb-2">{producto.title}</h3>
+              <p className="text-center text-black text-2xl">{producto.price}</p>
             </div>
                      
               <div class="relative flex items-center w-full h-10 ">
-                <button class="absolute bottom-0 flex items-center justify-center text-base text-white bg-fuchsia-300 w-full h-10 hover:bg-fuchsia-500 duration-300" onClick={() => handleAddToCart(article)}>
+                <button class="absolute bottom-0 flex items-center justify-center text-base text-white bg-fuchsia-300 w-full h-10 hover:bg-fuchsia-500 duration-300">
                   AGREGAR
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -125,5 +84,5 @@ const ProductsGrid = () => {
   );
 };
 
-export default ProductsGrid;
+export default ProductosGrid;
 

@@ -26,15 +26,15 @@ const Contact = () => {
         }
       };
     return (
-      <section id="contact-section"class="h-192 flex justify-center items-center">
+      <section id="contact-section" className="h-192 flex justify-center items-center bg-gradient-to-r from-purple-300 to-red-300">
         <div className="contact-container">
             <form onSubmit={onSubmit} className="contact-form">
                 <h3>Contacto</h3>
                 
-                <input type="text" required id="nombre" name="nombre" placeholder="Nombre" />
+                <input className="border-b-2" type="text" required id="nombre" name="nombre" placeholder="Nombre" />
                 <input type="email" required id="email" name="email" placeholder="Email" />
                 <textarea required id="mensaje" name="mensaje" placeholder="Mensaje" />
-                <button type="submit">Enviar</button>
+                <button className="bg-fuchsia-300 hover:bg-fuchsia-500"type="submit">Enviar</button>
             </form>
 
             <div className="contact-info">
