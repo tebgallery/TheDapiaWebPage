@@ -18,7 +18,7 @@ export default {
         '1800': '1800ms',
       },
       animation: {
-        'slide': 'slide 35s linear infinite',
+        'slide': 'slide 40s linear infinite',
       },
       keyframes: {
         slide: {

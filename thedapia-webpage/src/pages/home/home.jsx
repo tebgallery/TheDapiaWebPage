@@ -1,12 +1,16 @@
-import CarouselSection from '../../components/Carousel/CarouselSection';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
+import Carousel from '../../components/Carousel/Carousel';
 import ProductosCarousel from '../../components/ProductosCarousel/ProductosCarousel';
 import Features from '../../components/Features/Features';
 import Aboutus from '../../components/Aboutus/Aboutus';
 import Marcas from '../../components/Marcas/Marcas';
 import Contact from '../../components/Contact/Form';
 import Footer from '../../components/Footer/Footer';
-import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+
+import * as MarcasLibreria from '../../img/MarcasLibreria';
+import * as MarcasJuguetes from '../../img/MarcasJuguetes';
 
 const Home = () => {
   const location = useLocation();
@@ -22,6 +26,14 @@ const Home = () => {
       }
     }
   }, [location.pathname, location.state]);
+
+  const Carouselimgs = [
+    'https://www.moovingargentina.com.ar/images/banners/home/Banner_Carpetas-02.jpg',
+    'https://mayorista.ryproductos.com.ar/Content/Images/Banners/BANNER%20AGENDAS%202024.jpg',
+    'https://www.cresko.com/wp-content/uploads/2023/08/MOCHILAS-1-1.jpg',
+    'https://www.moovingargentina.com.ar/images/banners/banner%20carrusel%20Coloreo-01.jpg',
+    'https://www.cresko.com/wp-content/uploads/2023/08/CARTUCHERAS.jpg',
+];
 
   const UltimosIngresos = [
     {
@@ -57,24 +69,40 @@ const Home = () => {
   ];
 
   const marcasLiberia = [
-      {img: "https://catalogos.cresko.com/content/images/cresko-logo.png"},
-      {img: "https://www.moovingargentina.com.ar//components/com_mooving/img/logo_mooving_mooving_at_work.png"},
-      {img: "https://filgo.com.ar/wp-content/uploads/2023/04/filgo-red.svg"},
-      {img: "https://upload.wikimedia.org/wikipedia/commons/2/22/Maped_logo_fr.png"},
-      {img: "https://skribeargentina.com/wp-content/uploads/2018/09/Logo-Ezco_Mesa-de-trabajo-1.png"},
-      {img: "https://scontent.faep8-2.fna.fbcdn.net/v/t39.30808-6/319881151_847182286614800_5789619012646151511_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=vFK49CTtY5kAX-4VFLs&_nc_ht=scontent.faep8-2.fna&oh=00_AfA0p3zpLQ-HPNdg9vurAqO5w6poxyMQDAU3hT_u8wNOoQ&oe=65AF5C43"},
-      {img: "https://simball.com.ar/wp-content/uploads/2022/01/logo-web.png"},
-      {img: "https://pizarrasblancas.com.ar/wp-content/uploads/2023/06/giotto-fila-logo-formato-azul-del-jpg-de-disponible-148237142.png"},
+      {url: MarcasLibreria.cresko, alt: "cresko-logo" },
+      {url: MarcasLibreria.mooving, alt: "mooving-logo"},
+      {url: MarcasLibreria.filgo, alt: "filgo-logo"},
+      {url: MarcasLibreria.maped, alt: "maped-logo"},
+      {url: MarcasLibreria.ezco, alt: "ezco-logo"},
+      {url: MarcasLibreria.pizzini, alt: "pizzini-logo"},
+      {url: MarcasLibreria.simball, alt: "simball-logo"},
+      {url: MarcasLibreria.giotto, alt: "giotto-logo"},
+      {url: MarcasLibreria.faber, alt: "fabercastell-logo"},
+      {url: MarcasLibreria.multiscope, alt: "multiscope-logo"}
   ];
+
+  const marcasJuguetes = [
+    {url: MarcasJuguetes.cuatrom, alt: "4m-logo" },
+    {url: MarcasJuguetes.antex, alt: "antex-logo"},
+    {url: MarcasJuguetes.bimbi, alt: "bimbi-logo"},
+    {url: MarcasJuguetes.calesita, alt: "calesita-logo"},
+    {url: MarcasJuguetes.clementoni, alt: "clementoni-logo"},
+    {url: MarcasJuguetes.cresko, alt: "cresko-logo"},
+    {url: MarcasJuguetes.ditoys, alt: "ditoys-logo"},
+    {url: MarcasJuguetes.funnyland, alt: "funnyland-logo"},
+    {url: MarcasJuguetes.implas, alt: "implas-logo"},
+    {url: MarcasJuguetes.toptoys, alt: "toptoys-logo"}
+
+  ]
 
   return (
     <>
-      <CarouselSection />
+      <Carousel images = {Carouselimgs}/>
       <Features />
       <ProductosCarousel titulo={"ULTIMOS INGRESOS"} productos={UltimosIngresos} />
       <Marcas marcas = {marcasLiberia}/>
       <ProductosCarousel titulo={"LO MAS VENDIDO"} productos={UltimosIngresos} />
-      <Marcas marcas = {marcasLiberia}/>
+      <Marcas marcas = {marcasJuguetes}/>
       <ProductosCarousel titulo={"NUESTRAS OFERTAS"} productos={UltimosIngresos} />
       <Aboutus />
       <Contact />
