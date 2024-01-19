@@ -26,8 +26,8 @@ const Navbar = () => {
   const marcas = ['marca1', 'marca2', 'marca3', 'marca4','marca5', 'marca6', 'marca7', 'marca8','marca9', 'marca10', 'marca11', 'marca12','marca13', 'marca14', 'marca15', 'marca16','marca17', 'marca18', 'marca19', 'marca20'];
 
   return (
-    <nav className="flex sticky w-screen h-36 top-0 z-50">
-      <div className="absolute top-0 flex items-center w-screen h-24 bg-gradient-to-r from-fuchsia-300 to-fuchsia-400 justify-around border-b-2">
+    <nav className="flex sticky w-full h-36 top-0 z-50">
+      <div className="absolute top-0 flex items-center w-full h-24 bg-gradient-to-r from-fuchsia-300 to-fuchsia-400 justify-around border-b-2">
         <div className="w-64">
           <RouterLink to='/' ><img className = "w-16 h-16"src={Logo} alt="" /></RouterLink>
         </div>
@@ -73,7 +73,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-0 flex w-screen h-12 bg-gradient-to-r from-teal-400 to-emerald-400 flex items-center justify-center">
+      <div className="absolute bottom-0 flex w-full h-12 bg-gradient-to-r from-teal-400 to-emerald-400 flex items-center justify-center">
         <ul className= "space-x-14 font-bold">
             <li className="inline-block"> <RouterLink to='/' className="hover:text-white cursor-pointer">INICIO</RouterLink> </li>
             <li className="inline-block"> <RouterLink to='/productos' className="hover:text-white cursor-pointer">LIBRERIA</RouterLink> </li>
