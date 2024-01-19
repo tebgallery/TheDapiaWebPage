@@ -1,17 +1,14 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faUser} from '@fortawesome/free-solid-svg-icons';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-
+import {faUser, faShoppingCart, faChevronDown} from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
 import Logo from "../../img/thedapia-logo.png";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from "react";
 import {Link as RouterLink, useNavigate} from 'react-router-dom'
-import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap'
-import './Navbar.css'
+import ModalMarcas from './ModalMarcas';
+
 
 const Navbar = () => {
 
-  const [dropdown, setDropdown] = useState(false)
+  const [showMarcasModal, setShowMarcasModal] = useState(false);
   const navigate = useNavigate();
 
   const handleNavigateToSection = (sectionId) => {
@@ -19,9 +16,6 @@ const Navbar = () => {
     console.log(sectionId)
   }; 
 
-  const abrirCerrarDropdown=()=>{
-    setDropdown(!dropdown);
-  }
 
   const marcas = ['marca1', 'marca2', 'marca3', 'marca4','marca5', 'marca6', 'marca7', 'marca8','marca9', 'marca10', 'marca11', 'marca12','marca13', 'marca14', 'marca15', 'marca16','marca17', 'marca18', 'marca19', 'marca20'];
 
@@ -78,17 +72,11 @@ const Navbar = () => {
             <li className="inline-block"> <RouterLink to='/' className="hover:text-white cursor-pointer">INICIO</RouterLink> </li>
             <li className="inline-block"> <RouterLink to='/productos' className="hover:text-white cursor-pointer">LIBRERIA</RouterLink> </li>
             <li className="inline-block"> <RouterLink to='/productos' className="hover:text-white cursor-pointer">JUGUETES</RouterLink> </li>
-            <li className="inline-block">
-              <Dropdown isOpen={dropdown} toggle={abrirCerrarDropdown}>
-                <DropdownToggle caret className="font-bold text-base text-black hover:text-white cursor-pointer">
-                  MARCAS
-                </DropdownToggle>
-                <DropdownMenu>
-                  {marcas.map((item, index) => (
-                    <DropdownItem key={index} >{item}</DropdownItem>
-                  ))}
-                </DropdownMenu>
-              </Dropdown>
+
+            <li className="inline-block hover:text-white cursor-pointer"> 
+            <a href='#' onClick={() => setShowMarcasModal(true)}>
+              MARCAS </a>
+            <FontAwesomeIcon icon={faChevronDown}/>
             </li>
 
             <li className="inline-block"> 
@@ -103,6 +91,9 @@ const Navbar = () => {
             </li>
         </ul>
       </div>
+      {showMarcasModal && (
+        <ModalMarcas marcas={marcas} onClose={() => setShowMarcasModal(false)} />
+      )}
     </nav>
   )
 };
