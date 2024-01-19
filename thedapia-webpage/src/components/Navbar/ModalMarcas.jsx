@@ -10,7 +10,7 @@ const ModalMarcas = ({ marcas, onClose }) => {
   );
   return (
     <div className="fixed top-0 left-0 w-full h-full flex justify-center" onClick={onClose}>
-      <div className="bg-white p-8 w-4/6 h-2/6 m-36 grid grid-cols-4 gap-4 bg-gradient-to-r from-teal-400 to-emerald-400">
+      <div className="bg-white p-8 w-4/6 h-60 m-36 grid grid-cols-4 gap-4 bg-gradient-to-r from-teal-400 to-emerald-400">
           {groupedMarcas.map((column, colIndex) => (
             <div key={colIndex}>
               {column.map((marca, rowIndex) => (

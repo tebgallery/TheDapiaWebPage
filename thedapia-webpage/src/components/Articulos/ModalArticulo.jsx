@@ -9,8 +9,7 @@ const ModalArticulo = ({ articulo, onClose }) => {
   return (
     
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-950 bg-opacity-80"
-    onClick={handleOverlayClick}
-    >
+    onClick={handleOverlayClick}>
         <div className="bg-white p-8 w-3/5 h-4/7 rounded-3xl mt-40 shadow-lg flex ">
             <img src={articulo.img} alt={articulo.title} className="w-1/2 h-full object-contain mb-4" />
             <div className="ml-4">
