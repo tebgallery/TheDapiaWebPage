@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ModalArticulo from './ModalArticulo'
 
 const ArticulosGrid = ({ articulos }) => {
-  const itemsPerPage = 8;
+  const itemsPerPage = 40;
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedArticulo, setSelectedArticulo] = useState(null);
 
@@ -25,7 +25,7 @@ const ArticulosGrid = ({ articulos }) => {
   };
 
   return (
-    <div className="w-4/5 p-8">
+    <div className="w-4/5 py-16 px-8">
       <div className="grid grid-cols-4 gap-y-12">
         {currentArticulos.map((articulo, index) => (
           <div key={index} 
