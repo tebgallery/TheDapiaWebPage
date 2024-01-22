@@ -68,7 +68,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className="absolute bottom-0 flex w-full h-12 bg-gradient-to-r from-teal-400 to-emerald-400 flex items-center justify-center">
-        <ul className= "space-x-14 font-bold">
+        <ul className= "space-x-14">
             <li className="inline-block"> <RouterLink to='/' className="hover:text-white cursor-pointer">INICIO</RouterLink> </li>
             <li className="inline-block"> <RouterLink to='/productos' className="hover:text-white cursor-pointer">LIBRERIA</RouterLink> </li>
             <li className="inline-block"> <RouterLink to='/productos' className="hover:text-white cursor-pointer">JUGUETES</RouterLink> </li>
