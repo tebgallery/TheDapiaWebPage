@@ -1,4 +1,5 @@
 import {React,useState} from "react";
+import Navbar from "../../components/Navbar/Navbar";
 import ArticulosGrid from '../../components/Articulos/ArticulosGrid';
 import Footer from '../../components/Footer/Footer';
 import Filtros from '../../components/Filtros/Filtros';
@@ -35,6 +36,7 @@ const Productos = () => {
 
     return (
         <>
+        <Navbar />
         <section className="w-full">
           <div className= "flex justify-center">
             <Filtros />

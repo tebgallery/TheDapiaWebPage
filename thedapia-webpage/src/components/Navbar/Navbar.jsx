@@ -53,9 +53,9 @@ const Navbar = () => {
 
         <div className="w-64 flex text-center justify-around pt-2 ">
           <div className="w-32 h-full">
-            <a href="">
+            <RouterLink to='/adminpage'>
               <FontAwesomeIcon icon={faUser} className='w-8 h-8' />
-            </a>
+            </RouterLink>
             <p>Iniciar Sesión </p>
             
           </div>
