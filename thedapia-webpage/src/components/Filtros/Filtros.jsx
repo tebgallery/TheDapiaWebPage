@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookOpen, faChessKnight, faSortDown, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBookOpen, faChessKnight, faSortDown, faBars,faBox } from '@fortawesome/free-solid-svg-icons';
 
 const Filtros = () => {
   const [libreriaVisible, setLibreriaVisible] = useState(true);
@@ -13,7 +13,12 @@ const Filtros = () => {
   const [tecnicoVisible, setTecnicoVisible] = useState(false);
   const [tecnologiaVisible, setTecnologiaVisible] = useState(false);
 
-  const [jugueteriaVisible, setJugueteriaVisible] = useState(true);
+  const [mochilasVisible, setMochilasVisible] = useState(false);
+  const [mochilasCreskoVisible, setMochilasCreskoVisible] = useState(false);
+  const [mochilasMoovingVisible, setMochilasMoovingVisible] = useState(false);
+  
+
+  const [jugueteriaVisible, setJugueteriaVisible] = useState(false);
   const [juegosMesaVisible, setJuegosMesaVisible] = useState(false);
   const [juguetesBebeVisible, setJuguetesBebeVisible] = useState(false);
   const [puzzlesVisible, setPuzzlesVisible] = useState(false);
@@ -58,6 +63,18 @@ const Filtros = () => {
     setTecnologiaVisible(!tecnologiaVisible);
   };
 
+  const toggleMochilas = () => {
+    setMochilasVisible(!mochilasVisible);
+  };
+
+  const toggleMochilasCresko = () => {
+    setMochilasCreskoVisible(!mochilasCreskoVisible);
+  };
+
+  const toggleMochilasMooving = () => {
+    setMochilasMoovingVisible(!mochilasMoovingVisible);
+  };
+
   const toggleJugueteria = () => {
     setJugueteriaVisible(!jugueteriaVisible);
   };
@@ -95,6 +112,7 @@ const Filtros = () => {
         </button>
 
       </div>
+      <div className="border border-black">
       <div className='p-3 flex items-center hover:text-white cursor-pointer bg-purple-400' onClick={toggleLibreria}>
         <FontAwesomeIcon icon={faBookOpen} className="w-8 h-8 mr-2" />
         <h4 className="text-xl" >Libreria</h4>
@@ -103,7 +121,7 @@ const Filtros = () => {
       {libreriaVisible && (
         <ul className="text-base text-white bg-pink-400">
 
-          <div className="my-2 flex items-center cursor-pointer hover:text-black hover:bg-white" onClick={toggleAgendas}>
+          <div className="mb-2 flex items-center cursor-pointer hover:text-black hover:bg-white" onClick={toggleAgendas}>
             <li className="p-2">Agendas</li>
             <FontAwesomeIcon icon={faSortDown} className="ml-2 mb-1 w-3 h-3" />
           </div>
@@ -176,7 +194,7 @@ const Filtros = () => {
             </ul>
           )}
 
-          <div className="my-2 flex items-center cursor-pointer hover:text-black hover:bg-white" onClick={toggleTecnologia}>
+          <div className="mt-2 flex items-center cursor-pointer hover:text-black hover:bg-white" onClick={toggleTecnologia}>
             <li className="p-2">Tecnologia</li>
             <FontAwesomeIcon icon={faSortDown} className="ml-2 mb-1 w-3 h-3" />
           </div>
@@ -188,6 +206,48 @@ const Filtros = () => {
 
         </ul>
       )}
+      </div>
+
+      <div className="border border-black">
+      <div className='p-3 flex items-center hover:text-white cursor-pointer bg-purple-400' onClick={toggleMochilas}>
+        <FontAwesomeIcon icon={faBox} className="w-8 h-8 mr-2" />
+        <h4 className="text-xl" >Mochilas</h4>
+        <FontAwesomeIcon icon={faSortDown} className="ml-2 mb-2 " />
+      </div>
+      {mochilasVisible && (
+        <ul className="text-base text-white bg-pink-400">
+
+          <div className="flex items-center cursor-pointer hover:text-black hover:bg-white" onClick={toggleMochilasCresko}>
+            <li className="p-2">Cresko</li>
+            <FontAwesomeIcon icon={faSortDown} className="ml-2 mb-1 w-3 h-3" />
+          </div>
+          {mochilasCreskoVisible && (
+            <ul className="ml-4 my-2">
+              <li>Ver Todo</li>
+              <li>Dia Por Pagina</li>
+              <li>2 Dias Por Semana</li>
+              <li>Semana A la Vista</li>
+            </ul>
+          )}
+
+          <div className="flex items-center cursor-pointer hover:text-black hover:bg-white" onClick={toggleMochilasMooving}>
+            <li className="p-2">Mooving</li>
+            <FontAwesomeIcon icon={faSortDown} className="ml-2 mb-1 w-3 h-3" />
+          </div>
+          {mochilasMoovingVisible && (
+            <ul className="ml-4 my-2">
+              <li>Ver Todo</li>
+              <li>Dia Por Pagina</li>
+              <li>2 Dias Por Semana</li>
+              <li>Semana A la Vista</li>
+            </ul>
+          )}
+
+        </ul>
+      )}
+      </div>
+
+      <div className="border border-black">
       <div className='p-3 flex items-center hover:text-white cursor-pointer bg-purple-400' onClick={toggleJugueteria}>
         <FontAwesomeIcon icon={faChessKnight} className="w-8 h-8 mr-2" />
         <h4 className="text-xl" >Jugueteria</h4>
@@ -196,7 +256,7 @@ const Filtros = () => {
       {jugueteriaVisible && (
         <ul className="text-base text-white bg-pink-400">
           
-          <div className="my-2 flex items-center cursor-pointer hover:text-black hover:bg-white" onClick={toggleJuegosMesa}>
+          <div className="mb-2 flex items-center cursor-pointer hover:text-black hover:bg-white" onClick={toggleJuegosMesa}>
             <li className="p-2">Juegos De Mesa</li>
             <FontAwesomeIcon icon={faSortDown} className="ml-2 mb-1 w-3 h-3" />
           </div>
@@ -246,7 +306,7 @@ const Filtros = () => {
             </ul>
           )}
 
-          <div className="my-2 flex items-center cursor-pointer hover:text-black hover:bg-white" onClick={togglePersonajes}>
+          <div className="mt-2 flex items-center cursor-pointer hover:text-black hover:bg-white" onClick={togglePersonajes}>
             <li className="p-2">Personajes</li>
             <FontAwesomeIcon icon={faSortDown} className="ml-2 mb-1 w-3 h-3" />
           </div>
@@ -257,6 +317,7 @@ const Filtros = () => {
           )}
         </ul>
       )}
+      </div>
 
       
     </div>

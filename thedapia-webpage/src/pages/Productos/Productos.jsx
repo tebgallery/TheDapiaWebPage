@@ -35,9 +35,11 @@ const Productos = () => {
 
     return (
         <>
-        <section className="w-full flex justify-center">
+        <section className="w-full">
+          <div className= "flex justify-center">
             <Filtros />
             <ArticulosGrid articulos={articulos} />
+          </div>
         </section>
         <Footer/>
         </>
