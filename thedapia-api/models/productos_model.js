@@ -29,6 +29,10 @@ const productosSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    descripcion:{
+        type: String,
+        require: true
+    },
     imagen:{
         type: String,
         require: true
