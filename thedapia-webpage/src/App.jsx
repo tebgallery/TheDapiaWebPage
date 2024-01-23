@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar/Navbar';
 import Home from './pages/home/home';
 import Productos from './pages/Productos/Productos';
+import AdminPage from './pages/AdminPage/AdminPage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
@@ -8,10 +9,10 @@ const App = () => {
   return (
     <>
       <Router>
-        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/productos" element={<Productos />} />
+          <Route path="/adminpage" element = {<AdminPage/>}/>
         </Routes>
       </Router>
     </>

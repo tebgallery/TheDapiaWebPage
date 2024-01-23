@@ -8,6 +8,7 @@ import Aboutus from '../../components/Aboutus/Aboutus';
 import Marcas from '../../components/Marcas/Marcas';
 import Contact from '../../components/Contact/Form';
 import Footer from '../../components/Footer/Footer';
+import Navbar from '../../components/Navbar/Navbar';
 
 import * as MarcasLibreria from '../../img/MarcasLibreria';
 import * as MarcasJuguetes from '../../img/MarcasJuguetes';
@@ -97,6 +98,7 @@ const Home = () => {
 
   return (
     <>
+      <Navbar />
       <Carousel images = {Carouselimgs}/>
       <Features />
       <ProductosCarousel titulo={"ULTIMOS INGRESOS"} productos={UltimosIngresos} />

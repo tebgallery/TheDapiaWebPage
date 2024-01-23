@@ -22,8 +22,10 @@ const Navbar = () => {
   return (
     <nav className="flex sticky w-full h-36 top-0 z-50">
       <div className="absolute top-0 flex items-center w-full h-24 bg-gradient-to-r from-fuchsia-300 to-fuchsia-400 justify-around border-b-2">
-        <div>
-          <RouterLink to='/' ><img className = "w-16 h-16"src={Logo} alt="" /></RouterLink>
+        <div className="w-64">
+          <RouterLink  to='/' >
+            <img className = "w-16 h-16" src={Logo} alt="thedapia-logo" />
+          </RouterLink>
         </div>
 
         <div className="w-1/2 h-12 relative flex">
@@ -51,9 +53,9 @@ const Navbar = () => {
 
         <div className="w-64 flex text-center justify-around pt-2 ">
           <div className="w-32 h-full">
-            <a href="">
+            <RouterLink to='/adminpage'>
               <FontAwesomeIcon icon={faUser} className='w-8 h-8' />
-            </a>
+            </RouterLink>
             <p>Iniciar Sesión </p>
             
           </div>
@@ -74,10 +76,10 @@ const Navbar = () => {
             <li className="inline-block"> <RouterLink to='/productos' className="hover:text-white cursor-pointer">MOCHILAS</RouterLink> </li>
             <li className="inline-block"> <RouterLink to='/productos' className="hover:text-white cursor-pointer">JUGUETES</RouterLink> </li>
 
-            <li className="inline-block hover:text-white cursor-pointer"> 
-            <a href='#' onClick={() => setShowMarcasModal(true)}>
-              MARCAS </a>
-            <FontAwesomeIcon icon={faChevronDown}/>
+            <li className="inline-block hover:text-white cursor-pointer" onClick={() => setShowMarcasModal(true)}> 
+            <button>
+              MARCAS </button>
+            <FontAwesomeIcon className =" ml-1 mb-0.5 w-3 h-3"icon={faChevronDown}/>
             </li>
 
             <li className="inline-block"> 
