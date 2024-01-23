@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookOpen, faChessKnight, faSortDown, faBars,faBox } from '@fortawesome/free-solid-svg-icons';
 
 const Filtros = () => {
+  const [filtrosVisible, setFiltrosVisible] = useState(true); 
   const [libreriaVisible, setLibreriaVisible] = useState(true);
   const [agendasVisible, setAgendasVisible] = useState(false);
   const [artisticaVisible, setArtisticaVisible] = useState(false);
@@ -119,7 +120,7 @@ const Filtros = () => {
         <FontAwesomeIcon icon={faSortDown} className="ml-2 mb-2 " />
       </div>
       {libreriaVisible && (
-        <ul className="text-base text-white bg-pink-400">
+        <ul className="text-base text-white bg-pink-400 ">
 
           <div className="mb-2 flex items-center cursor-pointer hover:text-black hover:bg-white" onClick={toggleAgendas}>
             <li className="p-2">Agendas</li>
@@ -250,7 +251,7 @@ const Filtros = () => {
       <div className="border border-black">
       <div className='p-3 flex items-center hover:text-white cursor-pointer bg-purple-400' onClick={toggleJugueteria}>
         <FontAwesomeIcon icon={faChessKnight} className="w-8 h-8 mr-2" />
-        <h4 className="text-xl" >Jugueteria</h4>
+        <h4 className="text-xl" >Juguetes</h4>
         <FontAwesomeIcon icon={faSortDown} className="ml-2 mb-2 " />
       </div>
       {jugueteriaVisible && (
