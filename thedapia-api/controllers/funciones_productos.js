@@ -13,6 +13,7 @@ async function guardarProducto(body){
         descuento: body.descuento,
         cantidad: body.cantidad,
         categoria: body.categoria,
+        descripcion: body.descripcion,
         imagen: body.imagen,
         fechaModificacion: body.fechaModificacion,
         estado: body.estado
@@ -31,6 +32,7 @@ async function actualizarProducto(body, id){
             descuento: body.descuento,
             cantidad: body.cantidad,
             categoria: body.categoria,
+            descripcion: body.descripcion,
             imagen: body.imagen,
             fechaModificacion: body.fechaModificacion,
             estado: body.estado
