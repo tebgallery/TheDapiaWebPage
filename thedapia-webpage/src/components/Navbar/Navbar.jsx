@@ -22,7 +22,7 @@ const Navbar = () => {
   return (
     <nav className="flex sticky w-full h-36 top-0 z-50">
       <div className="absolute top-0 flex items-center w-full h-24 bg-gradient-to-r from-fuchsia-300 to-fuchsia-400 justify-around border-b-2">
-        <div className="w-64">
+        <div>
           <RouterLink to='/' ><img className = "w-16 h-16"src={Logo} alt="" /></RouterLink>
         </div>
 
@@ -68,9 +68,10 @@ const Navbar = () => {
         </div>
       </div>
       <div className="absolute bottom-0 flex w-full h-12 bg-gradient-to-r from-teal-400 to-emerald-400 flex items-center justify-center">
-        <ul className= "space-x-14 font-bold">
+        <ul className= "space-x-14">
             <li className="inline-block"> <RouterLink to='/' className="hover:text-white cursor-pointer">INICIO</RouterLink> </li>
             <li className="inline-block"> <RouterLink to='/productos' className="hover:text-white cursor-pointer">LIBRERIA</RouterLink> </li>
+            <li className="inline-block"> <RouterLink to='/productos' className="hover:text-white cursor-pointer">MOCHILAS</RouterLink> </li>
             <li className="inline-block"> <RouterLink to='/productos' className="hover:text-white cursor-pointer">JUGUETES</RouterLink> </li>
 
             <li className="inline-block hover:text-white cursor-pointer"> 

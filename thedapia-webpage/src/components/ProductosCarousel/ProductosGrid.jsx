@@ -26,7 +26,7 @@ const ProductosGrid = ({productos}) => {
   };
 
   return (
-    <div className="relative flex items-center justify-between w-11/12 m-auto">
+    <div className="relative flex items-center justify-between m-auto">
       <button
         onClick={handlePrev}
         className="flex items-center w-12 h-12 py-2 rounded-full p-4 bg-gray-200 text-gray-700 text-xl ml-20 hover:border-gray-500 border-2 hover:shadow-2xl duration-500"

@@ -35,9 +35,11 @@ const Productos = () => {
 
     return (
         <>
-        <section className="w-full min-h-256 bg-gray-200 flex justify-center">
-            <Filtros onFiltroChange={handleFiltroChange} />
+        <section className="w-full">
+          <div className= "flex justify-center">
+            <Filtros />
             <ArticulosGrid articulos={articulos} />
+          </div>
         </section>
         <Footer/>
         </>

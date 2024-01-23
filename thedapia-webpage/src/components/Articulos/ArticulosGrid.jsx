@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ModalArticulo from './ModalArticulo'
 
 const ArticulosGrid = ({ articulos }) => {
-  const itemsPerPage = 8;
+  const itemsPerPage = 40;
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedArticulo, setSelectedArticulo] = useState(null);
 
@@ -25,11 +25,11 @@ const ArticulosGrid = ({ articulos }) => {
   };
 
   return (
-    <div className="w-4/5 p-8">
+    <div className="w-4/5 py-16 px-8">
       <div className="grid grid-cols-4 gap-y-12">
         {currentArticulos.map((articulo, index) => (
           <div key={index} 
-          className="flex-none w-72 border-gray-300 border-x-2 border-t-2 rounded-t-3xl bg-white cursor-pointer hover:shadow-2xl duration-500 transition-transform transform hover:scale-105 hover:border-gray-300"
+          className="flex-none w-72 border-gray-300 border-x-2 border-t-2 bg-white cursor-pointer hover:shadow-2xl duration-500 transition-transform transform hover:scale-105 hover:border-gray-300"
           onClick={() => handleCardClick(articulo)}
           >
           <img
