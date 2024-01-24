@@ -17,14 +17,6 @@ const ProductosGrid = ({productos}) => {
     );
   };
 
-  const incrementQuantity = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
-  };
-
-  const decrementQuantity = () => {
-    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
-  };
-
   return (
     <div className="relative flex items-center justify-between m-auto">
       <button
