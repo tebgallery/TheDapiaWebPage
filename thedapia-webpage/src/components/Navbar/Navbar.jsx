@@ -4,11 +4,13 @@ import { useState } from 'react';
 import Logo from "../../img/thedapia-logo.png";
 import {Link as RouterLink, useNavigate} from 'react-router-dom'
 import ModalMarcas from './ModalMarcas';
+import CartModal from './CartModal';
 
 
 const Navbar = () => {
 
   const [showMarcasModal, setShowMarcasModal] = useState(false);
+  const [showCartModal, setShowCartModal] = useState(false);
   const navigate = useNavigate();
 
   const handleNavigateToSection = (sectionId) => {
@@ -60,10 +62,8 @@ const Navbar = () => {
             
           </div>
 
-          <div className="w-32">
-            <a href="">
+          <div className="w-32 cursor-pointer" onClick={() => setShowCartModal(true)}>
              <FontAwesomeIcon icon={faShoppingCart} className='w-8 h-8'  />
-            </a>
             <p>Ver carrito</p>
             
           </div>
@@ -96,6 +96,9 @@ const Navbar = () => {
       </div>
       {showMarcasModal && (
         <ModalMarcas marcas={marcas} onClose={() => setShowMarcasModal(false)} />
+      )}
+      {showCartModal && (
+        <CartModal onClose={() => setShowCartModal(false)}/>
       )}
     </nav>
   )
