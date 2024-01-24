@@ -48,7 +48,7 @@ const CartModal = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed w-full h-full top-0 bg-opacity-50 flex items-center justify-end">
+    <div className="fixed w-full h-full top-0 bg-opacity-50 flex items-center justify-end z-50">
       <div className="bg-white p-8 border border-black rounded-2xl w-4/12 h-full">
         <div className="flex items-center mb-12">
           <FontAwesomeIcon icon={faXmark} onClick={onClose} className="cursor-pointer" />

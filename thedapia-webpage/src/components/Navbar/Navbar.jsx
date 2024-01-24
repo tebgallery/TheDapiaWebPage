@@ -23,8 +23,8 @@ const Navbar = () => {
 
   return (
     <nav className="flex sticky w-full h-36 top-0 z-50">
-      <div className="absolute top-0 flex items-center w-full h-24 bg-gradient-to-r from-fuchsia-300 to-fuchsia-400 justify-around border-b-2">
-        <div className="w-64">
+      <div className="absolute top-0 flex items-center w-full h-24 bg-gradient-to-r from-fuchsia-300 to-fuchsia-400 justify-center border-b-2">
+        <div className="absolute left-0 ml-10 flex items-center">
           <RouterLink  to='/' >
             <img className = "w-16 h-16" src={Logo} alt="thedapia-logo" />
           </RouterLink>
@@ -53,7 +53,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        <div className="w-64 flex text-center justify-around pt-2 ">
+        <div className=" absolute right-0 mr-10 w-64 flex text-center justify-around pt-2 ">
           <div className="w-32 h-full">
             <RouterLink to='/adminpage'>
               <FontAwesomeIcon icon={faUser} className='w-8 h-8' />
