@@ -24,20 +24,22 @@ ruta.post('/',(req,res)=>{
     }) 
 })
 
-ruta.put("/:id", (req, res)=>{
-    let resultado = actualizarProducto(req.body, req.params.id);
-    resultado.then(valor  =>{
+ruta.put("/:_id", (req, res)=>{
+    let resultado = actualizarProducto(req.body, req.params._id);
+    resultado
+    .then(valor  =>{
         res.json({
             valor
         })
-        .catch(err => {
-            res.status(400).json({err})
-        })
     })
+    .catch(err => {
+        res.status(400).json({err})
+    })
+    
 })
 
-ruta.delete('/eliminar/:id', (req, res)=> {
-    const id = req.params.id;
+ruta.delete('/eliminar/:_id', (req, res)=> {
+    const id = req.params._id;
     eliminarProducto(id)
         .then(resultado => {
             if (resultado.deletedCount > 0) {

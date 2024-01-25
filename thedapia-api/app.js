@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import productos from './routes/productos_routes.js';
 import usuarios from './routes/usuarios_routes.js';
 import 'dotenv/config'
+import cors from 'cors'
 
 mongoose.connect('mongodb://localhost:27017/thedapia', {useNewUrlParser: true, useUnifiedTopology: true})
 .then(()=>{
@@ -15,6 +16,7 @@ mongoose.connect('mongodb://localhost:27017/thedapia', {useNewUrlParser: true, u
 const app = express();
 const port = process.env.PORT || 3002;
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use('/productos', productos);

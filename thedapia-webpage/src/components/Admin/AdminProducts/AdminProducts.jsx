@@ -1,6 +1,23 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
+import axios from 'axios';
 
 const AdminProducts = () => {
+    const url = 'http://localhost:3000/productos';
+
+    const [products, setProducts] = useState([]);
+    const [nombre, setNombre] = useState('');
+    const [marca, setMarca] = useState('');
+    const [codigoBarra, setCodigoBarra] = useState();
+    const [precio, setPrecio] = useState();
+    const [descuento, setDescuento] = useState();
+    const [cantidad, setCantidad] = useState();
+    const [categoria, setCategoria] = useState('');
+    const [color, setColor] = useState('');
+    const [imagen, setImagen] = useState('');
+    const [descripcion, setDescripcion] = useState('');
+    // const [estado, setEstado] = useState();
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
     const [showAddProductModal, setShowAddProductModal] = useState(false);
     const [showModifProductModal, setShowModifProductModal] = useState(false);
     const [showRemoveProductModal, setShowRemoveProductModal] = useState(false);
@@ -8,7 +25,7 @@ const AdminProducts = () => {
     const headers = [
         "Nombre",
         "Marca",
-        "CodBarra",
+        "CodigoBarra",
         "Precio",
         "Descuento",
         "Cantidad",
@@ -20,36 +37,81 @@ const AdminProducts = () => {
         "Estado",
         "Acciones",
     ];
-    const productos = [
-        {
-            Nombre: "Cartuchera Homero Simpsons Mooving",
-            Marca: "Mooving",
-            CodBarra: 2332120880,
-            Precio: 19990,
-            Descuento: 10,
-            Cantidad: 50,
-            Categoria: "Libreria",
-            Imagen: "https://tiendup.b-cdn.net/business/48/products/gyNKV0_656f73ae4d4a9_large.jpg",
-            FechaModificacion: "2024-01-10",
-            Descripcion: "Cartuchera Mooving Homero Simpsos 2 Pisos, no incluye accesorios dentro",
-            Estado: "Activo",
-        },
-        {
-            Nombre: "Mochila Cresko Sonic SO213",
-            Marca: "Cresko",
-            CodBarra: 2337850880,
-            Precio: 79990,
-            Descuento: 5,
-            Cantidad: 30,
-            Categoria: "Mochilas",
-            Imagen: "https://catalogos.cresko.com/Content/images/articulos/SO123_4.jpg",
-            FechaModificacion: "2024-01-11",
-            Descripcion: "Mochila Sonic Cresko SO213 18'' con 2 bolsillos",
-            Estado: "Inactivo",
-        },
 
+    useEffect( () =>{
+      getProducts();
+    },[]);
+    
+    const getProducts = async () =>{
+      const response = await axios.get(url);
+      setProducts(response.data);
+    }
+    const handleAddProduct = async () => {
+      try {
+          const newProduct = {
+              nombre,
+              marca,
+              codigoBarra,
+              precio,
+              descuento,
+              cantidad,
+              categoria,
+              color,
+              imagen,
+              descripcion,
+          };
+          const response = await axios.post(url, newProduct);
 
-    ];
+          console.log('Producto agregado:', response.data);
+
+          getProducts();
+          handleCloseAddProductModal();
+      } catch (error) {
+          console.error('Error al agregar el producto:', error);
+      }
+    }
+
+    const handleModifyProduct = async () => {
+      try {
+          const modifiedProduct = {
+              nombre,
+              marca,
+              codigoBarra,
+              precio,
+              descuento,
+              cantidad,
+              categoria,
+              color,
+              imagen,
+              descripcion,
+          };
+          console.log('Modified Product:', modifiedProduct);
+          const response = await axios.put(`${url}/${selectedProduct._id}`, modifiedProduct);
+
+          console.log('Producto modificado:', response);
+          console.log('Pid:', selectedProduct._id);
+
+          getProducts();
+          handleCloseModifProductModal();
+      } catch (error) {
+          console.error('Error al modificar el producto:', error);
+      }
+    }
+
+    const handleRemoveProduct = async () => {
+      try {
+        console.log('Producto id:', selectedProduct._id);
+        const response = await axios.delete(`${url}/eliminar/${selectedProduct._id}`);
+        console.log('Producto eliminado:', response);
+    
+        getProducts();
+        handleCloseRemoveProductModal();
+      } catch (error) {
+        console.error('Error al eliminar el producto:', error);
+      }
+    };
+   
+
 
     const handleOpenAddProductModal = () => {
         setShowAddProductModal(true);
@@ -59,16 +121,33 @@ const AdminProducts = () => {
         setShowAddProductModal(false);
     };
 
-    const handleOpenModifProductModal = () => {
-        setShowModifProductModal(true);
+    const handleOpenModifProductModal = (selectedProduct) => {
+      console.log('Selected Product:', selectedProduct);
+      setSelectedProduct(selectedProduct);
+
+      setShowModifProductModal(true);
+
+      setNombre(selectedProduct.nombre || '');
+      setMarca(selectedProduct.marca || '');
+      setCodigoBarra(selectedProduct.codigoBarra || '');
+      setPrecio(selectedProduct.precio || '');
+      setDescuento(selectedProduct.descuento || '');
+      setCantidad(selectedProduct.cantidad || '');
+      setCategoria(selectedProduct.categoria || '');
+      setColor(selectedProduct.color || '');
+      setImagen(selectedProduct.imagen || '');
+      setDescripcion(selectedProduct.descripcion || '');
     };
 
     const handleCloseModifProductModal = () => {
         setShowModifProductModal(false);
+        setSelectedProduct(null);
     };
 
-    const handleOpenRemoveProductModal = () => {
-        setShowRemoveProductModal(true);
+    const handleOpenRemoveProductModal = (product) => {
+      console.log('Selected Product:', product._id);
+      setSelectedProduct(product);
+      setShowRemoveProductModal(true);
     };
 
     const handleCloseRemoveProductModal = () => {
@@ -100,33 +179,33 @@ const AdminProducts = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {productos.map((producto, index) => (
-                                <tr key={index} className="border-black">
+                            {products.map((product, _id) => (
+                                <tr key={product._id} className="border-black">
                                     {headers.map((header, idx) => (
                                         <td key={idx} className="border-b border-black p-2">
                                             {header === "Imagen" ? (
                                                 <img
-                                                    src={producto[header]}
-                                                    alt={`Imagen de ${producto.Nombre}`}
+                                                    src={product.imagen}
+                                                    alt={`Imagen de ${product.nombre}`}
                                                     className="w-16 h-16 object-cover"
                                                 />
                                             ) : header === "Acciones" ? (
                                                 <div className="flex space-x-2">
                                                     <button
                                                         className="bg-amber-400 text-white px-2 py-1 rounded"
-                                                        onClick={handleOpenModifProductModal}
+                                                        onClick={()=>handleOpenModifProductModal(product)}
                                                     >
                                                         Modificar
                                                     </button>
                                                     <button
                                                         className="bg-red-500 text-white px-2 py-1 rounded"
-                                                        onClick={handleOpenRemoveProductModal}
+                                                        onClick={()=>handleOpenRemoveProductModal(product)}
                                                     >
                                                         Eliminar
                                                     </button>
                                                 </div>
                                             ) : (
-                                                producto[header]
+                                                product[header.toLowerCase()]
                                             )}
                                         </td>
                                     ))}
@@ -145,65 +224,86 @@ const AdminProducts = () => {
                       type="text"
                       name="Nombre"
                       placeholder="Nombre del Producto"
+                      value={nombre}
+                      onChange={(e)=> setNombre(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
                       type="text"
                       name="Marca"
                       placeholder="Marca del Producto"
+                      value={marca}
+                      onChange={(e)=> setMarca(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
                       type="text"
-                      name="CodBarra"
+                      name="CodigoBarra"
                       placeholder="Codigo de Barra"
+                      value={codigoBarra}
+                      onChange={(e)=> setCodigoBarra(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
                       type="text"
                       name="Precio"
                       placeholder="Precio"
+                      value={precio}
+                      onChange={(e)=> setPrecio(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
                       type="text"
                       name="Descuento"
                       placeholder="Descuento"
+                      value={descuento}
+                      onChange={(e)=> setDescuento(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
                       type="text"
                       name="Cantidad"
                       placeholder="Cantidad"
+                      value={cantidad}
+                      onChange={(e)=> setCantidad(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
                       type="text"
                       name="Categoria"
                       placeholder="Categoria"
+                      value={categoria}
+                      onChange={(e)=> setCategoria(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
                       type="text"
                       name="Color"
                       placeholder="Color"
+                      value={color}
+                      onChange={(e)=> setColor(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
-                      type="file"
+                      type="text"
                       name="Imagen"
                       placeholder="Imagen"
+                      value={imagen}
+                      onChange={(e)=> setImagen(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
                       type="text"
                       name="Descripcion"
                       placeholder="Descripcion"
+                      value={descripcion}
+                      onChange={(e)=> setDescripcion(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                   </form>
                   <div className="mt-16 flex justify-center">
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded">
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded"
+                    onClick={handleAddProduct}>
                       Agregar Producto
                     </button>
                     <button
@@ -226,66 +326,86 @@ const AdminProducts = () => {
                       type="text"
                       name="Nombre"
                       placeholder="Nombre del Producto"
-                      
+                      value={nombre}
+                      onChange={(e)=> setNombre(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
                       type="text"
                       name="Marca"
                       placeholder="Marca del Producto"
+                      value={marca}
+                      onChange={(e)=> setMarca(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
                       type="text"
-                      name="CodBarra"
+                      name="CodigoBarra"
                       placeholder="Codigo de Barra"
+                      value={codigoBarra}
+                      onChange={(e)=> setCodigoBarra(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
                       type="text"
                       name="Precio"
                       placeholder="Precio"
+                      value={precio}
+                      onChange={(e)=> setPrecio(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
                       type="text"
                       name="Descuento"
                       placeholder="Descuento"
+                      value={descuento}
+                      onChange={(e)=> setDescuento(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
                       type="text"
                       name="Cantidad"
                       placeholder="Cantidad"
+                      value={cantidad}
+                      onChange={(e)=> setCantidad(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
                       type="text"
                       name="Categoria"
                       placeholder="Categoria"
+                      value={categoria}
+                      onChange={(e)=> setCategoria(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
                       type="text"
                       name="Color"
                       placeholder="Color"
+                      value={color}
+                      onChange={(e)=> setColor(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
-                      type="file"
+                      type="text"
                       name="Imagen"
                       placeholder="Imagen"
+                      value={imagen}
+                      onChange={(e)=> setImagen(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
                       type="text"
                       name="Descripcion"
                       placeholder="Descripcion"
+                      value={descripcion}
+                      onChange={(e)=> setDescripcion(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                   </form>
                   <div className="mt-16 flex justify-center">
-                    <button className="bg-amber-400 text-white px-4 py-2 rounded">
+                    <button className="bg-amber-400 text-white px-4 py-2 rounded"
+                    onClick={handleModifyProduct}>
                       Modificar Producto
                     </button>
                     <button
@@ -304,7 +424,8 @@ const AdminProducts = () => {
                 <div className="bg-white p-8 rounded-3xl w-1/3">
                   <h2 className="text-2xl text-center font-bold">Seguro que desea eliminar el producto?</h2>
                   <div className="mt-8 flex justify-center">
-                    <button className="bg-red-400 text-white px-4 py-2 rounded">
+                    <button className="bg-red-400 text-white px-4 py-2 rounded"
+                    onClick={handleRemoveProduct}>
                       Eliminar
                     </button>
                     <button
@@ -320,5 +441,6 @@ const AdminProducts = () => {
         </section>
     );
 };
+
 
 export default AdminProducts;
