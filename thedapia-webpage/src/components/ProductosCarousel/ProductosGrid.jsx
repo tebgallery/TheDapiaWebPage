@@ -79,7 +79,7 @@ const ProductosGrid = ({ productos }) => {
       )}
 
       {showCartModal && (
-        <CartModal producto = {showCartModal} onClose={() => setShowCartModal(false)}/>
+        <CartModal products = {showCartModal} onClose={() => setShowCartModal(false)}/>
       )}
 
 
