@@ -6,16 +6,17 @@ async function listaProductos(){
 }
 async function guardarProducto(body){
     let producto = new productosModel({
-        codigoBarra: body.codigoBarra,
         nombre: body.nombre,
         marca: body.marca,
+        codigoBarra: body.codigoBarra,
         precio: body.precio,
         descuento: body.descuento,
         cantidad: body.cantidad,
         categoria: body.categoria,
-        descripcion: body.descripcion,
+        color: body.color,
         imagen: body.imagen,
         fechaModificacion: body.fechaModificacion,
+        descripcion: body.descripcion,
         estado: body.estado
     })
     console.log(producto)
@@ -23,18 +24,19 @@ async function guardarProducto(body){
 }
 
 async function actualizarProducto(body, id){
-    let producto = await productosModel.updateOne({id: id},{
+    let producto = await productosModel.updateOne({_id: id},{
         $set: {
-            codigoBarra: body.codigoBarra,
             nombre: body.nombre,
             marca: body.marca,
+            codigoBarra: body.codigoBarra,
             precio: body.precio,
             descuento: body.descuento,
             cantidad: body.cantidad,
             categoria: body.categoria,
-            descripcion: body.descripcion,
+            color: body.color,
             imagen: body.imagen,
             fechaModificacion: body.fechaModificacion,
+            descripcion: body.descripcion,
             estado: body.estado
         }
     })
@@ -42,7 +44,7 @@ async function actualizarProducto(body, id){
 }
 
 async function eliminarProducto(id){
-    let resultado= await productosModel.deleteOne({id: id});
+    let resultado= await productosModel.deleteOne({_id: id});
     return resultado;
 }
 

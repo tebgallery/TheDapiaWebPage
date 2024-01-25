@@ -1,16 +1,16 @@
 import mongoose from "mongoose";
 
 const productosSchema = new mongoose.Schema({
-    codigoBarra:{
-        type: Number,
-        require: true
-    },
     nombre:{
         type: String,
         require: true
     },
     marca:{
         type: String,
+        require: true
+    },
+    codigoBarra:{
+        type: Number,
         require: true
     },
     precio:{
@@ -29,7 +29,7 @@ const productosSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    descripcion:{
+    color:{
         type: String,
         require: true
     },
@@ -41,8 +41,12 @@ const productosSchema = new mongoose.Schema({
         type: Date,
         require: false
     },
-    estado:{
+    descripcion:{
         type: String,
+        require: true
+    },
+    estado:{
+        type: Number,
         require: false
     }
 })
