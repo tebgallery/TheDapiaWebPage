@@ -136,7 +136,7 @@ const AdminProducts = () => {
       setCategoria(selectedProduct.categoria || '');
       setColor(selectedProduct.color || '');
       setImagen(selectedProduct.imagen || '');
-      setDescripcion(selectedProduct.descripcion || '');
+      setDescripcion(selectedProduct.descripcion || "");
     };
 
     const handleCloseModifProductModal = () => {
@@ -224,7 +224,6 @@ const AdminProducts = () => {
                       type="text"
                       name="Nombre"
                       placeholder="Nombre del Producto"
-                      value={nombre}
                       onChange={(e)=> setNombre(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
@@ -232,7 +231,6 @@ const AdminProducts = () => {
                       type="text"
                       name="Marca"
                       placeholder="Marca del Producto"
-                      value={marca}
                       onChange={(e)=> setMarca(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
@@ -240,7 +238,6 @@ const AdminProducts = () => {
                       type="text"
                       name="CodigoBarra"
                       placeholder="Codigo de Barra"
-                      value={codigoBarra}
                       onChange={(e)=> setCodigoBarra(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
@@ -248,7 +245,6 @@ const AdminProducts = () => {
                       type="text"
                       name="Precio"
                       placeholder="Precio"
-                      value={precio}
                       onChange={(e)=> setPrecio(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
@@ -256,7 +252,6 @@ const AdminProducts = () => {
                       type="text"
                       name="Descuento"
                       placeholder="Descuento"
-                      value={descuento}
                       onChange={(e)=> setDescuento(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
@@ -264,23 +259,18 @@ const AdminProducts = () => {
                       type="text"
                       name="Cantidad"
                       placeholder="Cantidad"
-                      value={cantidad}
                       onChange={(e)=> setCantidad(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
-                    <input
-                      type="text"
-                      name="Categoria"
-                      placeholder="Categoria"
-                      value={categoria}
-                      onChange={(e)=> setCategoria(e.target.value)}
-                      className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
-                    />
+                    <select  className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500" id="categoria" name="Categoria" onChange={(e)=> setCategoria(e.target.value)}>
+                      <option value="Liberia">Libreria</option>
+                      <option value="Juguetes">Juguetes</option>
+                      <option value="Mochilas">Mochilas</option>
+                    </select>
                     <input
                       type="text"
                       name="Color"
                       placeholder="Color"
-                      value={color}
                       onChange={(e)=> setColor(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
@@ -288,7 +278,6 @@ const AdminProducts = () => {
                       type="text"
                       name="Imagen"
                       placeholder="Imagen"
-                      value={imagen}
                       onChange={(e)=> setImagen(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
@@ -296,7 +285,6 @@ const AdminProducts = () => {
                       type="text"
                       name="Descripcion"
                       placeholder="Descripcion"
-                      value={descripcion}
                       onChange={(e)=> setDescripcion(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
