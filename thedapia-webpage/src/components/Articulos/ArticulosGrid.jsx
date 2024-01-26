@@ -26,6 +26,15 @@ const ArticulosGrid = ({products, onCartClick, onAddToCartClick}) => {
     setSelectedArticulo(null);
   };
 
+  const handleProductDiscount = (producto) => {
+    if (producto.descuento !== null && producto.descuento !== 0) {
+      const discountedPrice = producto.precio - (producto.precio * producto.descuento) / 100;
+      return discountedPrice.toFixed(2); // Redondear a 2 decimales
+    } else {
+      return producto.precio.toFixed(2); // Si el descuento es null, mostrar el precio original
+    }
+  };
+
 
   return (
     <div className="w-4/5 py-16 px-8 mx-8">
@@ -42,7 +51,14 @@ const ArticulosGrid = ({products, onCartClick, onAddToCartClick}) => {
               />
               <div class="h-36 p-4 ">
                 <h3 className="text-lg text-gray-500 text-center font-semibold block mb-2">{producto.nombre}</h3>
-                <p className="text-center text-black text-2xl">${producto.precio}</p>
+    
+                  {producto.descuento!=null && producto.descuento!=0  ?(
+                    <div className="flex items-center justify-center">
+                      <p className="text-center text-gray-500 text-lg line-through">${producto.precio}</p>
+                      <p className="text-center text-black text-xl ml-5">${handleProductDiscount(producto)}</p>
+                    </div>
+                  ): <p className="text-center text-black text-xl">${producto.precio}</p>}
+                
               </div>
             </div>
                    

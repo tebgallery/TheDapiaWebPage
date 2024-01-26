@@ -360,14 +360,17 @@ const AdminProducts = () => {
                       onChange={(e)=> setCantidad(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
-                    <input
-                      type="text"
-                      name="Categoria"
-                      placeholder="Categoria"
-                      value={categoria}
-                      onChange={(e)=> setCategoria(e.target.value)}
+                    <select
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
-                    />
+                      id="categoria"
+                      name="Categoria"
+                      value={categoria}
+                      onChange={(e) => setCategoria(e.target.value)}
+                    >
+                      <option value="Libreria">Libreria</option>
+                      <option value="Juguetes">Juguetes</option>
+                      <option value="Mochilas">Mochilas</option>
+                    </select>
                     <input
                       type="text"
                       name="Color"

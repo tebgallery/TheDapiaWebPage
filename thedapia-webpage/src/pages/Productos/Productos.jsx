@@ -9,21 +9,42 @@ import {faBars } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 
-const Productos = () => {
-  const url = 'http://localhost:3000/productos';
+const Productos = ({categoria,palabra}) => {
+  const getUrl = 'http://localhost:3000/productos';
+  const getCatUrl = "http://localhost:3000/productos/"+categoria;
+  const getWordUrl = "http://localhost:3000/productos/buscar"+palabra;
   const [products, setProducts] = useState([]);
   const [showFiltros,setShowFiltros] = useState(true);
   const [showCartModal, setShowCartModal] = useState(false);
   const [cart, setCart] = useState([]);
 
-  useEffect( () =>{
-    getProducts();
-  },[]);
+  useEffect(() => {
+    if (categoria) {
+      getProductsByCategory();
+    }
+    else if(palabra) {
+      getProductsByWord();
+    }
+    else{
+      getProducts();
+    }
+  }, [categoria,palabra]);
 
   const getProducts = async () =>{
-    const response = await axios.get(url);
+    const response = await axios.get(getUrl);
     setProducts(response.data);
   }
+
+  const getProductsByCategory = async () =>{
+    const response = await axios.get(getCatUrl);
+    setProducts(response.data);
+  }
+
+  const getProductsByWord = async () =>{
+    const response = await axios.get(getWordUrl);
+    setProducts(response.data);
+  }
+
 
   const toggleCartModal = () => {
     setShowCartModal(!showCartModal);

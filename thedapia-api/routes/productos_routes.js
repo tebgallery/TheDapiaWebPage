@@ -1,5 +1,5 @@
 import express from "express";
-import { listaProductos, guardarProducto, actualizarProducto, eliminarProducto } from "../controllers/funciones_productos.js";
+import { listaProductos, buscarProductosPorPalabra, productosPorCategoria,guardarProducto, actualizarProducto, eliminarProducto } from "../controllers/funciones_productos.js";
 
 const ruta = express.Router();
 
@@ -9,6 +9,26 @@ ruta.get('/', (req, res) =>{
         res.json(productos)
     }).catch(err =>{
         res.status(400).json({err})
+    })
+});
+
+ruta.get('/buscar/:palabra', (req, res) => {
+    const palabra = req.params.palabra;
+    let resultado = buscarProductosPorPalabra(palabra);
+    resultado.then(productos => {
+        res.json(productos)
+    }).catch(err => {
+        res.status(400).json({ err })
+    })
+});
+
+ruta.get('/:categoria', (req, res) => {
+    const categoria = req.params.categoria;
+    let resultado = productosPorCategoria(categoria);
+    resultado.then(productos => {
+        res.json(productos)
+    }).catch(err => {
+        res.status(400).json({ err })
     })
 });
 
