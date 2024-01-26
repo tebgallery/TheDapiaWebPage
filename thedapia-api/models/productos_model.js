@@ -9,7 +9,7 @@ const productosSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    codigoBarra:{
+    codigobarra:{
         type: Number,
         require: true
     },
@@ -37,7 +37,7 @@ const productosSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    fechaModificacion:{
+    fechamodificacion:{
         type: Date,
         require: false
     },
