@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight, faChevronLeft, faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import ModalArticulo from '../Articulos/ModalArticulo'
-import CartModal from "../Navbar/CartModal"
+import CartModal from "../CartModal/CartModal"
 
 const ProductosGrid = ({ productos }) => {
   const [currentIndex, setCurrentIndex] = useState(0);

@@ -2,13 +2,11 @@ import { React, useState} from "react";
 import ModalArticulo from './ModalArticulo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
-import CartModal from "../../components/Navbar/CartModal";
 
-const ArticulosGrid = ({products}) => {
+const ArticulosGrid = ({products, onCartClick, onAddToCartClick}) => {
   const itemsPerPage = 40;
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedArticulo, setSelectedArticulo] = useState(null);
-  const [showCartModal, setShowCartModal] = useState(false);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -26,10 +24,6 @@ const ArticulosGrid = ({products}) => {
 
   const handleCloseModal = () => {
     setSelectedArticulo(null);
-  };
-
-  const handleCartModal = (producto) => {
-    setShowCartModal(producto);
   };
 
 
@@ -52,8 +46,9 @@ const ArticulosGrid = ({products}) => {
               </div>
             </div>
                    
-            <div class="relative flex items-center w-full h-10 " onClick={() => handleCartModal(producto)}>
-              <button class="absolute bottom-0 flex items-center justify-center text-base text-white bg-fuchsia-300 w-full h-10 hover:bg-fuchsia-500 duration-300" >
+            <div class="relative flex items-center w-full h-10 " onClick={() => { onAddToCartClick(producto); onCartClick(); }}>
+              <button 
+              className="absolute bottom-0 flex items-center justify-center text-base text-white bg-fuchsia-300 w-full h-10 hover:bg-fuchsia-500 duration-300" >
                 AGREGAR
                 <FontAwesomeIcon className="text-black ml-2" icon={faCartPlus} />
               </button>
@@ -79,9 +74,6 @@ const ArticulosGrid = ({products}) => {
           ))}
         </ul>
       </div>
-      {showCartModal && (
-        <CartModal product = {showCartModal} onClose={() => setShowCartModal(false)}/>
-      )}
     </div>
   );
 };
