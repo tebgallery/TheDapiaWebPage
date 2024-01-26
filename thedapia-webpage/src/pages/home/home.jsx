@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import {React, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import Carousel from '../../components/Carousel/Carousel';
@@ -9,11 +9,13 @@ import Marcas from '../../components/Marcas/Marcas';
 import Contact from '../../components/Contact/Form';
 import Footer from '../../components/Footer/Footer';
 import Navbar from '../../components/Navbar/Navbar';
+import CartModal from '../../components/CartModal/CartModal';
 
 import * as MarcasLibreria from '../../img/MarcasLibreria';
 import * as MarcasJuguetes from '../../img/MarcasJuguetes';
 
 const Home = () => {
+  const [showCartModal, setShowCartModal] = useState(false);
   const location = useLocation();
   useEffect(() => {
     const { state } = location;
@@ -139,10 +141,18 @@ const Home = () => {
     {url: MarcasJuguetes.toptoys, alt: "toptoys-logo"}
 
   ]
+  console.log("hola");
+
+  const toggleCartModal = () => {
+    setShowCartModal(!showCartModal)
+  };
 
   return (
     <>
-      <Navbar />
+      <Navbar onCartClick = {toggleCartModal}/>
+      {showCartModal && (
+        <CartModal onClose={() => setShowCartModal(false)}/>
+      )}
       <Carousel images = {Carouselimgs}/>
       <Features />
       <ProductosCarousel titulo={"ULTIMOS INGRESOS"} productos={UltimosIngresos} />
