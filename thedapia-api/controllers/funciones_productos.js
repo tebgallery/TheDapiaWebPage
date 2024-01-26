@@ -4,6 +4,31 @@ async function listaProductos(){
     let productos = await productosModel.find();
     return productos
 }
+
+async function buscarProductosPorPalabra(palabra) {
+    const regex = new RegExp(palabra, 'i');
+
+    const productos = await productosModel.find({
+        $or: [
+            { nombre: { $regex: regex } },
+            { marca: { $regex: regex } },
+            { descripcion: { $regex: regex } },
+        ],
+    });
+
+    return productos;
+}
+
+async function productosPorCategoria(categoria) {
+    try {
+        const productos = await productosModel.find({ categoria: categoria });
+        return productos;
+    } catch (error) {
+        console.error("Error al obtener productos por categoría:", error);
+        throw error;
+    }
+}
+
 async function guardarProducto(body){
     let producto = new productosModel({
         nombre: body.nombre,
@@ -48,4 +73,4 @@ async function eliminarProducto(id){
     return resultado;
 }
 
-export { listaProductos, guardarProducto, actualizarProducto, eliminarProducto};
+export { listaProductos, buscarProductosPorPalabra,productosPorCategoria,guardarProducto, actualizarProducto, eliminarProducto};
