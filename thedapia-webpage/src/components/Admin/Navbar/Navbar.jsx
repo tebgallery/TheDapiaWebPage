@@ -15,8 +15,13 @@ const Navbar = () => {
                 </div>
                 <div className="w-auto p-4 absolute right-0 mr-8">
                     <ul className="p-4 space-x-16 text-xl text-white">
-                        <li className="inline-block">Agregar / Quitar Producto </li>
                         <li className="inline-block">Ver Ordenes </li>
+                        <select name="ProductosHomePage" id="productoshomepage" className="bg-slate-800 px-2 py-1" >
+                            <option value="none" selected disabled hidden>Categorias Home</option>
+                            <option value="ultimos-ingresos">Ultimos Ingresos</option>
+                            <option value="lo-mas-vendido">Lo Mas Vendido</option>
+                            <option value="ofertas">Ofertas</option>
+                        </select>
 
                     </ul>
                 </div>
