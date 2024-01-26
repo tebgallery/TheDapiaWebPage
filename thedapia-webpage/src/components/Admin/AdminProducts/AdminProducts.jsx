@@ -7,7 +7,7 @@ const AdminProducts = () => {
     const [products, setProducts] = useState([]);
     const [nombre, setNombre] = useState('');
     const [marca, setMarca] = useState('');
-    const [codigoBarra, setCodigoBarra] = useState();
+    const [codigobarra, setcodigoBarra] = useState();
     const [precio, setPrecio] = useState();
     const [descuento, setDescuento] = useState();
     const [cantidad, setCantidad] = useState();
@@ -25,7 +25,7 @@ const AdminProducts = () => {
     const headers = [
         "Nombre",
         "Marca",
-        "CodigoBarra",
+        "codigoBarra",
         "Precio",
         "Descuento",
         "Cantidad",
@@ -51,7 +51,7 @@ const AdminProducts = () => {
           const newProduct = {
               nombre,
               marca,
-              codigoBarra,
+              codigobarra,
               precio,
               descuento,
               cantidad,
@@ -62,7 +62,16 @@ const AdminProducts = () => {
           };
           const response = await axios.post(url, newProduct);
 
-          console.log('Producto agregado:', response.data);
+          setNombre('');
+          setMarca('');
+          setcodigoBarra('');
+          setPrecio('');
+          setDescuento('');
+          setCantidad('');
+          setCategoria('');
+          setColor('');
+          setImagen('');
+          setDescripcion('');
 
           getProducts();
           handleCloseAddProductModal();
@@ -76,7 +85,7 @@ const AdminProducts = () => {
           const modifiedProduct = {
               nombre,
               marca,
-              codigoBarra,
+              codigobarra,
               precio,
               descuento,
               cantidad,
@@ -85,11 +94,7 @@ const AdminProducts = () => {
               imagen,
               descripcion,
           };
-          console.log('Modified Product:', modifiedProduct);
           const response = await axios.put(`${url}/${selectedProduct._id}`, modifiedProduct);
-
-          console.log('Producto modificado:', response);
-          console.log('Pid:', selectedProduct._id);
 
           getProducts();
           handleCloseModifProductModal();
@@ -100,9 +105,7 @@ const AdminProducts = () => {
 
     const handleRemoveProduct = async () => {
       try {
-        console.log('Producto id:', selectedProduct._id);
         const response = await axios.delete(`${url}/eliminar/${selectedProduct._id}`);
-        console.log('Producto eliminado:', response);
     
         getProducts();
         handleCloseRemoveProductModal();
@@ -122,14 +125,13 @@ const AdminProducts = () => {
     };
 
     const handleOpenModifProductModal = (selectedProduct) => {
-      console.log('Selected Product:', selectedProduct);
       setSelectedProduct(selectedProduct);
 
       setShowModifProductModal(true);
 
       setNombre(selectedProduct.nombre || '');
       setMarca(selectedProduct.marca || '');
-      setCodigoBarra(selectedProduct.codigoBarra || '');
+      setcodigoBarra(selectedProduct.codigobarra || '');
       setPrecio(selectedProduct.precio || '');
       setDescuento(selectedProduct.descuento || '');
       setCantidad(selectedProduct.cantidad || '');
@@ -145,7 +147,6 @@ const AdminProducts = () => {
     };
 
     const handleOpenRemoveProductModal = (product) => {
-      console.log('Selected Product:', product._id);
       setSelectedProduct(product);
       setShowRemoveProductModal(true);
     };
@@ -238,10 +239,10 @@ const AdminProducts = () => {
                     />
                     <input
                       type="text"
-                      name="CodigoBarra"
+                      name="codigoBarra"
                       placeholder="Codigo de Barra"
-                      value={codigoBarra}
-                      onChange={(e)=> setCodigoBarra(e.target.value)}
+                      value={codigobarra}
+                      onChange={(e)=> setcodigoBarra(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
@@ -340,10 +341,10 @@ const AdminProducts = () => {
                     />
                     <input
                       type="text"
-                      name="CodigoBarra"
+                      name="codigoBarra"
                       placeholder="Codigo de Barra"
-                      value={codigoBarra}
-                      onChange={(e)=> setCodigoBarra(e.target.value)}
+                      value={codigobarra}
+                      onChange={(e)=> setcodigoBarra(e.target.value)}
                       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
                     />
                     <input
