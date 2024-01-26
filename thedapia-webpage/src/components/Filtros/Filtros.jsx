@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookOpen, faChessKnight, faSortDown, faBars,faBox } from '@fortawesome/free-solid-svg-icons';
 
 const Filtros = () => {
-  const [filtrosVisible, setFiltrosVisible] = useState(true); 
   const [libreriaVisible, setLibreriaVisible] = useState(true);
   const [agendasVisible, setAgendasVisible] = useState(false);
   const [artisticaVisible, setArtisticaVisible] = useState(false);
@@ -105,13 +104,9 @@ const Filtros = () => {
   };
 
   return (
-    <div className="w-1/5 py-16 mx-8">
+    <div className="w-1/5 py-16 ml-8 mr-4">
       <div className="pl-2 flex items-center justify-between">
         <h2 className="text-2xl text-center mb-2">Filtros</h2>
-        <button > 
-          <FontAwesomeIcon className= "h-full w-6 "icon={faBars} />
-        </button>
-
       </div>
       <div className="border border-black">
       <div className='p-3 flex items-center hover:text-white cursor-pointer bg-purple-400' onClick={toggleLibreria}>

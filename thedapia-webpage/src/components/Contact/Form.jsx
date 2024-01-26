@@ -39,9 +39,12 @@ const Contact = () => {
 
             <div className="contact-info">
                 <img src={ThedapiaMap} alt="" />
-                <p><FontAwesomeIcon icon={faLocationDot}/> Av. Asamblea 682 CABA, 1424</p>
-                <p><FontAwesomeIcon icon={faPhone}/> +5401133445566</p>
-                <p><FontAwesomeIcon icon={faEnvelope}/> thedapia23@gmail.com</p>
+                <p><FontAwesomeIcon className="mr-2" icon={faLocationDot}/> Av. Asamblea 682 CABA, 1424</p>
+                <p><FontAwesomeIcon className="mr-2" icon={faPhone}/> +5401133445566</p>
+                <p><FontAwesomeIcon className="mr-2" icon={faEnvelope}/> thedapia23@gmail.com</p>
+                <p>Horario de Atención: 10 hs a 15 hs y de 16 hs a 19:30 hs</p>
+                <p>Como llegar: Subte E, Estación Jose M. Moreno</p>
+                <p>Colectivos: 4, 7, 25, 42, 134, 135,  </p>
             </div>
         </div>
       </section>

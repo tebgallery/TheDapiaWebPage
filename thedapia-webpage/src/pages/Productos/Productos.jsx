@@ -1,51 +1,47 @@
-import {React,useState} from "react";
+import { React, useState, useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import ArticulosGrid from '../../components/Articulos/ArticulosGrid';
 import Footer from '../../components/Footer/Footer';
 import Filtros from '../../components/Filtros/Filtros';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faBars } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 
 const Productos = () => {
+  const url = 'http://localhost:3000/productos';
+  const [products, setProducts] = useState([]);
+  const [showFiltros,setShowFiltros] = useState(true);
 
-  const [filtrosSeleccionados, setFiltrosSeleccionados] = useState({});
+  useEffect( () =>{
+    getProducts();
+  },[]);
 
-  const handleFiltroChange = (nuevosFiltros) => {
-    setFiltrosSeleccionados(nuevosFiltros);
-    };
-  
-    const articulos = [
-        { id: 1, title: 'Cartuchera Mooving Homero Simpsons', img: "https://www.tiendaforeva.com.ar/media/catalog/product/cache/5be8613c49569c873a50ed7e321cb477/4/0/4064524_20231130160006.jpg", precio: 19990 },
-        { id: 2, title: 'Artículo 2', img: "https://www.tiendaforeva.com.ar/media/catalog/product/cache/5be8613c49569c873a50ed7e321cb477/4/0/4064524_20231130160006.jpg", precio: 19990  },
-        { id: 3, title: 'Artículo 3', img: "https://www.tiendaforeva.com.ar/media/catalog/product/cache/5be8613c49569c873a50ed7e321cb477/4/0/4064524_20231130160006.jpg", precio: 19990  },
-        { id: 4, title: 'Artículo 4', img: "https://www.tiendaforeva.com.ar/media/catalog/product/cache/5be8613c49569c873a50ed7e321cb477/4/0/4064524_20231130160006.jpg", precio: 19990  },
-        { id: 5, title: 'Artículo 5', img: "https://www.tiendaforeva.com.ar/media/catalog/product/cache/5be8613c49569c873a50ed7e321cb477/4/0/4064524_20231130160006.jpg", precio: 19990  },
-        { id: 6, title: 'Artículo 6', img: "https://www.tiendaforeva.com.ar/media/catalog/product/cache/5be8613c49569c873a50ed7e321cb477/4/0/4064524_20231130160006.jpg", precio: 19990  },
-        { id: 7, title: 'Artículo 7', img: "https://www.tiendaforeva.com.ar/media/catalog/product/cache/5be8613c49569c873a50ed7e321cb477/4/0/4064524_20231130160006.jpg", precio: 19990  },
-        { id: 8, title: 'Artículo 8', img: "https://www.tiendaforeva.com.ar/media/catalog/product/cache/5be8613c49569c873a50ed7e321cb477/4/0/4064524_20231130160006.jpg", precio: 19990  },
-        { id: 9, title: 'Artículo 9', img: "https://www.tiendaforeva.com.ar/media/catalog/product/cache/5be8613c49569c873a50ed7e321cb477/4/0/4064524_20231130160006.jpg", precio: 19990  },
-        { id: 10, title: 'Artículo 10', img: "https://www.tiendaforeva.com.ar/media/catalog/product/cache/5be8613c49569c873a50ed7e321cb477/4/0/4064524_20231130160006.jpg", precio: 19990  },
-        { id: 11, title: 'Artículo 11', img: "https://www.tiendaforeva.com.ar/media/catalog/product/cache/5be8613c49569c873a50ed7e321cb477/4/0/4064524_20231130160006.jpg", precio: 19990  },
-        { id: 12, title: 'Artículo 12', img: "https://www.tiendaforeva.com.ar/media/catalog/product/cache/5be8613c49569c873a50ed7e321cb477/4/0/4064524_20231130160006.jpg", precio: 19990  },
-        { id: 13, title: 'Artículo 13', img: "https://www.tiendaforeva.com.ar/media/catalog/product/cache/5be8613c49569c873a50ed7e321cb477/4/0/4064524_20231130160006.jpg", precio: 19990  },
-        { id: 14, title: 'Artículo 14', img: "https://www.tiendaforeva.com.ar/media/catalog/product/cache/5be8613c49569c873a50ed7e321cb477/4/0/4064524_20231130160006.jpg", precio: 19990  },
-        { id: 15, title: 'Artículo 15', img: "https://www.tiendaforeva.com.ar/media/catalog/product/cache/5be8613c49569c873a50ed7e321cb477/4/0/4064524_20231130160006.jpg", precio: 19990  },
-        // Otros artículos...
-      ];
+  const getProducts = async () =>{
+    const response = await axios.get(url);
+    setProducts(response.data);
+  }
 
 
-
-    return (
-        <>
-        <Navbar />
-        <section className="w-full">
-          <div className= "flex justify-center">
-            <Filtros />
-            <ArticulosGrid articulos={articulos} />
+  return (
+    <>
+      <Navbar />
+      <section className="w-full">
+        <div className="flex justify-center p-4">
+            {showFiltros && (
+            <Filtros/>
+          )}
+          <div className="mt-16">
+            <button className="py-1 px-2" onClick={() => setShowFiltros(!showFiltros)}>
+              <FontAwesomeIcon className= "h-6 w-6 "icon={faBars}/>
+            </button>
           </div>
-        </section>
-        <Footer/>
-        </>
-    )
+            <ArticulosGrid products ={products} />
+        </div>
+      </section>
+      <Footer />
+    </>
+  )
 }
 
 export default Productos;
