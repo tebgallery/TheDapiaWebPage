@@ -29,6 +29,10 @@ const productosSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    seccionEnPagina: {
+        type: String,
+        require: false
+    },
     color:{
         type: String,
         require: true
