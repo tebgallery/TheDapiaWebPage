@@ -50,14 +50,14 @@ const ArticulosGrid = ({products, onCartClick, onAddToCartClick}) => {
                 className="w-full h-72 p-2 object-contain border-black border-b-2 "
               />
               <div class="h-36 p-4 ">
-                <h3 className="text-lg text-gray-500 text-center font-semibold block mb-2">{producto.nombre}</h3>
+                <h3 className="text-lg text-gray-500 text-center font-semibold block mb-4">{producto.nombre}</h3>
     
                   {producto.descuento!=null && producto.descuento!=0  ?(
                     <div className="flex items-center justify-center">
-                      <p className="text-center text-gray-500 text-lg line-through">${producto.precio}</p>
-                      <p className="text-center text-black text-xl ml-5">${handleProductDiscount(producto)}</p>
+                      <p className="text-center text-fuchsia-500 text-lg line-through">${producto.precio}</p>
+                      <p className="text-center text-black text-2xl ml-5">${handleProductDiscount(producto)}</p>
                     </div>
-                  ): <p className="text-center text-black text-xl">${producto.precio}</p>}
+                  ): <p className="text-center text-black text-2xl">${producto.precio}</p>}
                 
               </div>
             </div>
