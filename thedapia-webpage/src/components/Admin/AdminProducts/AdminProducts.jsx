@@ -22,25 +22,20 @@ const AdminProducts = () => {
     descuento: '',
     cantidad: '',
     categoria: '',
-    seccionEnPagina: '',
+    seccionenpagina: '',
     color: '',
     imagen: '',
-    fechaModificacion: '',
+    fechamodificacion: '',
     descripcion: '',
     estado: '',
   });
+
   const handleChange = (name, value) => {
     setFormValues({
       ...formValues,
       [name]: value,
     });
   };
-
-  const today = new Date();
-  const day = today.getDate();
-  const month = today.getMonth() + 1; // Los meses se indexan desde 0, por lo que sumamos 1
-  const year = today.getFullYear();
-
 
   const headers = [
     "Nombre",
@@ -67,10 +62,21 @@ const AdminProducts = () => {
     const response = await axios.get(url);
     setProducts(response.data);
   }
+
   const handleAddProduct = async () => {
     try {
-      
-      const response = await axios.post(url, formValues);
+      const today = new Date();
+      const formattedDate = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
+
+    // Actualizar el valor de fechamodificacion
+    const tempFormValues = {
+      ...formValues,
+      fechamodificacion: today,
+      estado: Boolean(estado),
+    };
+
+      console.log(tempFormValues);
+      const response = await axios.post(url, tempFormValues);
     
       setFormValues({
         nombre: '',
@@ -83,7 +89,7 @@ const AdminProducts = () => {
         seccionenpagina: '',
         color: '',
         imagen: '',
-        fechamodificacion: `${day}/${month}/${year}`,
+        fechamodificacion: '',
         descripcion: '',
         estado: '',
       })
@@ -97,6 +103,7 @@ const AdminProducts = () => {
 
   const handleModifyProduct = async () => {
     try {
+      console.log(formValues);
       const response = await axios.put(`${url}/${selectedProduct._id}`, formValues);
       setFormValues({
         nombre: '',
@@ -109,7 +116,7 @@ const AdminProducts = () => {
         seccionenpagina: '',
         color: '',
         imagen: '',
-        fechamodificacion: `${day}/${month}/${year}`,
+        fechamodificacion: '',
         descripcion: '',
         estado: '',
       })

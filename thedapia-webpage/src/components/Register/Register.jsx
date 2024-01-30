@@ -1,10 +1,12 @@
 import RegisterForm from './RegisterForm';
+import Navbar from "../Navbar/Navbar";
 
 const Register = () => {
     return (
-        <section class = "w-screen h-screen flex h-screen bg-white">
-            <RegisterForm/>
-        </section>
+        <>
+      <Navbar/>
+      <RegisterForm/>
+    </>
     );
 };
 

@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const ModifyProductModalForm = ({ handleChange, values }) => {
-  console.log("lista:",values);
   return (
   <form className="text-center">
     <input
@@ -69,7 +68,7 @@ const ModifyProductModalForm = ({ handleChange, values }) => {
       id="seccionEnPagina"
       name="SeccionEnPagina"
       value={values.seccionenpagina}
-      onChange={(e) => handleChange('seccionEnPagina', e.target.value)}
+      onChange={(e) => handleChange('seccionenpagina', e.target.value)}
     >
       <option value="" disabled hidden>Categorias Home </option>
       <option value="UltimosIngresos">Ultimos Ingresos</option>
@@ -105,10 +104,10 @@ const ModifyProductModalForm = ({ handleChange, values }) => {
       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
       id="estado"
       name="Estado"
-      value={Boolean(values.estado)}
-      onChange={(e) => handleChange('estado', Boolean(e.target.value))}
+      value={values.estado}
+      onChange={(e) => handleChange('categoria', e.target.value)}
     >
-      <option value="true"> Activo</option>
+      <option value="true">Activo</option>
       <option value="false">Desactivado</option>
     </select>
   </form>

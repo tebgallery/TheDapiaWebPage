@@ -9,6 +9,7 @@ export default {
       height: {
         104: '26rem',
         128: '32rem',
+        176: '44rem',
         192: '48rem',
         208: '52rem',
         224: '56rem',
