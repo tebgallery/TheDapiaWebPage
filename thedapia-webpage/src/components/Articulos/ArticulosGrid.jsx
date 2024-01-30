@@ -49,7 +49,7 @@ const ArticulosGrid = ({products, onCartClick, onAddToCartClick}) => {
                 alt={producto.nombre}
                 className="w-full h-72 p-2 object-contain border-black border-b-2 "
               />
-              <div class="h-36 p-4 ">
+              <div className="h-36 p-4 ">
                 <h3 className="text-lg text-gray-500 text-center font-semibold block mb-4">{producto.nombre}</h3>
     
                   {producto.descuento!=null && producto.descuento!=0  ?(
@@ -62,7 +62,7 @@ const ArticulosGrid = ({products, onCartClick, onAddToCartClick}) => {
               </div>
             </div>
                    
-            <div class="relative flex items-center w-full h-10 " onClick={() => { onAddToCartClick(producto); onCartClick(); }}>
+            <div className="relative flex items-center w-full h-10 " onClick={() => { onAddToCartClick(producto); onCartClick(); }}>
               <button 
               className="absolute bottom-0 flex items-center justify-center text-base text-white bg-fuchsia-300 w-full h-10 hover:bg-fuchsia-500 duration-300" >
                 AGREGAR

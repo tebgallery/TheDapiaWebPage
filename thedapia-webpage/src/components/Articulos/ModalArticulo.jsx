@@ -20,8 +20,8 @@ const ModalArticulo = ({ producto, onClose }) => {
                 <p className="text-lg text-gray-700 mb-2">Cantidad : {producto.cantidad}</p>
                 <p className="text-lg text-gray-700 mb-2">Descripción: {producto.descripcion}</p>
                 <p className="text-2xl font-semibold">${producto.precio}</p>
-                <div class="absolute bottom-0 flex items-center w-full mb-8" onClick={() => handleCartModal(producto)}>
-              <button class="flex items-center justify-center text-base text-white bg-fuchsia-300 w-full h-10 hover:bg-fuchsia-500 duration-300" >
+                <div className="absolute bottom-0 flex items-center w-full mb-8" onClick={() => handleCartModal(producto)}>
+              <button className="flex items-center justify-center text-base text-white bg-fuchsia-300 w-full h-10 hover:bg-fuchsia-500 duration-300" >
                 AGREGAR
                 <FontAwesomeIcon className="text-black ml-2" icon={faCartPlus} />
               </button>

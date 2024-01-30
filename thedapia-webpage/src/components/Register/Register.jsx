@@ -2,7 +2,7 @@ import RegisterForm from './RegisterForm';
 
 const Register = () => {
     return (
-        <section class = "w-screen h-screen flex h-screen bg-white">
+        <section className = "w-screen h-screen flex h-screen bg-white">
             <RegisterForm/>
         </section>
     );
