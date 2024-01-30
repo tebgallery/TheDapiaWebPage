@@ -1,6 +1,8 @@
 import React from 'react';
 
-const ModifyProductModalForm = ({ handleChange, values }) => (
+const ModifyProductModalForm = ({ handleChange, values }) => {
+  console.log("lista:",values);
+  return (
   <form className="text-center">
     <input
       type="text"
@@ -57,9 +59,23 @@ const ModifyProductModalForm = ({ handleChange, values }) => (
       value={values.categoria}
       onChange={(e) => handleChange('categoria', e.target.value)}
     >
+      <option value="" disabled hidden>Selecciona una categoria</option>
       <option value="Liberia">Libreria</option>
       <option value="Juguetes">Juguetes</option>
       <option value="Mochilas">Mochilas</option>
+    </select>
+    <select
+      className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
+      id="seccionEnPagina"
+      name="SeccionEnPagina"
+      value={values.seccionenpagina}
+      onChange={(e) => handleChange('seccionEnPagina', e.target.value)}
+    >
+      <option value="" disabled hidden>Categorias Home </option>
+      <option value="UltimosIngresos">Ultimos Ingresos</option>
+      <option value="MasVendido">Lo Mas Vendido</option>   
+      <option value="Ofertas">Ofertas</option>
+      <option value="none">Ninguna</option> 
     </select>
     <input
       type="text"
@@ -85,7 +101,18 @@ const ModifyProductModalForm = ({ handleChange, values }) => (
       onChange={(e) => handleChange('descripcion', e.target.value)}
       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
     />
+    <select
+      className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
+      id="estado"
+      name="Estado"
+      value={Boolean(values.estado)}
+      onChange={(e) => handleChange('estado', Boolean(e.target.value))}
+    >
+      <option value="true"> Activo</option>
+      <option value="false">Desactivado</option>
+    </select>
   </form>
-);
+  );
+};
 
 export default ModifyProductModalForm;

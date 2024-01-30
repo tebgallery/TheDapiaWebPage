@@ -22,9 +22,12 @@ const AdminProducts = () => {
     descuento: '',
     cantidad: '',
     categoria: '',
+    seccionEnPagina: '',
     color: '',
     imagen: '',
+    fechaModificacion: '',
     descripcion: '',
+    estado: '',
   });
   const handleChange = (name, value) => {
     setFormValues({
@@ -32,6 +35,12 @@ const AdminProducts = () => {
       [name]: value,
     });
   };
+
+  const today = new Date();
+  const day = today.getDate();
+  const month = today.getMonth() + 1; // Los meses se indexan desde 0, por lo que sumamos 1
+  const year = today.getFullYear();
+
 
   const headers = [
     "Nombre",
@@ -41,6 +50,7 @@ const AdminProducts = () => {
     "Descuento",
     "Cantidad",
     "Categoria",
+    "SeccionEnPagina",
     "Color",
     "Imagen",
     "FechaModificacion",
@@ -70,9 +80,12 @@ const AdminProducts = () => {
         descuento: '',
         cantidad: '',
         categoria: '',
+        seccionenpagina: '',
         color: '',
         imagen: '',
+        fechamodificacion: `${day}/${month}/${year}`,
         descripcion: '',
+        estado: '',
       })
 
       getProducts();
@@ -84,7 +97,6 @@ const AdminProducts = () => {
 
   const handleModifyProduct = async () => {
     try {
-      
       const response = await axios.put(`${url}/${selectedProduct._id}`, formValues);
       setFormValues({
         nombre: '',
@@ -94,9 +106,12 @@ const AdminProducts = () => {
         descuento: '',
         cantidad: '',
         categoria: '',
+        seccionenpagina: '',
         color: '',
         imagen: '',
+        fechamodificacion: `${day}/${month}/${year}`,
         descripcion: '',
+        estado: '',
       })
 
       getProducts();
@@ -138,9 +153,12 @@ const AdminProducts = () => {
       descuento: selectedProduct.descuento || '',
       cantidad: selectedProduct.cantidad || '',
       categoria: selectedProduct.categoria || '',
+      seccionenpagina: selectedProduct.seccionenpagina || '',
       color: selectedProduct.color || '',
       imagen: selectedProduct.imagen || '',
+      fechamodificacion: selectedProduct.fechamodificacion || '',
       descripcion: selectedProduct.descripcion || '',
+      estado: selectedProduct.estado || '',
     });
   };
 
@@ -155,9 +173,12 @@ const AdminProducts = () => {
       descuento: '',
       cantidad: '',
       categoria: '',
+      seccionenpagina: '',
       color: '',
       imagen: '',
+      fechamodificacion: '',
       descripcion: '',
+      estado: '',
     })
   };
 
@@ -169,6 +190,7 @@ const AdminProducts = () => {
   const handleCloseRemoveProductModal = () => {
     setShowRemoveProductModal(false);
   };
+
 
   return (
     <section className="w-full bg-slate-200">
