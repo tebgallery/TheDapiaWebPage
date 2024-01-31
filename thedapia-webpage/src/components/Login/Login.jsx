@@ -1,11 +1,15 @@
 import LoginForm from "./LoginForm";
 import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
 const Login = () => {
   return (
-    <section class = "w-screen h-screen flex h-screen bg-white m-auto">
+    <>
       <Navbar/>
-      <LoginForm/>
-    </section>
+      <div className="h-176 flex items-center justify-center">
+        <LoginForm/>
+      </div>
+      <Footer/>
+    </>
   );
 };
 

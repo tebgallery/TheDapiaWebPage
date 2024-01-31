@@ -1,6 +1,6 @@
 const LoginForm = () => {
     return (
-      <div class="relative m-auto w-full max-w-md bg-white px-6 pt-10 pb-8 shadow-2xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
+      <div class="relative w-full max-w-xl h-104 bg-white px-6 pt-10 pb-8 shadow-2xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
         <div class="w-full">
           <div class="text-center">
             <h1 class="text-3xl font-semibold text-gray-900">Iniciar sesión</h1>
