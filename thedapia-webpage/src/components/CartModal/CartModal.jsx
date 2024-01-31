@@ -7,24 +7,25 @@ import {
   faMinus,
 } from "@fortawesome/free-solid-svg-icons";
 
-const CartModal = ({ onClose, product }) => {
-  console.log(product);
-  const [cart, setCart] = useState([]);
+const CartModal = ({onClose, cart }) => {
+  {/*const [productAmount, setProductAmount] =  useState(cart); */}
+  
+  console.log(cart);
 
   const total = cart.reduce(
     (accumulator, currentValue) =>
       accumulator + currentValue.precio * currentValue.amount,
     0
   );
-
+{/*
   const handleIncrementProductAmount = (productId) => {
-    setCart((prevCart) =>
+    setProductAmount((prevCart) =>
       prevCart.map((item) =>
         item._id === productId ? { ...item, amount: item.amount + 1 } : item
       )
     );
   };
-
+{/*
   const handleDecrementProductAmount = (productId) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
@@ -38,7 +39,7 @@ const CartModal = ({ onClose, product }) => {
   const handleRemoveProduct = (productId) => {
     setCart((prevCart) => prevCart.filter((cart) => cart._id !== productId));
   };
-
+*/}
   return (
     <div className="fixed w-full h-full top-0 bg-opacity-50 flex items-center justify-end z-50">
       <div className="bg-white p-8 border border-black rounded-2xl w-4/12 h-full">
@@ -82,7 +83,11 @@ const CartModal = ({ onClose, product }) => {
               </div>
             </div>
             <div className="relative text-center">
-              <p>${c.precio}</p>
+            {c.descuento!=null && c.descuento!=0  ? (
+                <p>${c.precio} ${c.preciototal} </p>
+            ) : 
+              <p>${c.preciototal}</p>
+            }
             </div>
             <FontAwesomeIcon
               icon={faTrashCan}

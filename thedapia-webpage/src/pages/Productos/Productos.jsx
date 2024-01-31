@@ -50,8 +50,25 @@ const Productos = ({categoria,palabra}) => {
     setShowCartModal(!showCartModal);
   };
 
+
   const handleAddProductToCart = (product) => {
-    setCart(...cart, product);
+    const existingProduct = cart.find((item) => item._id === product._id);
+
+    if (existingProduct) {
+      console.log("existe");
+      // Si ya está en el carrito, incrementar la cantidad
+      setCart(
+        cart.map((item) =>
+          item._id === product._id ? { ...item, amount: item.amount + 1 } : item
+        )
+      );
+      
+    } else {
+      console.log("no existe");
+      // Si no está en el carrito, agregarlo con cantidad 1
+      setCart([...cart,  {...product, amount:1}]);
+    }
+
   };
 
   
@@ -60,7 +77,7 @@ const Productos = ({categoria,palabra}) => {
       <Navbar onCartClick = {toggleCartModal} />
 
       {showCartModal && (
-        <CartModal onClose={() => setShowCartModal(false)} product = {cart}/>
+        <CartModal onClose={() => setShowCartModal(false)} cart = {cart}/>
       )}
 
       <section className="w-full">
@@ -73,7 +90,7 @@ const Productos = ({categoria,palabra}) => {
               <FontAwesomeIcon className= "h-6 w-6 "icon={faBars}/>
             </button>
           </div>
-            <ArticulosGrid onCartClick = {toggleCartModal} products = {products} onAddToCartClick = {handleAddProductToCart}/>
+            <ArticulosGrid onCartClick = {toggleCartModal} products = {products} onAddToCartClick = {handleAddProductToCart} cart = {cart}/>
         </div>
       </section>
       <Footer />
