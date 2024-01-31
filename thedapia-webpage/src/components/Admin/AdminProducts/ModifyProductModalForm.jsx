@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React  from 'react';
 
 const ModifyProductModalForm = ({ handleChange, values }) => {
   return (
@@ -105,8 +105,9 @@ const ModifyProductModalForm = ({ handleChange, values }) => {
       id="estado"
       name="Estado"
       value={values.estado}
-      onChange={(e) => handleChange('categoria', e.target.value)}
+      onChange={(e) => handleChange('estado', e.target.value)}
     >
+      <option value="" disabled hidden>Estado </option>
       <option value="true">Activo</option>
       <option value="false">Desactivado</option>
     </select>

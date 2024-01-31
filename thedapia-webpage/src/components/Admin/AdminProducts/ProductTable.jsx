@@ -1,6 +1,20 @@
 import React from 'react';
 
-const ProductTable = ({ headers, products, handleOpenModifProductModal, handleOpenRemoveProductModal }) => (
+const ProductTable = ({ headers, products, handleOpenModifProductModal, handleOpenRemoveProductModal }) => {
+  const formatDate = (dateString) => {
+    const options = { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric', 
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,  
+    };
+    return new Date(dateString).toLocaleDateString([],options);
+  }
+  
+  return(
   <div className="w-11/12 m-auto">
     <table className="table-auto border-2 border-slate-100 border-separate border-spacing-1 w-full bg-slate-500 ">
       <thead>
@@ -38,7 +52,11 @@ const ProductTable = ({ headers, products, handleOpenModifProductModal, handleOp
                       Eliminar
                     </button>
                   </div>
-                ): (
+                ) : header === 'FechaModificacion' ? (
+                    formatDate(product[header.toLowerCase()])
+                ) : header === 'Estado' ? (
+                  product[header.toLowerCase()] ? 'Activo' : 'Desactivado'
+                ) : (
                   product[header.toLowerCase()]
                 )}
               </td>
@@ -48,6 +66,6 @@ const ProductTable = ({ headers, products, handleOpenModifProductModal, handleOp
       </tbody>
     </table>
   </div>
-);
+)};
 
 export default ProductTable;
