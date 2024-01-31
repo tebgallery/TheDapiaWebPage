@@ -1,10 +1,10 @@
 const LoginForm = () => {
     return (
-      <div className="relative m-auto w-full max-w-md bg-white px-6 pt-10 pb-8 shadow-2xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
-        <div className="w-full">
-          <div className="text-center">
-            <h1 className="text-3xl font-semibold text-gray-900">Iniciar sesión</h1>
-            <p className="mt-2 text-gray-500">Inicia sesión para comenzar tus compras!</p>
+      <div class="relative w-full max-w-xl h-104 bg-white px-6 pt-10 pb-8 shadow-2xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
+        <div class="w-full">
+          <div class="text-center">
+            <h1 class="text-3xl font-semibold text-gray-900">Iniciar sesión</h1>
+            <p class="mt-2 text-gray-500">Inicia sesión para comenzar tus compras!</p>
           </div>
           <div className="mt-5">
             <form action="">

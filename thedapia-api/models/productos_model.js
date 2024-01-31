@@ -29,9 +29,9 @@ const productosSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    seccionEnPagina: {
+    seccionenpagina: {
         type: String,
-        require: false
+        require: true
     },
     color:{
         type: String,
@@ -43,15 +43,15 @@ const productosSchema = new mongoose.Schema({
     },
     fechamodificacion:{
         type: Date,
-        require: false
+        require: true
     },
     descripcion:{
         type: String,
         require: true
     },
     estado:{
-        type: Number,
-        require: false
+        type:  Boolean,
+        require: true
     }
 })
 

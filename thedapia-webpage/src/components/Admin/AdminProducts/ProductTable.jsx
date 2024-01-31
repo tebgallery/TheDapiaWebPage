@@ -1,12 +1,26 @@
 import React from 'react';
 
-const ProductTable = ({ headers, products, handleOpenModifProductModal, handleOpenRemoveProductModal }) => (
+const ProductTable = ({ headers, products, handleOpenModifProductModal, handleOpenRemoveProductModal }) => {
+  const formatDate = (dateString) => {
+    const options = { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric', 
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,  
+    };
+    return new Date(dateString).toLocaleDateString([],options);
+  }
+  
+  return(
   <div className="w-11/12 m-auto">
-    <table className="table-auto border-collapse w-full">
+    <table className="table-auto border-2 border-slate-100 border-separate border-spacing-1 w-full bg-slate-500 ">
       <thead>
         <tr>
           {headers.map((header, index) => (
-            <th key={index} className="border-b border-black p-2">
+            <th key={index} className="border-black p-2">
               {header}
             </th>
           ))}
@@ -14,9 +28,9 @@ const ProductTable = ({ headers, products, handleOpenModifProductModal, handleOp
       </thead>
       <tbody>
         {products.map((product) => (
-          <tr key={product._id} className="border-black">
+          <tr key={product._id} className="bg-slate-300 border-black hover:bg-slate-200">
             {headers.map((header, idx) => (
-              <td key={idx} className="border-b border-black p-2">
+              <td key={idx} className="border border-white p-2 ">
                 {header === 'Imagen' ? (
                   <img
                     src={product.imagen}
@@ -38,6 +52,10 @@ const ProductTable = ({ headers, products, handleOpenModifProductModal, handleOp
                       Eliminar
                     </button>
                   </div>
+                ) : header === 'FechaModificacion' ? (
+                    formatDate(product[header.toLowerCase()])
+                ) : header === 'Estado' ? (
+                  product[header.toLowerCase()] ? 'Activo' : 'Desactivado'
                 ) : (
                   product[header.toLowerCase()]
                 )}
@@ -48,6 +66,6 @@ const ProductTable = ({ headers, products, handleOpenModifProductModal, handleOp
       </tbody>
     </table>
   </div>
-);
+)};
 
 export default ProductTable;

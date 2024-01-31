@@ -38,12 +38,12 @@ async function guardarProducto(body){
         descuento: body.descuento,
         cantidad: body.cantidad,
         categoria: body.categoria,
-        seccionEnPagina: body.seccionEnPagina,
+        seccionenpagina: body.seccionenpagina,
         color: body.color,
         imagen: body.imagen,
         fechamodificacion: body.fechamodificacion,
         descripcion: body.descripcion,
-        estado: body.estado
+        estado: body.estado,
     })
     console.log(producto)
     return await producto.save();
@@ -59,12 +59,12 @@ async function actualizarProducto(body, id){
             descuento: body.descuento,
             cantidad: body.cantidad,
             categoria: body.categoria,
-            seccionEnPagina: body.seccionEnPagina,
+            seccionenpagina: body.seccionenpagina,
             color: body.color,
             imagen: body.imagen,
             fechamodificacion: body.fechamodificacion,
             descripcion: body.descripcion,
-            estado: body.estado
+            estado: body.estado,
         }
     })
     return producto;
