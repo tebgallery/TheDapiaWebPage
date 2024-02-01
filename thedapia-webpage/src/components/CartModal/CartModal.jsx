@@ -18,8 +18,9 @@ const CartModal = ({onClose, cart, onClickMinus,onClickPlus,onClickRemove }) => 
   const navigate = useNavigate();
 
   const handleNavigateToOrderPage = () => {
-    navigate('/order');
-    
+    // Supongamos que 'cart' es tu lista de productos en formato JSON
+    const cartParameter = encodeURIComponent(JSON.stringify(cart));
+    navigate(`/order/${cartParameter}`);
   };
 
   return (
