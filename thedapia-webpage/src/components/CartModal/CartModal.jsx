@@ -6,50 +6,34 @@ import {
   faPlus,
   faMinus,
 } from "@fortawesome/free-solid-svg-icons";
+import {Link as RouterLink, useNavigate} from 'react-router-dom'
 
-const CartModal = ({onClose, cart }) => {
-  {/*const [productAmount, setProductAmount] =  useState(cart); */}
-  
-  console.log(cart);
-
+const CartModal = ({onClose, cart, onClickMinus,onClickPlus,onClickRemove }) => {
   const total = cart.reduce(
     (accumulator, currentValue) =>
-      accumulator + currentValue.precio * currentValue.amount,
+      accumulator + currentValue.preciototal * currentValue.amount,
     0
   );
-{/*
-  const handleIncrementProductAmount = (productId) => {
-    setProductAmount((prevCart) =>
-      prevCart.map((item) =>
-        item._id === productId ? { ...item, amount: item.amount + 1 } : item
-      )
-    );
-  };
-{/*
-  const handleDecrementProductAmount = (productId) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item._id === productId && item.amount > 1
-          ? { ...item, amount: item.amount - 1 }
-          : item
-      )
-    );
+
+  const navigate = useNavigate();
+
+  const handleNavigateToOrderPage = () => {
+    navigate('/order');
+    
   };
 
-  const handleRemoveProduct = (productId) => {
-    setCart((prevCart) => prevCart.filter((cart) => cart._id !== productId));
-  };
-*/}
   return (
     <div className="fixed w-full h-full top-0 bg-opacity-50 flex items-center justify-end z-50">
-      <div className="bg-white p-8 border border-black rounded-2xl w-4/12 h-full">
-        <div className="flex items-center mb-12">
+      <div className="bg-white p-8 border border-black rounded-2xl w-3/12 h-full">
+      {cart.length > 0 ? (
+      <>
+          <div className="flex items-center mb-12">
           <FontAwesomeIcon
             icon={faXmark}
             onClick={onClose}
             className="cursor-pointer"
           />
-          <h3 className="ml-12 text-lg p-2">Carrito de Compras</h3>
+          <h3 className="ml-10 text-2xl p-2">Carrito de Compras</h3>
         </div>
         {cart.map((c) => (
           <div
@@ -66,7 +50,7 @@ const CartModal = ({onClose, cart }) => {
                     <FontAwesomeIcon
                       icon={faMinus}
                       className="cursor-pointer w-3 h-3"
-                      onClick={() => handleDecrementProductAmount(c._id)}
+                      onClick={() => onClickMinus(c)}
                     />
                     <input
                       type="text"
@@ -76,23 +60,26 @@ const CartModal = ({onClose, cart }) => {
                     <FontAwesomeIcon
                       icon={faPlus}
                       className="cursor-pointer w-3 h-3"
-                      onClick={() => handleIncrementProductAmount(c._id)}
+                      onClick={() => onClickPlus(c)}
                     />
                   </div>
                 </div>
               </div>
             </div>
             <div className="relative text-center">
-            {c.descuento!=null && c.descuento!=0  ? (
-                <p>${c.precio} ${c.preciototal} </p>
-            ) : 
+            {c.descuento !== null && c.descuento !== 0 ? (
+              <>
+                <p className="text-fuchsia-500 line-through">${c.precio}</p>
+                <p>${c.preciototal}</p>
+              </>
+            ) : (
               <p>${c.preciototal}</p>
-            }
+            )}
             </div>
             <FontAwesomeIcon
               icon={faTrashCan}
               className="cursor-pointer absolute top-0 right-0"
-              onClick={() => handleRemoveProduct(c._id)}
+              onClick={() => onClickRemove(c)}
             />
           </div>
         ))}
@@ -103,7 +90,7 @@ const CartModal = ({onClose, cart }) => {
           </div>
 
           <div className="mt-16">
-            <button className="bg-blue-500 text-white px-4 py-2 rounded w-full mb-4">
+            <button className="bg-blue-500 text-white px-4 py-2 rounded w-full mb-4" onClick={handleNavigateToOrderPage}>
               Continuar Compra
             </button>
             <button className="bg-gray-400 text-white px-4 py-2 rounded w-full">
@@ -111,6 +98,17 @@ const CartModal = ({onClose, cart }) => {
             </button>
           </div>
         </div>
+        </>      
+        ) : (
+          <>
+            <FontAwesomeIcon
+              icon={faXmark}
+              onClick={onClose}
+              className="cursor-pointer mb-10"
+            />
+            <p className="text-xl">No agregaste nada!</p>
+          </>
+        )}
       </div>
     </div>
   );

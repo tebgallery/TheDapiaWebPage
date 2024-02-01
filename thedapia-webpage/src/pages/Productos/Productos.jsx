@@ -55,8 +55,6 @@ const Productos = ({categoria,palabra}) => {
     const existingProduct = cart.find((item) => item._id === product._id);
 
     if (existingProduct) {
-      console.log("existe");
-      // Si ya está en el carrito, incrementar la cantidad
       setCart(
         cart.map((item) =>
           item._id === product._id ? { ...item, amount: item.amount + 1 } : item
@@ -64,11 +62,37 @@ const Productos = ({categoria,palabra}) => {
       );
       
     } else {
-      console.log("no existe");
-      // Si no está en el carrito, agregarlo con cantidad 1
       setCart([...cart,  {...product, amount:1}]);
     }
 
+  };
+
+  const handleDecrementProductAmount = (product) => {
+    setCart(
+    cart.map((item) =>
+        item._id === product._id
+        ? { ...item, amount: item.amount > 1 ? item.amount - 1 : item.amount }
+        : item
+      )
+    );
+  };
+
+  const handleIncrementProductAmount = (product) => {
+    setCart(
+    cart.map((item) =>
+        item._id === product._id
+        ? { ...item, amount: item.amount < product.cantidad ? item.amount + 1 : item.amount}
+        : item
+      )
+    );
+  };
+
+  const handleRemoveProduct = (product) => {
+    setCart(
+      cart.filter((item) =>
+          item._id !== product._id
+        )
+      );
   };
 
   
@@ -77,7 +101,12 @@ const Productos = ({categoria,palabra}) => {
       <Navbar onCartClick = {toggleCartModal} />
 
       {showCartModal && (
-        <CartModal onClose={() => setShowCartModal(false)} cart = {cart}/>
+        <CartModal 
+          onClose={() => setShowCartModal(false)} 
+          cart = {cart} 
+          onClickMinus = {handleDecrementProductAmount} 
+          onClickPlus = {handleIncrementProductAmount} 
+          onClickRemove = {handleRemoveProduct}/>
       )}
 
       <section className="w-full">
