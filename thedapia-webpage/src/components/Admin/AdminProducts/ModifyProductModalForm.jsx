@@ -71,9 +71,9 @@ const ModifyProductModalForm = ({ handleChange, values }) => {
       onChange={(e) => handleChange('seccionenpagina', e.target.value)}
     >
       <option value="" disabled hidden>Categorias Home </option>
-      <option value="UltimosIngresos">Ultimos Ingresos</option>
-      <option value="MasVendido">Lo Mas Vendido</option>   
-      <option value="Ofertas">Ofertas</option>
+      <option value="ultimos-ingresos">Ultimos Ingresos</option>
+      <option value="mas-vendido">Lo Mas Vendido</option>   
+      <option value="ofertas">Ofertas</option>
       <option value="none">Ninguna</option> 
     </select>
     <input
