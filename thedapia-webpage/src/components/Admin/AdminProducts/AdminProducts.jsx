@@ -21,6 +21,7 @@ const AdminProducts = () => {
     codigobarra: "",
     precio: "",
     descuento: "",
+    preciototal: "",
     cantidad: "",
     categoria: "",
     seccionenpagina: "",
@@ -44,6 +45,7 @@ const AdminProducts = () => {
     "codigoBarra",
     "Precio",
     "Descuento",
+    "PrecioTotal",
     "Cantidad",
     "Categoria",
     "SeccionEnPagina",
@@ -66,10 +68,15 @@ const AdminProducts = () => {
 
   const handleAddProduct = async () => {
     try {
+      console.log("precio:",formValues.precio);
+      console.log("descuento:",formValues.descuento);
       const tempFormValues = {
         ...formValues,
+        preciototal:  Number(formValues.precio) - (Number(formValues.precio) * Number(formValues.descuento)) / 100,
         fechamodificacion: today,
       };
+      console.log(formValues);
+      console.log(tempFormValues);
 
       const response = await axios.post(url, tempFormValues);
 
@@ -79,6 +86,7 @@ const AdminProducts = () => {
         codigobarra: "",
         precio: "",
         descuento: "",
+        preciototal: "",
         cantidad: "",
         categoria: "",
         seccionenpagina: "",
@@ -101,6 +109,7 @@ const AdminProducts = () => {
       console.log("objeto1:",formValues.estado);
       const tempFormValues = {
         ...formValues,
+        preciototal:  formValues.precio - (formValues.precio * formValues.descuento) / 100,
         fechamodificacion: today,
       };
       console.log("objeto2:",tempFormValues);
@@ -114,6 +123,7 @@ const AdminProducts = () => {
         codigobarra: "",
         precio: "",
         descuento: "",
+        preciototal: "",
         cantidad: "",
         categoria: "",
         seccionenpagina: "",
@@ -163,6 +173,7 @@ const AdminProducts = () => {
       codigobarra: selectedProduct.codigobarra || "",
       precio: selectedProduct.precio || "",
       descuento: selectedProduct.descuento || "",
+      preciototal: selectedProduct.preciototal || "",
       cantidad: selectedProduct.cantidad || "",
       categoria: selectedProduct.categoria || "",
       seccionenpagina: selectedProduct.seccionenpagina || "",
@@ -183,6 +194,7 @@ const AdminProducts = () => {
       codigobarra: "",
       precio: "",
       descuento: "",
+      preciototal: "",
       cantidad: "",
       categoria: "",
       seccionenpagina: "",

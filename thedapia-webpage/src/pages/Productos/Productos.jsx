@@ -50,8 +50,49 @@ const Productos = ({categoria,palabra}) => {
     setShowCartModal(!showCartModal);
   };
 
+
   const handleAddProductToCart = (product) => {
-    setCart(...cart, product);
+    const existingProduct = cart.find((item) => item._id === product._id);
+
+    if (existingProduct) {
+      setCart(
+        cart.map((item) =>
+          item._id === product._id ? { ...item, amount: item.amount + 1 } : item
+        )
+      );
+      
+    } else {
+      setCart([...cart,  {...product, amount:1}]);
+    }
+
+  };
+
+  const handleDecrementProductAmount = (product) => {
+    setCart(
+    cart.map((item) =>
+        item._id === product._id
+        ? { ...item, amount: item.amount > 1 ? item.amount - 1 : item.amount }
+        : item
+      )
+    );
+  };
+
+  const handleIncrementProductAmount = (product) => {
+    setCart(
+    cart.map((item) =>
+        item._id === product._id
+        ? { ...item, amount: item.amount < product.cantidad ? item.amount + 1 : item.amount}
+        : item
+      )
+    );
+  };
+
+  const handleRemoveProduct = (product) => {
+    setCart(
+      cart.filter((item) =>
+          item._id !== product._id
+        )
+      );
   };
 
   
@@ -60,7 +101,12 @@ const Productos = ({categoria,palabra}) => {
       <Navbar onCartClick = {toggleCartModal} />
 
       {showCartModal && (
-        <CartModal onClose={() => setShowCartModal(false)} product = {cart}/>
+        <CartModal 
+          onClose={() => setShowCartModal(false)} 
+          cart = {cart} 
+          onClickMinus = {handleDecrementProductAmount} 
+          onClickPlus = {handleIncrementProductAmount} 
+          onClickRemove = {handleRemoveProduct}/>
       )}
 
       <section className="w-full">
@@ -73,7 +119,7 @@ const Productos = ({categoria,palabra}) => {
               <FontAwesomeIcon className= "h-6 w-6 "icon={faBars}/>
             </button>
           </div>
-            <ArticulosGrid onCartClick = {toggleCartModal} products = {products} onAddToCartClick = {handleAddProductToCart}/>
+            <ArticulosGrid onCartClick = {toggleCartModal} products = {products} onAddToCartClick = {handleAddProductToCart} cart = {cart}/>
         </div>
       </section>
       <Footer />
