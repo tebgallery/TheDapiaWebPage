@@ -4,14 +4,13 @@ import ProductTable from "./ProductTable";
 import AddProductModal from "./AddProductModal";
 import ModifyProductModal from "./ModifyProductModal";
 import RemoveProductModal from "./RemoveProductModal";
+import Navbar from "../Navbar/Navbar";
 
 const AdminProducts = () => {
   const url = "http://localhost:3000/productos";
   const today = new Date();
-
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-
   const [showAddProductModal, setShowAddProductModal] = useState(false);
   const [showModifProductModal, setShowModifProductModal] = useState(false);
   const [showRemoveProductModal, setShowRemoveProductModal] = useState(false);
@@ -31,6 +30,20 @@ const AdminProducts = () => {
     descripcion: "",
     estado: "",
   });
+  const [selectedFilter, setSelectedFilter] = useState("none");
+  
+  const handleFilterChange = (filter) => {
+    setSelectedFilter(filter);
+  };
+
+  const filterProducts = (products) => {
+    if (selectedFilter === "none") {
+      return products;
+    } else {
+      const filteredProducts = products.filter((product) => product.seccionenpagina === selectedFilter);
+      return filteredProducts;
+    }
+  };
 
   const handleChange = (name, value) => {
     setFormValues({
@@ -59,7 +72,7 @@ const AdminProducts = () => {
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [selectedFilter]);
 
   const getProducts = async () => {
     const response = await axios.get(url);
@@ -106,13 +119,11 @@ const AdminProducts = () => {
 
   const handleModifyProduct = async () => {
     try {
-      console.log("objeto1:",formValues.estado);
       const tempFormValues = {
         ...formValues,
         preciototal:  formValues.precio - (formValues.precio * formValues.descuento) / 100,
         fechamodificacion: today,
       };
-      console.log("objeto2:",tempFormValues);
       const response = await axios.put(
         `${url}/${selectedProduct._id}`,
         tempFormValues
@@ -137,7 +148,7 @@ const AdminProducts = () => {
       getProducts();
       handleCloseModifProductModal();
     } catch (error) {
-      console.error("Error al modificar el producto:", error);
+      console.error("Error al modificar el producto:", error.response.data);
     }
   };
 
@@ -217,6 +228,7 @@ const AdminProducts = () => {
 
   return (
     <section className="w-full bg-slate-200">
+      <Navbar handleFilterChange={handleFilterChange} />
       <div className="w-full">
         <div className="relative m-auto w-11/12 flex items-center justify-center">
           <h1 className="text-4xl text-center mb-20 mt-12">
@@ -231,9 +243,10 @@ const AdminProducts = () => {
         </div>
         <ProductTable
           headers={headers}
-          products={products}
+          products={filterProducts(products)}
           handleOpenModifProductModal={handleOpenModifProductModal}
           handleOpenRemoveProductModal={handleOpenRemoveProductModal}
+          selectedFilter={selectedFilter}
         />
       </div>
       {showAddProductModal && (

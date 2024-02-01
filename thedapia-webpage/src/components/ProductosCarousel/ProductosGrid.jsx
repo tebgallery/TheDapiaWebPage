@@ -52,14 +52,14 @@ const ProductosGrid = ({ productos }) => {
                 alt={producto.nombre}
                 className="w-full h-72 object-contain border-black border-b-2 "
               />
-              <div class="h-36 p-4 ">
+              <div className="h-36 p-4 ">
                 <h3 className="text-lg text-gray-500 text-center font-semibold block mb-2">{producto.nombre}</h3>
                 <p className="text-center text-black text-2xl">${producto.precio}</p>
               </div>
             </div>
 
-            <div class="relative flex items-center w-full h-10" onClick={() => handleCartModal(producto)}>
-              <button class="absolute bottom-0 flex items-center justify-center text-base text-white bg-fuchsia-300 w-full h-10 hover:bg-fuchsia-500 duration-300" >
+            <div className="relative flex items-center w-full h-10" onClick={() => handleCartModal(producto)}>
+              <button className="absolute bottom-0 flex items-center justify-center text-base text-white bg-fuchsia-300 w-full h-10 hover:bg-fuchsia-500 duration-300" >
                 AGREGAR
                 <FontAwesomeIcon className="text-black ml-2" icon={faCartPlus} />
               </button>
@@ -69,7 +69,7 @@ const ProductosGrid = ({ productos }) => {
       </div>
       <button
         onClick={handleNext}
-        class="flex items-center w-12 h-12 py-2 rounded-full p-4 bg-gray-200 text-gray-700 text-xl mr-20 hover:border-gray-500 border-2 hover:shadow-2xl duration-500"
+        className="flex items-center w-12 h-12 py-2 rounded-full p-4 bg-gray-200 text-gray-700 text-xl mr-20 hover:border-gray-500 border-2 hover:shadow-2xl duration-500"
       >
         <FontAwesomeIcon icon={faChevronRight} />
       </button>

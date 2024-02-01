@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProductTable = ({ headers, products, handleOpenModifProductModal, handleOpenRemoveProductModal }) => {
+const ProductTable = ({ headers, products, handleOpenModifProductModal, handleOpenRemoveProductModal, selectedFilter }) => {
   const formatDate = (dateString) => {
     const options = { 
       year: 'numeric', 
@@ -14,6 +14,10 @@ const ProductTable = ({ headers, products, handleOpenModifProductModal, handleOp
     return new Date(dateString).toLocaleDateString([],options);
   }
   
+  const filteredProducts = selectedFilter === "none"
+    ? products
+    : products.filter(product => product.seccionenpagina === selectedFilter);
+
   return(
   <div className="w-11/12 m-auto">
     <table className="table-auto border-2 border-slate-100 border-separate border-spacing-1 w-full bg-slate-500 ">
@@ -27,7 +31,7 @@ const ProductTable = ({ headers, products, handleOpenModifProductModal, handleOp
         </tr>
       </thead>
       <tbody>
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <tr key={product._id} className="bg-slate-300 border-black hover:bg-slate-200">
             {headers.map((header, idx) => (
               <td key={idx} className="border border-white p-2 ">
