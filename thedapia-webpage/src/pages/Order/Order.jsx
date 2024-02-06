@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import img from "../../img/portada.jpg";
 import { useParams } from "react-router-dom";
 import OrderForm from "../../components/Order/OrderForm";
 import OrderFormInput from "../../components/Order/OrderFormInput";
-import { useNavigate } from 'react-router-dom'
+import Coverlayout from "../../components/CoverLayout/Coverlayout";
+import CartColumn from "../../components/CartColumn/CartColumn";
+
+import {useNavigate} from 'react-router-dom'
 
 const Order = () => {
     const [shippingCost, setShippingCost] = useState(0);
@@ -12,20 +14,19 @@ const Order = () => {
 
     const decodedCart = decodeURIComponent(cart);
     const parsedCart = JSON.parse(decodedCart);
+    const totalPrice = parsedCart[parsedCart.length - 1].total + shippingCost;
     const navigate = useNavigate();
 
-    const handleNavigateToHome = () => {
-        navigate('/');
+    const handleNavigateToPaymentPage = () => {
+        const cartWithTotalPrice = [...parsedCart, { totalPrice }];
+        const cartParameter = encodeURIComponent(JSON.stringify(cartWithTotalPrice));
+        navigate(`/payment/${cartParameter}`);
     };
-
-    console.log(cart);
-
+  
 
     return (
         <div>
-            <div className="w-full h-48 mb-12 flex justify-center bg-emerald-500 hover:opacity-60 hover:cursor-pointer" onClick={handleNavigateToHome}>
-                <img src={img} alt="portada.jpg" />
-            </div>
+            <Coverlayout/>
             <div className="m-auto">
                 <div className="grid grid-cols-12 gap-2">
                     <div className="col-span-8 m-auto flex items-center justify-center">
@@ -143,46 +144,13 @@ const Order = () => {
                             )}
 
                             <div className="flex justify-end">
-                                <button className="bg-black text-white uppercase px-2 py-2 w-1/3 h-12 my-10 hover:opacity-65">
+                                <button className="bg-black text-white uppercase px-2 py-2 w-1/3 h-12 my-10 hover:opacity-65" onClick={handleNavigateToPaymentPage}>
                                     Continuar con el pago
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div className="col-span-4">
-                        <div className="sticky top-12 w-8/12 border-t border-gray-300 p-2">
-                            {parsedCart.slice(0, -1).map((producto, _id) => (
-                                <div
-                                    key={_id}
-                                >
-                                    <div className="flex items-center justify-between border-b border-gray-300 py-2">
-                                        <img
-                                            src={producto.imagen}
-                                            alt="imagen-producto"
-                                            className="w-20 h-20"
-                                        />
-                                        <h4 className="uppercase"> {producto.nombre} <br /> X {producto.amount}</h4>
-                                        <p className="font-semibold ">$ {producto.preciototal}</p>
-                                    </div>
-                                </div>
-                            ))}
-
-                            <div className="border-b border-gray-300 py-2">
-                                <div className="flex justify-between items-start my-2">
-                                    <p>Subtotal: </p>
-                                    <p className="font-semibold ">${parsedCart[parsedCart.length - 1].total}</p>
-                                </div>
-                                <div className="flex justify-between items-start my-2">
-                                    <p>Costo del envío: </p>
-                                    <p className="font-semibold ">${shippingCost}</p>
-                                </div>
-                            </div>
-                            <div className="flex items-center justify-between border-b border-gray-300 py-5">
-                                <p className="text-2xl font-semibold">Total: </p>
-                                <p className="font-semibold ">${parsedCart[parsedCart.length - 1].total + shippingCost} </p>
-                            </div>
-                        </div>
-                    </div>
+                     <CartColumn cart = {parsedCart} shippingCost={shippingCost}/>
                 </div>
             </div>
         </div>
