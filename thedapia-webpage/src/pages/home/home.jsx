@@ -141,7 +141,6 @@ const Home = () => {
     {url: MarcasJuguetes.toptoys, alt: "toptoys-logo"}
 
   ]
-  console.log("hola");
 
   const toggleCartModal = () => {
     setShowCartModal(!showCartModal)

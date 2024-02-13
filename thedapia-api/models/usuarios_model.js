@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, { Mongoose } from "mongoose";
 
-const productosSchema = new mongoose.Schema({
+const usuariosSchema = new mongoose.Schema({
     nombre:{
         type: String,
         require: true
@@ -14,7 +14,7 @@ const productosSchema = new mongoose.Schema({
         require: true
     },
     contrasena:{
-        type: Number,
+        type: String,
         require: true
     },
     telefono:{
@@ -39,4 +39,4 @@ const productosSchema = new mongoose.Schema({
     }
 })
 
-export default mongoose.model('Usuarios', productosSchema);
+export default mongoose.model('Usuarios', usuariosSchema);

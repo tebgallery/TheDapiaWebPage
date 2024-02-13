@@ -20,7 +20,7 @@ const ModifyProductModalForm = ({ handleChange, values }) => {
       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
     />
     <input
-      type="text"
+      type="number"
       name="codigoBarra"
       placeholder="Codigo de Barra"
       value={values.codigobarra}
@@ -28,7 +28,7 @@ const ModifyProductModalForm = ({ handleChange, values }) => {
       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
     />
     <input
-      type="text"
+      type="number"
       name="Precio"
       placeholder="Precio"
       value={values.precio}
@@ -36,7 +36,7 @@ const ModifyProductModalForm = ({ handleChange, values }) => {
       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
     />
     <input
-      type="text"
+      type="number"
       name="Descuento"
       placeholder="Descuento"
       value={values.descuento}
@@ -44,7 +44,7 @@ const ModifyProductModalForm = ({ handleChange, values }) => {
       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
     />
     <input
-      type="text"
+      type="number"
       name="Cantidad"
       placeholder="Cantidad"
       value={values.cantidad}
