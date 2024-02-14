@@ -1,22 +1,29 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faUser, faShoppingCart, faChevronDown} from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import {faUser, faShoppingCart, faChevronDown, faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
+import { useState, useContext } from 'react';
 import Logo from "../../img/thedapia-logo.png";
-import {Link as RouterLink, useNavigate} from 'react-router-dom'
+import { AuthContext } from '../../context/AuthContext';
+import {Link as RouterLink, useNavigate} from 'react-router-dom';
 import ModalMarcas from './ModalMarcas';
 
 
 const Navbar = ( {onCartClick} ) => {
 
   const [showMarcasModal, setShowMarcasModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const {user, logOutUser} = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const handleCloseOpenLoginModal = () =>{
+    if(showLoginModal === false){
+      setShowLoginModal(true)
+    }else{
+      setShowLoginModal(false)
+    }
+  }
   const handleNavigateToSection = (sectionId) => {
     navigate('/', { state: { sectionId } });
-    
-    console.log(sectionId)
   }; 
-
 
   const marcas = ['marca1', 'marca2', 'marca3', 'marca4','marca5', 'marca6', 'marca7', 'marca8','marca9', 'marca10', 'marca11', 'marca12','marca13', 'marca14', 'marca15', 'marca16','marca17', 'marca18', 'marca19', 'marca20'];
 
@@ -39,32 +46,17 @@ const Navbar = ( {onCartClick} ) => {
             className="w-16 bg-white flex items-center justify-center"
             type="button"
           >
-            <svg className="w-7 h-7" viewBox="0 0 1000 1000">
-              <path
-                className="path1"
-                d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 
-                                            55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 
-                                            140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 
-                                            79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 
-                                            218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"
-              ></path>
-            </svg>
+            <FontAwesomeIcon icon={faMagnifyingGlass} className="w-7 h-7" />
           </button>
         </div>
 
-        <div className=" absolute right-0 mr-10 w-64 flex text-center justify-around pt-2 ">
-          <div className="w-32 h-full">
-            <RouterLink to='/adminpage'>
+        <div className="w-40 pl-10 flex justify-around ">
+          <div className="cursor-pointer pl-10" onClick={() => handleCloseOpenLoginModal()}>
               <FontAwesomeIcon icon={faUser} className='w-8 h-8' />
-            </RouterLink>
-            <p>Iniciar Sesión </p>
-            
           </div>
 
-          <div className="w-32 cursor-pointer" onClick={onCartClick}>
+          <div className="cursor-pointer pl-10" onClick={onCartClick}>
              <FontAwesomeIcon icon={faShoppingCart} className='w-8 h-8'  />
-            <p>Ver carrito</p>
-            
           </div>
         </div>
       </div>
@@ -96,6 +88,22 @@ const Navbar = ( {onCartClick} ) => {
       </div>
       {showMarcasModal && (
         <ModalMarcas marcas={marcas} onClose={() => setShowMarcasModal(false)} />
+      )}
+
+      {showLoginModal && (
+        <div className="fixed top-24 bg-white p-4 border border-gray-300 rounded shadow-md" style={{right: '20%'}}>
+          {
+            user ?
+            <>
+              <RouterLink onClick={() => logOutUser()} to='/login'>Cerrar sesion</RouterLink>
+            </>
+            :
+            <>
+              <RouterLink to='/login' className="block mb-2">Iniciar Sesión</RouterLink>
+              <RouterLink to='/register'>Registrarse</RouterLink>
+            </>
+          }
+        </div>
       )}
     </nav>
   )
