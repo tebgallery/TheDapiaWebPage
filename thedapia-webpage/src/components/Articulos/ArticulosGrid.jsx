@@ -3,7 +3,7 @@ import ModalArticulo from './ModalArticulo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
-const ArticulosGrid = ({products, onCartClick, onAddToCartClick}) => {
+const ArticulosGrid = ({products, onCartClick, onAddToCartClick,cart}) => {
   const itemsPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedArticulo, setSelectedArticulo] = useState(null);

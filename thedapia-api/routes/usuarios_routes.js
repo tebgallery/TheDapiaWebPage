@@ -15,9 +15,9 @@ ruta.get('/', (req, res) =>{
 ruta.post('/',(req,res)=>{
     let body = req.body;
     let usuario = guardarUsuario(body);
-    usuario.then(prod =>{
+    usuario.then(us =>{
         res.json({
-            valor: prod
+            valor: us
         })
     }).catch(err =>{
         res.status(400).json({err})

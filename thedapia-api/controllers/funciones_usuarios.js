@@ -12,7 +12,7 @@ async function guardarUsuario(body){
         contrasena: body.contrasena,
         telefono: body.telefono,
         direccion: body.direccion,
-        fechaExp: body.fechaExp,
+        ultFechaConexion: body.ultFechaConexion,
         tipo: body.tipo,
         estado: body.estado
     })
@@ -29,7 +29,7 @@ async function actualizarUsuario(body, id){
             contrasena: body.contrasena,
             telefono: body.telefono,
             direccion: body.direccion,
-            fechaExp: body.fechaExp,
+            ultFechaConexion: body.ultFechaConexion,
             tipo: body.tipo,
             estado: body.estado
         }

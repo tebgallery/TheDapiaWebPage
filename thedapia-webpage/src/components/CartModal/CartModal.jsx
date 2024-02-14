@@ -9,17 +9,22 @@ import {
 import {Link as RouterLink, useNavigate} from 'react-router-dom'
 
 const CartModal = ({onClose, cart, onClickMinus,onClickPlus,onClickRemove }) => {
+  
   const total = cart.reduce(
     (accumulator, currentValue) =>
       accumulator + currentValue.preciototal * currentValue.amount,
     0
   );
 
+  const cartWithTotal = [...cart, { total }];
+  console.log(cartWithTotal);
+
   const navigate = useNavigate();
 
   const handleNavigateToOrderPage = () => {
-    navigate('/order');
-    
+    // Supongamos que 'cart' es tu lista de productos en formato JSON
+    const cartParameter = encodeURIComponent(JSON.stringify(cartWithTotal));
+    navigate(`/order/${cartParameter}`);
   };
 
   return (
