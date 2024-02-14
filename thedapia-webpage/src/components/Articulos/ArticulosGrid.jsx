@@ -3,7 +3,7 @@ import ModalArticulo from './ModalArticulo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
-const ArticulosGrid = ({products, onCartClick, onAddToCartClick}) => {
+const ArticulosGrid = ({products, onCartClick, onAddToCartClick,cart}) => {
   const itemsPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedArticulo, setSelectedArticulo] = useState(null);
@@ -26,16 +26,6 @@ const ArticulosGrid = ({products, onCartClick, onAddToCartClick}) => {
     setSelectedArticulo(null);
   };
 
-  const handleProductDiscount = (producto) => {
-    if (producto.descuento !== null && producto.descuento !== 0) {
-      const discountedPrice = producto.precio - (producto.precio * producto.descuento) / 100;
-      return discountedPrice.toFixed(2); // Redondear a 2 decimales
-    } else {
-      return producto.precio.toFixed(2); // Si el descuento es null, mostrar el precio original
-    }
-  };
-
-
   return (
     <div className="w-4/5 py-16 px-8 mx-8">
       <div className="grid grid-cols-4 gap-10 place-content-center">
@@ -55,9 +45,9 @@ const ArticulosGrid = ({products, onCartClick, onAddToCartClick}) => {
                   {producto.descuento!=null && producto.descuento!=0  ?(
                     <div className="flex items-center justify-center">
                       <p className="text-center text-fuchsia-500 text-lg line-through">${producto.precio}</p>
-                      <p className="text-center text-black text-2xl ml-5">${handleProductDiscount(producto)}</p>
+                      <p className="text-center text-black text-2xl ml-5">${producto.preciototal}</p>
                     </div>
-                  ): <p className="text-center text-black text-2xl">${producto.precio}</p>}
+                  ): <p className="text-center text-black text-2xl">${producto.preciototal}</p>}
                 
               </div>
             </div>

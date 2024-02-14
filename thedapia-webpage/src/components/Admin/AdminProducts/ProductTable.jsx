@@ -56,6 +56,8 @@ const ProductTable = ({ headers, products, handleOpenModifProductModal, handleOp
                       Eliminar
                     </button>
                   </div>
+                ) : header === 'PrecioTotal' ? (
+                    product[header.toLowerCase()] = product.precio - (product.precio * product.descuento) / 100
                 ) : header === 'FechaModificacion' ? (
                     formatDate(product[header.toLowerCase()])
                 ) : header === 'Estado' ? (

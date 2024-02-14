@@ -19,22 +19,22 @@ const usuariosSchema = new mongoose.Schema({
     },
     telefono:{
         type: Number,
-        require: true
+        require: false
     },
     direccion:{
         type: String,
-        require: true
+        require: false
     },
-    fechaExp:{
+    ultFechaConexion:{
         type: Date,
         require: false
     },
     tipo:{
-        type: Number,
+        type: String,
         require: false
     },
     estado:{
-        type: Number,
+        type: String,
         require: false
     }
 })

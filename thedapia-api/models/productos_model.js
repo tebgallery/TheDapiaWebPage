@@ -19,7 +19,11 @@ const productosSchema = new mongoose.Schema({
     },
     descuento:{
         type: Number,
-        require: true
+        require: false
+    },
+    preciototal: {
+        type: Number,
+        require: true,
     },
     cantidad:{
         type: Number,
