@@ -1,4 +1,3 @@
-import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home/home';
 import Productos from './pages/Productos/Productos';
 import AdminPage from './pages/AdminPage/AdminPage';
@@ -6,6 +5,7 @@ import Order from './pages/Order/Order';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Payment from './pages/Payment/Payment';
+import ProtectedRoute from './routes/ProtectedRoute';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
@@ -14,6 +14,10 @@ const App = () => {
     <>
       <Router>
         <Routes>
+          <Route element ={<ProtectedRoute/>}>
+            {/* rutas protegidas
+            ej: <Route path="/adminpage" element = {<AdminPage/>}/> */}
+          </Route>
           <Route path="/" element={<Home />} />
           <Route path="/productos" element={<Productos />} />
           <Route path="/productos/libreria" element={<Productos categoria = "Libreria" />} />
