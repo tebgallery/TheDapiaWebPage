@@ -25,6 +25,8 @@ const Navbar = ( {onCartClick} ) => {
     navigate('/', { state: { sectionId } });
   }; 
 
+  console.log(user);
+
   const marcas = ['marca1', 'marca2', 'marca3', 'marca4','marca5', 'marca6', 'marca7', 'marca8','marca9', 'marca10', 'marca11', 'marca12','marca13', 'marca14', 'marca15', 'marca16','marca17', 'marca18', 'marca19', 'marca20'];
 
   return (
