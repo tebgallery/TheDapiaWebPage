@@ -39,20 +39,18 @@ const ArticulosGrid = ({products, onCartClick, onAddToCartClick,cart}) => {
                 alt={producto.nombre}
                 className="w-full h-60 p-2 object-contain duration-500 transition-transform transform hover:scale-105 "
               />
-              <div class="h-36 p-4 border-black border-t-2 ">
+              <div className="h-36 p-4 border-black border-t-2 ">
                 <h3 className="text-lg text-gray-500 text-center font-semibold block mb-4">{producto.nombre}</h3>
-    
                   {producto.descuento!=null && producto.descuento!=0  ?(
                     <div className="flex items-center justify-center">
                       <p className="text-center text-fuchsia-500 text-lg line-through">${producto.precio}</p>
                       <p className="text-center text-black text-2xl ml-5">${producto.preciototal}</p>
                     </div>
                   ): <p className="text-center text-black text-2xl">${producto.preciototal}</p>}
-                
               </div>
             </div>
 
-            <div class="relative flex items-center w-full h-10" onClick={() => { onAddToCartClick(producto); onCartClick(); }}>
+            <div className="relative flex items-center w-full h-10" onClick={() => { onAddToCartClick(producto); onCartClick(); }}>
               <button 
               className="absolute bottom-0 rounded-b-xl flex items-center justify-center text-base text-white bg-fuchsia-300 w-full h-10 hover:bg-fuchsia-500 duration-300" >
                 AGREGAR
@@ -60,10 +58,7 @@ const ArticulosGrid = ({products, onCartClick, onAddToCartClick,cart}) => {
               </button>
             </div>             
         </div>
-        
         ))}
-
-        
       </div>
 
       {selectedArticulo && (

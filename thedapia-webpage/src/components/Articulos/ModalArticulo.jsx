@@ -29,7 +29,6 @@ const ModalArticulo = ({ producto, onClose }) => {
             </div>
         </div>
     </div>
-    
   );
 };
 
