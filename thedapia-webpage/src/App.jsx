@@ -4,7 +4,6 @@ import AdminPage from './pages/AdminPage/AdminPage';
 import Order from './pages/Order/Order';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
-import Payment from './pages/Payment/Payment';
 import ProtectedRoute from './routes/ProtectedRoute';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -26,7 +25,6 @@ const App = () => {
           <Route path="/productos/buscar:palabra" element={<Productos categoria = "Juguetes" />} />
           <Route path="/adminpage" element = {<AdminPage/>}/>
           <Route path="/order/:cart" element={<Order/>} />
-          <Route path="/payment/:cart" element={<Payment/>} />
           <Route path="/login" element = {<Login/>}/>
           <Route path="/register" element = {<Register/>}/>
         </Routes>

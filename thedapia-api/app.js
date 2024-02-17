@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import productos from './routes/productos_routes.js';
 import usuarios from './routes/usuarios_routes.js';
+import orders from './routes/orders_routes.js';
 import 'dotenv/config'
 import cors from 'cors'
 
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use('/productos', productos);
 app.use('/usuarios', usuarios);
+app.use('/orders',orders);
 
 app.listen(port, ()=>{
     console.log('server running')
