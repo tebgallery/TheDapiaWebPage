@@ -1,8 +1,10 @@
 import express from 'express';
+import morgan from 'morgan';
 import mongoose from 'mongoose';
 import productos from './routes/productos_routes.js';
 import usuarios from './routes/usuarios_routes.js';
 import orders from './routes/orders_routes.js';
+import paymentRoutes from './routes/payment_routes.js';
 import 'dotenv/config'
 import cors from 'cors'
 
@@ -16,6 +18,7 @@ mongoose.connect('mongodb://localhost:27017/thedapia', {useNewUrlParser: true, u
 
 const app = express();
 const port = process.env.PORT || 3002;
+app.use(morgan('dev'));
 
 app.use(cors());
 app.use(express.json());
@@ -23,6 +26,7 @@ app.use(express.urlencoded({extended: true}));
 app.use('/productos', productos);
 app.use('/usuarios', usuarios);
 app.use('/orders',orders);
+app.use(paymentRoutes);
 
 app.listen(port, ()=>{
     console.log('server running')
