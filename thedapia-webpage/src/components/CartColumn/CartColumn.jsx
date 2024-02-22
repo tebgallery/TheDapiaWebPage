@@ -3,7 +3,7 @@ import React from "react";
 const CartColumn = ({cart, shippingCost}) => {
     return (
         <div className="col-span-4">
-            <div className="sticky top-12 w-8/12 border-t border-gray-300 p-2">
+            <div className="sticky top-12 w-9/12 border-t border-gray-300 p-2">
                 {cart.slice(0, -1).map((producto, _id) => (
                     <div key={_id}>
                         <div className="flex items-center justify-between border-b border-gray-300 py-2">

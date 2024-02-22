@@ -2,12 +2,9 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import OrderForm from "../../components/Order/OrderForm";
 import OrderFormInput from "../../components/Order/OrderFormInput";
-import Coverlayout from "../../components/CoverLayout/Coverlayout";
 import CartColumn from "../../components/CartColumn/CartColumn";
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import axios from "axios";
-
-<Wallet initialization={{ preferenceId: '<PREFERENCE_ID>' }} customization={{ texts:{ valueProp: 'smart_option'}}} />
 
 
 import cardsLogo from '../../img/PaymentLogos/cardslogo.jpg';
@@ -148,7 +145,7 @@ const Order = () => {
     return (
         <div>
             <div className="m-auto">
-                <div className="grid grid-cols-12 gap-2">
+                <div className="grid grid-cols-12 gap-2 mt-8">
                     <div className="col-span-8 m-auto flex items-center justify-center">
                         <div className="w-9/12 mr-2 p-2">
                             {orderForm && (
@@ -411,7 +408,7 @@ const Order = () => {
                                             <Wallet initialization={{ preferenceId: preferenceId }} 
                                                     customization={{ texts:{ valueProp: 'smart_option'}}} 
                                                     onClick= {handlecreateOrder}
-                                                    />
+                                            />
                                         )}
 
                                     </div>
