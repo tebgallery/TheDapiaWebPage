@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import OrderForm from "../../components/Order/OrderForm";
 import OrderFormInput from "../../components/Order/OrderFormInput";
-import Coverlayout from "../../components/CoverLayout/Coverlayout";
 import CartColumn from "../../components/CartColumn/CartColumn";
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+import axios from "axios";
+
 
 import cardsLogo from '../../img/PaymentLogos/cardslogo.jpg';
 import mpLogo from '../../img/PaymentLogos/mplogo.png';
 
-import { useNavigate } from 'react-router-dom';
 
 const Order = () => {
     const [shippingCost, setShippingCost] = useState(0);
@@ -23,11 +24,128 @@ const Order = () => {
     const parsedCart = JSON.parse(decodedCart);
     const totalPrice = parsedCart[parsedCart.length - 1].total + shippingCost;
 
+    const [preferenceId,setPreferenceId] = useState(null);
+
+    const [email, setEmail] = useState('');
+    const [nombre, setNombre] = useState('');
+    const [apellido, setApellido] = useState('');
+    const [telefono, setTelefono] = useState('');
+    const [direccion, setDireccion] = useState('');
+    const [dni, setDni] = useState('');
+    const [retiro, setRetiro] = useState('');
+
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+    };
+
+    const handleNombreChange = (e) => {
+        setNombre(e.target.value);
+    };
+
+    const handleApellidoChange = (e) => {
+        setApellido(e.target.value);
+    };
+
+    const handleTelefonoChange = (e) => {
+        setTelefono(e.target.value);
+    };
+
+    const handleDireccionChange = (e) => {
+        setDireccion(e.target.value);
+    };
+
+    const handleDniChange = (e) => {
+        setDni(e.target.value);
+    };
+    
+    initMercadoPago('TEST-5f4d3505-a67d-4563-9129-99ac26835e19',{
+        locale: "es-AR",
+    });
+
+    const createPreference = async () => {
+        try {
+            const cartWithoutLastItem = [...parsedCart.slice(0, parsedCart.length - 1)];
+            const products = cartWithoutLastItem.map(product => ({
+                title: product.nombre,
+                quantity: product.amount,
+                price: product.preciototal,
+            }));
+
+            products.push({
+                title: "Envío",
+                quantity: 1,
+                price: shippingCost
+            });
+
+            const response = await axios.post("http://localhost:3000/create-preference", {
+                    products: products
+            });
+
+            const {id} = response.data;
+            return id;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleBuy = async () => {
+        const id = await createPreference();
+        if (id) {
+            setPreferenceId(id);
+        }
+    };
+
+    const createOrder = async (orderData) => {
+        try {
+            const response = await axios.post("http://localhost:3000/orders", orderData);
+            console.log(response.data);
+            // Aquí puedes manejar la respuesta del servidor si es necesario
+        } catch (error) {
+            console.error("Error al enviar la orden:", error);
+        }
+    };
+
+    const handlecreateOrder = async () => {
+
+        const cartWithoutLastItem = [...parsedCart.slice(0, parsedCart.length - 1)];
+        // Construir la lista de productos para la orden
+        const products = cartWithoutLastItem.map(product => ({
+            nombreProducto: product.nombre,
+            cantidad: product.cantidad,
+            codBarra: String(product.codigobarra),
+            color: product.color,
+            imagen: product.imagen,
+            marca: product.marca,
+            precio: product.preciototal
+        }));
+
+        console.log("or",products);
+
+        // Construir los datos de la orden
+        const orderData = {
+            email: email,
+            nombre: nombre,
+            apellido: apellido,
+            telefono: telefono,
+            direccion: direccion,
+            dni: dni,
+            retiro: retiro,
+            estado: "Pendiente",
+            productos: products,
+            precioOrden: totalPrice,
+            // Agrega aquí otros datos de la orden si los necesitas
+        };
+
+        console.log(orderData);
+
+        // Enviar la orden al backend
+        await createOrder(orderData);
+    };
+
     return (
         <div>
-            <Coverlayout />
             <div className="m-auto">
-                <div className="grid grid-cols-12 gap-2">
+                <div className="grid grid-cols-12 gap-2 mt-8">
                     <div className="col-span-8 m-auto flex items-center justify-center">
                         <div className="w-9/12 mr-2 p-2">
                             {orderForm && (
@@ -37,26 +155,36 @@ const Order = () => {
                                             id="mail"
                                             name="mail"
                                             placeholder="Email"
+                                            value={email}
+                                            onChange={handleEmailChange}
                                         ></OrderFormInput>
                                         <OrderFormInput
                                             id="nombre"
                                             name="nombre"
                                             placeholder="Nombre"
+                                            value={nombre}
+                                            onChange={handleNombreChange}
                                         ></OrderFormInput>
                                         <OrderFormInput
                                             id="apellido"
                                             name="apellido"
                                             placeholder="Apellido"
+                                            value={apellido}
+                                            onChange={handleApellidoChange}
                                         ></OrderFormInput>
                                         <OrderFormInput
                                             id="telefono"
                                             name="telefono"
                                             placeholder="Teléfono"
+                                            value={telefono}
+                                            onChange={handleTelefonoChange}
                                         ></OrderFormInput>
                                         <OrderFormInput
                                             id="dni"
                                             name="dni"
                                             placeholder="DNI o CUIL"
+                                            value={dni}
+                                            onChange={handleDniChange}
                                         ></OrderFormInput>
                                     </OrderForm>
                                     <OrderForm title="Entrega">
@@ -66,11 +194,11 @@ const Order = () => {
                                                     type="radio"
                                                     id="entrega-1"
                                                     name="entrega"
-                                                    value="entrega-1"
                                                     className="mx-4 my-4"
                                                     onClick={() => {
                                                         setShippingCost(4800);
                                                         setReceiverForm(true);
+                                                        setRetiro("Envío a Domicilio - Correo Argentino Clásico")
                                                     }}
                                                 />
                                                 <p className="font-bold">
@@ -85,11 +213,11 @@ const Order = () => {
                                                     type="radio"
                                                     id="entrega-2"
                                                     name="entrega"
-                                                    value="entrega-2"
                                                     className="mx-4 my-4"
                                                     onClick={() => {
                                                         setShippingCost(5500);
                                                         setReceiverForm(true);
+                                                        setRetiro("Envío a Domicilio - Correo Argentino Express")
                                                     }}
                                                 />
                                                 <p className="font-bold">
@@ -107,11 +235,11 @@ const Order = () => {
                                                         type="radio"
                                                         id="entrega-3"
                                                         name="entrega"
-                                                        value="entrega-3"
                                                         className="mx-4 my-4 "
                                                         onClick={() => {
                                                             setShippingCost(0);
                                                             setReceiverForm(false);
+                                                            setRetiro("Retiro en Persona");
                                                         }}
                                                     />
                                                     <p className="font-bold inline-block">Retiro en Persona</p>
@@ -137,6 +265,8 @@ const Order = () => {
                                                 id="calle"
                                                 name="calle"
                                                 placeholder="Calle"
+                                                value={direccion}
+                                                onChange={handleDireccionChange}
                                             ></OrderFormInput>
                                             <OrderFormInput
                                                 id="numero"
@@ -247,7 +377,8 @@ const Order = () => {
                                             onClick={() => {
                                                 setPaymentMethod(2);
                                                 setCardData(false);
-                                                setMpData(true);
+                                                handleBuy();
+                                                handlecreateOrder();
                                             }}
 
                                         />
@@ -255,7 +386,7 @@ const Order = () => {
                                         <p className="mx-4">Utilizando la opción Pagar a través de Mercado Pago serás redirigido y podrás pagar de las siguientes formas: Tarjeta de crédito - Tarjeta de Débito - Efectivo - Saldo en la cuenta de Mercado Pago</p>
                                     </div>
 
-                                    <div className="flex justify-between">
+                                    <div className="flex justify-between items-center">
                                         <button className="bg-black text-white uppercase px-2 py-2 w-1/3 h-12 my-10 hover:opacity-65"
                                             onClick={() => {
                                                 setOrderForm(true);
@@ -273,12 +404,11 @@ const Order = () => {
                                                 Continuar con el pedido
                                             </button>
                                         )}
-                                        {paymentMethod === 2 && (
-                                            <button className="bg-black text-white uppercase px-2 py-2 w-1/3 h-12 my-10 hover:opacity-65"
-
-                                            >
-                                                Continuar con mercadopago
-                                            </button>
+                                        {paymentMethod === 2 && preferenceId && (
+                                            <Wallet initialization={{ preferenceId: preferenceId }} 
+                                                    customization={{ texts:{ valueProp: 'smart_option'}}} 
+                                                    onClick= {handlecreateOrder}
+                                            />
                                         )}
 
                                     </div>

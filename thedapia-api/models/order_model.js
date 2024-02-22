@@ -1,38 +1,70 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
+
+const productSchema = new mongoose.Schema({
+    nombreProducto: {
+        type: String,
+        required: true
+    },
+    cantidad: {
+        type: Number,
+        required: true
+    },
+    codBarra: {
+        type: String
+    },
+    color: {
+        type: String
+    },
+    imagen: {
+        type: String
+    },
+    marca: {
+        type: String
+    },
+    precio: {
+        type: Number,
+        required: true
+    }
+});
 
 const orderSchema = new mongoose.Schema({
-    email:{
+    email: {
         type: String,
-        require: true
+        required: true
     },
-    nombre:{
+    nombre: {
         type: String,
-        require: true
+        required: true
     },
-    apellido:{
+    apellido: {
         type: String,
-        require: true
+        required: true
     },
-    telefono:{
+    telefono: {
+        type: String,
+        required: true
+    },
+    direccion: {
+        type: String,
+        required: true
+    },
+    dni: {
+        type: String,
+        required: true
+    },
+    retiro: {
+        type: String,
+        required: true
+    },
+    estado: {
+        type: String,
+        required: true
+    },
+    productos: [productSchema], // Lista de productos
+    precioOrden: {
         type: Number,
-        require: true
-    },
-    direccion:{
-        type: String,
-        require: true
-    },
-    dni:{
-        type: String,
-        require: true
-    },
-    retiro:{
-        type: String,
-        require: true
-    },
-    estado:{
-        type: String,
-        require: true
+        required: true
     }
-})
+});
 
-export default mongoose.model('Orders', orderSchema);
+export default mongoose.model('Order', orderSchema);

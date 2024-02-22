@@ -1,16 +1,8 @@
 import orderModel from "../models/order_model.js";
 
-const getOrders = async (req, res) =>{
-    try{
-        let order = await orderModel.find();
-        res.json(order)
-    }catch(err ) {
-        res.status(400).json(
-            {
-                err
-            }
-        )
-    }
+async function getOrders () {
+    let orders = await orderModel.find();
+    return orders
 }
 
 
@@ -23,7 +15,9 @@ async function addOrder(body){
         direccion: body.direccion,
         dni: body.dni,
         retiro: body.retiro,
-        estado: body.estado
+        estado: body.estado,
+        productos: body.productos,
+        precioOrden: body.precioOrden,
     })
     return await order.save();
 }
