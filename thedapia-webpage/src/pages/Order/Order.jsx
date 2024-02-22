@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import OrderForm from "../../components/Order/OrderForm";
 import OrderFormInput from "../../components/Order/OrderFormInput";
+import OrderFormErrorMessage from "../../components/Order/ErrorMessage";
 import CartColumn from "../../components/CartColumn/CartColumn";
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import axios from "axios";
@@ -9,6 +10,7 @@ import axios from "axios";
 
 import cardsLogo from '../../img/PaymentLogos/cardslogo.jpg';
 import mpLogo from '../../img/PaymentLogos/mplogo.png';
+import ErrorMessage from "../../components/Order/ErrorMessage";
 
 
 const Order = () => {
@@ -24,41 +26,82 @@ const Order = () => {
     const parsedCart = JSON.parse(decodedCart);
     const totalPrice = parsedCart[parsedCart.length - 1].total + shippingCost;
 
-    const [preferenceId,setPreferenceId] = useState(null);
+    const [preferenceId, setPreferenceId] = useState(null);
 
-    const [email, setEmail] = useState('');
-    const [nombre, setNombre] = useState('');
-    const [apellido, setApellido] = useState('');
-    const [telefono, setTelefono] = useState('');
-    const [direccion, setDireccion] = useState('');
-    const [dni, setDni] = useState('');
-    const [retiro, setRetiro] = useState('');
+    const [userData, setUserData] = useState({
+        email: "",
+        nombre: "",
+        apellido: "",
+        telefono: "",
+        calle: "",
+        numero: "",
+        dni: "",
+        retiro: ""
+    })
+
+    const [errors, setErrors] = useState({
+        email: 'Este campo es obligatorio',
+        nombre: 'Este campo es obligatorio',
+        apellido: 'Este campo es obligatorio',
+        telefono: 'Este campo es obligatorio',
+        calle: '',
+        numero: '',
+        dni: 'Este campo es obligatorio'
+    });
 
     const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-    };
-
-    const handleNombreChange = (e) => {
-        setNombre(e.target.value);
-    };
-
-    const handleApellidoChange = (e) => {
-        setApellido(e.target.value);
-    };
-
-    const handleTelefonoChange = (e) => {
-        setTelefono(e.target.value);
-    };
-
-    const handleDireccionChange = (e) => {
-        setDireccion(e.target.value);
-    };
-
-    const handleDniChange = (e) => {
-        setDni(e.target.value);
+        const { value } = e.target;
+        setUserData({ ...userData, email: value });
+        setErrors({ ...errors, email: value.trim() ? '' : 'Este campo es obligatorio' });
     };
     
-    initMercadoPago('TEST-5f4d3505-a67d-4563-9129-99ac26835e19',{
+    const handleNombreChange = (e) => {
+        const { value } = e.target;
+        setUserData({ ...userData, nombre: value });
+        setErrors({ ...errors, nombre: value.trim() ? '' : 'Este campo es obligatorio' });
+    };
+    
+    const handleApellidoChange = (e) => {
+        const { value } = e.target;
+        setUserData({ ...userData, apellido: value });
+        setErrors({ ...errors, apellido: value.trim() ? '' : 'Este campo es obligatorio' });
+    };
+    
+    const handleTelefonoChange = (e) => {
+        const { value } = e.target;
+        setUserData({ ...userData, telefono: value });
+        setErrors({ ...errors, telefono: value.trim() ? '' : 'Este campo es obligatorio' });
+    };
+    
+    const handleCalleChange = (e) => {
+        const { value } = e.target;
+        setUserData({ ...userData, calle: value });
+        setErrors({ ...errors, calle: value.trim() ? '' : 'Este campo es obligatorio' });
+    };
+
+    const handleNumeroChange = (e) => {
+        const { value } = e.target;
+        setUserData({ ...userData, numero: value });
+        setErrors({ ...errors, numero: value.trim() ? '' : 'Este campo es obligatorio' });
+    };
+    
+    const handleDniChange = (e) => {
+        const { value } = e.target;
+        setUserData({ ...userData, dni: value });
+        setErrors({ ...errors, dni: value.trim() ? '' : 'Este campo es obligatorio' });
+    };
+
+    const hasErrors = () => {
+        console.log(errors);
+        for (const error in errors) {
+            if (errors[error]) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    initMercadoPago('TEST-5f4d3505-a67d-4563-9129-99ac26835e19', {
         locale: "es-AR",
     });
 
@@ -78,10 +121,10 @@ const Order = () => {
             });
 
             const response = await axios.post("http://localhost:3000/create-preference", {
-                    products: products
+                products: products
             });
 
-            const {id} = response.data;
+            const { id } = response.data;
             return id;
         } catch (error) {
             console.log(error);
@@ -97,6 +140,7 @@ const Order = () => {
 
     const createOrder = async (orderData) => {
         try {
+            console.log(orderData);
             const response = await axios.post("http://localhost:3000/orders", orderData);
             console.log(response.data);
             // Aquí puedes manejar la respuesta del servidor si es necesario
@@ -119,24 +163,20 @@ const Order = () => {
             precio: product.preciototal
         }));
 
-        console.log("or",products);
-
         // Construir los datos de la orden
         const orderData = {
-            email: email,
-            nombre: nombre,
-            apellido: apellido,
-            telefono: telefono,
-            direccion: direccion,
-            dni: dni,
-            retiro: retiro,
+            email: userData.email,
+            nombre: userData.nombre,
+            apellido: userData.apellido,
+            telefono: userData.telefono,
+            direccion: userData.calle + userData.numero,
+            dni: userData.dni,
+            retiro: userData.retiro,
             estado: "Pendiente",
             productos: products,
             precioOrden: totalPrice,
             // Agrega aquí otros datos de la orden si los necesitas
         };
-
-        console.log(orderData);
 
         // Enviar la orden al backend
         await createOrder(orderData);
@@ -152,41 +192,57 @@ const Order = () => {
                                 <>
                                     <OrderForm title="Datos del contacto">
                                         <OrderFormInput
-                                            id="mail"
-                                            name="mail"
+                                            id="email"
+                                            name="email"
                                             placeholder="Email"
-                                            value={email}
+                                            value={userData.email}
                                             onChange={handleEmailChange}
                                         ></OrderFormInput>
+                                        {errors.email &&
+                                        <ErrorMessage error = {errors.email}/>
+                                        }
                                         <OrderFormInput
                                             id="nombre"
                                             name="nombre"
                                             placeholder="Nombre"
-                                            value={nombre}
+                                            value={userData.nombre}
                                             onChange={handleNombreChange}
                                         ></OrderFormInput>
+                                        {errors.nombre && 
+                                        <ErrorMessage error = {errors.nombre}/>
+                                        }
                                         <OrderFormInput
                                             id="apellido"
                                             name="apellido"
                                             placeholder="Apellido"
-                                            value={apellido}
+                                            value={userData.apellido}
                                             onChange={handleApellidoChange}
                                         ></OrderFormInput>
+                                        {errors.apellido && 
+                                        <ErrorMessage error = {errors.apellido}/>
+                                        }
                                         <OrderFormInput
                                             id="telefono"
                                             name="telefono"
                                             placeholder="Teléfono"
-                                            value={telefono}
+                                            value={userData.telefono}
                                             onChange={handleTelefonoChange}
                                         ></OrderFormInput>
+                                        {errors.telefono && 
+                                        <ErrorMessage error = {errors.telefono}/>
+                                        }
                                         <OrderFormInput
                                             id="dni"
                                             name="dni"
                                             placeholder="DNI o CUIL"
-                                            value={dni}
+                                            value={userData.dni}
                                             onChange={handleDniChange}
                                         ></OrderFormInput>
+                                        {errors.dni && 
+                                        <ErrorMessage error = {errors.dni}/>
+                                        }
                                     </OrderForm>
+
                                     <OrderForm title="Entrega">
                                         <div className="flex justify-between border border-black p-3 my-2">
                                             <div className="flex items-center">
@@ -198,7 +254,8 @@ const Order = () => {
                                                     onClick={() => {
                                                         setShippingCost(4800);
                                                         setReceiverForm(true);
-                                                        setRetiro("Envío a Domicilio - Correo Argentino Clásico")
+                                                        setUserData({ ...userData, retiro: "Envío a Domicilio - Correo Argentino Clásico" });
+                                                        setErrors({ ...errors, calle:'Este campo es obligatorio', numero:'Este campo es obligatorio' });
                                                     }}
                                                 />
                                                 <p className="font-bold">
@@ -217,7 +274,8 @@ const Order = () => {
                                                     onClick={() => {
                                                         setShippingCost(5500);
                                                         setReceiverForm(true);
-                                                        setRetiro("Envío a Domicilio - Correo Argentino Express")
+                                                        setUserData({ ...userData, retiro: "Envío a Domicilio - Correo Argentino Express" });
+                                                        setErrors({ ...errors, calle:'Este campo es obligatorio', numero:'Este campo es obligatorio' });
                                                     }}
                                                 />
                                                 <p className="font-bold">
@@ -239,7 +297,8 @@ const Order = () => {
                                                         onClick={() => {
                                                             setShippingCost(0);
                                                             setReceiverForm(false);
-                                                            setRetiro("Retiro en Persona");
+                                                            setUserData({ ...userData, retiro: "Retiro en Persona" });
+                                                            setErrors({ ...errors, calle:'', numero:'' });
                                                         }}
                                                     />
                                                     <p className="font-bold inline-block">Retiro en Persona</p>
@@ -265,14 +324,22 @@ const Order = () => {
                                                 id="calle"
                                                 name="calle"
                                                 placeholder="Calle"
-                                                value={direccion}
-                                                onChange={handleDireccionChange}
+                                                value={userData.calle}
+                                                onChange={handleCalleChange}
                                             ></OrderFormInput>
+                                            {errors.calle && 
+                                            <ErrorMessage error = {errors.calle}/>
+                                            }
                                             <OrderFormInput
                                                 id="numero"
                                                 name="numero"
                                                 placeholder="Número"
+                                                value={userData.numero}
+                                                onChange={handleNumeroChange}
                                             ></OrderFormInput>
+                                            {errors.numero && 
+                                            <ErrorMessage error = {errors.numero}/>
+                                            }
                                             <OrderFormInput
                                                 id="departamento"
                                                 name="departamento"
@@ -292,6 +359,7 @@ const Order = () => {
                                                 setPaymentForm(true);
                                                 setOrderForm(false);
                                             }}
+                                            disabled={hasErrors()} // Deshabilitar si hay errores
                                         >
                                             Continuar con el pago
                                         </button>
@@ -405,9 +473,9 @@ const Order = () => {
                                             </button>
                                         )}
                                         {paymentMethod === 2 && preferenceId && (
-                                            <Wallet initialization={{ preferenceId: preferenceId }} 
-                                                    customization={{ texts:{ valueProp: 'smart_option'}}} 
-                                                    onClick= {handlecreateOrder}
+                                            <Wallet initialization={{ preferenceId: preferenceId }}
+                                                customization={{ texts: { valueProp: 'smart_option' } }}
+                                                onClick={handlecreateOrder}
                                             />
                                         )}
 

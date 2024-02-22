@@ -25,8 +25,6 @@ const Navbar = ( {onCartClick, cart} ) => {
     navigate('/', { state: { sectionId } });
   }; 
 
-  console.log(user);
-
   const marcas = ['marca1', 'marca2', 'marca3', 'marca4','marca5', 'marca6', 'marca7', 'marca8','marca9', 'marca10', 'marca11', 'marca12','marca13', 'marca14', 'marca15', 'marca16','marca17', 'marca18', 'marca19', 'marca20'];
   return (
     <nav className="flex sticky w-full h-36 top-0 z-50">
@@ -57,7 +55,7 @@ const Navbar = ( {onCartClick, cart} ) => {
           </div>
 
           <div className="cursor-pointer pl-10 relative" onClick={onCartClick}>
-              {cart.length > 0 && <div className='absolute top-0 right-0 text-white bg-red-500 rounded-full w-4 h-4 text-center text-sm'>
+              {cart!== undefined && cart.length > 0 && <div className='absolute top-0 right-0 text-white bg-red-500 rounded-full w-4 h-4 text-center text-sm'>
                 {cart.length}
               </div>}
              <FontAwesomeIcon icon={faShoppingCart} className='w-8 h-8'  />
