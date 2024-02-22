@@ -98,7 +98,7 @@ const Productos = ({categoria,palabra}) => {
   
   return (
     <>
-      <Navbar onCartClick = {toggleCartModal} />
+      <Navbar onCartClick = {toggleCartModal} cart={cart} />
 
       {showCartModal && (
         <CartModal 
