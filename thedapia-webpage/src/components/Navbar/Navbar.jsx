@@ -28,7 +28,6 @@ const Navbar = ( {onCartClick, cart} ) => {
   console.log(user);
 
   const marcas = ['marca1', 'marca2', 'marca3', 'marca4','marca5', 'marca6', 'marca7', 'marca8','marca9', 'marca10', 'marca11', 'marca12','marca13', 'marca14', 'marca15', 'marca16','marca17', 'marca18', 'marca19', 'marca20'];
-console.log('cart', cart)
   return (
     <nav className="flex sticky w-full h-36 top-0 z-50">
       <div className="absolute top-0 flex items-center w-full h-24 bg-gradient-to-r from-fuchsia-300 to-fuchsia-400 justify-center border-b-2">
