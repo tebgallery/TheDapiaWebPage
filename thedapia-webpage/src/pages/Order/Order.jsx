@@ -155,7 +155,7 @@ const Order = () => {
         // Construir la lista de productos para la orden
         const products = cartWithoutLastItem.map(product => ({
             nombreProducto: product.nombre,
-            cantidad: product.cantidad,
+            cantidad: product.amount,
             codBarra: String(product.codigobarra),
             color: product.color,
             imagen: product.imagen,
