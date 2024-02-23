@@ -6,6 +6,7 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import ProtectedRoute from './routes/ProtectedRoute';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AdminOrders from './pages/AdminPage/AdminOrders';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/productos/juguetes" element={<Productos categoria = "Juguetes" />} />
           <Route path="/productos/buscar:palabra" element={<Productos categoria = "Juguetes" />} />
           <Route path="/adminpage" element = {<AdminPage/>}/>
+          <Route path="/adminpage/orders" element = {<AdminOrders/>}/>
           <Route path="/order/:cart" element={<Order/>} />
           <Route path="/login" element = {<Login/>}/>
           <Route path="/register" element = {<Register/>}/>
