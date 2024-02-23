@@ -22,6 +22,7 @@ const Navbar = ({ handleFilterChange }) => {
                 </div>
                 <div className="w-auto p-4 absolute right-0 mr-8">
                     <ul className="p-4 space-x-16 text-xl text-white">
+                    <RouterLink to='/adminpage' className="text-xl text-white">Ver Productos</RouterLink>
                     <RouterLink to='/adminpage/orders' className="text-xl text-white">Ver Ordenes</RouterLink>
                         <select
                             name="ProductosHomePage"

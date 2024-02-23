@@ -41,7 +41,7 @@ const AdminOrders = () => {
         <>
             <Navbar/>
             <div className="w-full flex justify-center mt-20 bg-slate-50">
-                <table className="w-10/12 table-auto border-2 border-slate-100 border-separate border-spacing-1 w-full bg-emerald-100 border rounded-2xl ">
+                <table className="w-10/12 table-auto border-2 border-slate-100 border-separate border-spacing-1 bg-emerald-100 border rounded-2xl ">
                     <thead>
                     <tr>
                         {headers.map((header, index) => (
