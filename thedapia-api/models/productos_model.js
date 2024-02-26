@@ -33,6 +33,10 @@ const productosSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    subcategoria:{
+        type: String,
+        require: true
+    },
     seccionenpagina: {
         type: String,
         require: true
