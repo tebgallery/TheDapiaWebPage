@@ -26,6 +26,9 @@ export default {
           '0%': { transform: 'translateX(0) ' },
           '100%': { transform: 'translateX(-100%)' }  /* Cambia el porcentaje según la cantidad de imágenes */
         }
+      },
+      scale: {
+        '102': '1.02',
       }
     }
   },

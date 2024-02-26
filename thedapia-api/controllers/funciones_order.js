@@ -17,12 +17,37 @@ async function addOrder(body){
         retiro: body.retiro,
         estado: body.estado,
         productos: body.productos,
-        precioOrden: body.precioOrden,
+        precioOrden: body.precioOrden
     })
     return await order.save();
 }
 
+async function updateOrder(body, id){
+    let order = await orderModel.updateOne({_id: id},{
+        $set: {
+            email: body.email,
+            nombre: body.nombre,
+            apellido: body.apellido,
+            telefono: body.telefono,
+            direccion: body.direccion,
+            dni: body.dni,
+            retiro: body.retiro,
+            estado: body.estado,
+            productos: body.productos,
+            precioOrden: body.precioOrden
+        }
+    })
+    return order;
+}
+
+async function deleteOrder(id){
+    let result= await orderModel.deleteOne({_id: id});
+    return result;
+}
+
 export {
     getOrders,
-    addOrder
+    addOrder,
+    updateOrder,
+    deleteOrder
 };

@@ -88,8 +88,6 @@ const AdminProducts = () => {
         preciototal:  Number(formValues.precio) - (Number(formValues.precio) * Number(formValues.descuento)) / 100,
         fechamodificacion: today,
       };
-      console.log(formValues);
-      console.log(tempFormValues);
 
       const response = await axios.post(url, tempFormValues);
 
