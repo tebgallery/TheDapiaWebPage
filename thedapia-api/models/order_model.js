@@ -46,7 +46,7 @@ const orderSchema = new mongoose.Schema({
     },
     direccion: {
         type: String,
-        required: true
+        required: false
     },
     dni: {
         type: String,
