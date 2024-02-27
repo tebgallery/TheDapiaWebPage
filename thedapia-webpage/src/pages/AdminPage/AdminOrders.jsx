@@ -10,19 +10,6 @@ const AdminOrders = () => {
     const [orders, setOrders] = useState([]);
     const [productModal, setProductModal] = useState(false);
     const [selectedOrderProducts, setSelectedOrderProducts] = useState({});
-    const [orderForm, setOrderForm] = useState({
-        _id: "",
-        email: "",
-        nombre: "",
-        apellido: "",
-        telefono: "",
-        direccion: "",
-        dni: "",
-        retiro: "",
-        estado: "",
-        productos: [],
-        precioOrden: ""
-    });
 
     const getOrders = async () => {
         try {
@@ -33,29 +20,15 @@ const AdminOrders = () => {
         }
     };
 
-    const updateOrder = async () => {
+    const updateOrder = async (order) => {
         try {
-            const response = await axios.put(url, orderForm);
+            const response = await axios.put(url, order);
 
         }
         catch (error) {
             console.error("Error al modificar la orden:", error.response.data);
         }
 
-        setOrderForm({
-            ...orderForm,
-            _id: "",
-            email: "",
-            nombre: "",
-            apellido: "",
-            telefono: "",
-            direccion: "",
-            dni: "",
-            retiro: "",
-            estado: "",
-            productos: [],
-            precioOrden: ""
-        });
     };
 
     useEffect(() => {
@@ -82,23 +55,11 @@ const AdminOrders = () => {
 
     const handleOrderStatusChange = (value,order) => {
 
-        console.log("orden a cambiar:",order);
-        setOrderForm({
-            ...orderForm,
-            _id: order._id,
-            email: order.email,
-            nombre: order.nombre,
-            apellido: order.apellido,
-            telefono: order.telefono,
-            direccion: order.direccion,
-            dni: order.dni,
-            retiro: order.retiro,
-            estado: value,
-            productos: order.productos,
-            precioOrden: order.precioOrden
-        });
+        order.estado = value;
 
-        updateOrder();
+        updateOrder(order);
+
+        getOrders();
 
     };
 
@@ -118,7 +79,7 @@ const AdminOrders = () => {
                     </thead>
                     <tbody>
                         {orders.map((order, index) => (
-                            <tr key={index} className="duration-300 transition-transform transform hover:scale-102">
+                            <tr key={index} className="duration-300 transition-transform transform hover:scale-102 hover:bg-slate-200">
                                 <td className="border-l-2 rounded-l-xl border-y-2 border-gray-200 text-base px-4 py-4">{order.email}</td>
                                 <td className="border-y-2 border-gray-200 text-base px-4 py-4">{order.nombre}</td>
                                 <td className="border-y-2 border-gray-200 text-base px-4 py-4 ">{order.apellido}</td>
@@ -128,16 +89,18 @@ const AdminOrders = () => {
                                 <td className="border-y-2 border-gray-200 text-base px-4 py-4 ">{order.retiro}</td>
                                 <td className="border-y-2 border-gray-200 text-base px-4 py-4">
                                     <select
-                                        className="bg-transparent border-none text-base outline-none focus:outline-none"
-                                        value={order.estado} // Mostrar el valor seleccionado o el valor actual de la orden
+                                        className="rounded-lg px-2 py-2 border-none text-base outline-none focus:outline-none"
+                                        value={order.estado}
                                         onChange={(e) => handleOrderStatusChange(e.target.value,order)}
                                     >
                                         <option value="Aprobado">Aprobado</option>
+                                        <hr />
                                         <option value="Pendiente">Pendiente</option>
+                                        <hr/>
                                         <option value="Cancelado">Cancelado</option>
                                     </select>
                                 </td>
-                                <td className="border-y-2 border-gray-200 text-base px-4 py-4">$ {order.precioOrden}</td>
+                                <td className="border-y-2 border-gray-200 text-base text-emerald-600 font-semibold px-4 py-4">$ {order.precioOrden}</td>
                                 <td className="border-r-2 rounded-r-xl border-y-2 border-gray-200 text-base text-center px-4 py-4">
                                     <div className="flex justify-center">
                                         <button className="border-2 border-pink-400 text-pink-400 rounded-xl px-4 py-1 hover:bg-white-500 flex items-center justify-center hover:bg-pink-400 hover:text-white"
