@@ -5,6 +5,8 @@ import AddProductModal from "./AddProductModal";
 import ModifyProductModal from "./ModifyProductModal";
 import RemoveProductModal from "./RemoveProductModal";
 import Navbar from "../Navbar/Navbar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const AdminProducts = () => {
   const url = "http://localhost:3000/productos";
@@ -55,21 +57,23 @@ const AdminProducts = () => {
 
   const headers = [
     "Nombre",
+    "Imagen",
     "Marca",
-    "codigoBarra",
+    /*
+  "codigoBarra",*/
     "Precio",
     "Descuento",
     "PrecioTotal",
     "Cantidad",
     "Categoria",
-    "SubCategoria",
-    "SeccionEnPagina",
-    "Color",
-    "Imagen",
-    "FechaModificacion",
-    "Descripcion",
+    /*"SubCategoria",*/
+    /*"SeccionEnPagina",*/
+    /*"Color",*/
+    "Ult. Modificación",
+    /*"Descripcion",*/
     "Estado",
     "Acciones",
+    ""
   ];
 
   useEffect(() => {
@@ -230,21 +234,28 @@ const AdminProducts = () => {
     setShowRemoveProductModal(false);
   };
 
+  console.log(products);
+
   return (
-    <section className="w-full bg-slate-200">
+    <section className="w-full">
       <Navbar handleFilterChange={handleFilterChange} />
       <div className="w-full">
-        <div className="relative m-auto w-11/12 flex items-center justify-center">
-          <h1 className="text-4xl text-center mb-20 mt-12">
-            Productos Subidos
+        <div className="relative m-auto w-11/12 flex items-center justify-between">
+          <h1 className="text-4xl font-semibold mb-16 mt-12">
+            Productos
           </h1>
           <button
-            className="absolute right-0 bg-emerald-500 text-white px-2 py-1 rounded"
+            className="absolute right-0 bg-emerald-500 opacity-80 text-white px-4 py-4 rounded-full flex items-center justify-center hover:opacity-100 shadow-xl duration-500 transition-transform transform hover:scale-110"
             onClick={handleOpenAddProductModal}
           >
-            Agregar Producto
+            <FontAwesomeIcon
+                  icon={faPlus}
+                  className="w-4 h-4"
+          />
           </button>
+
         </div>
+        <div className="w-full flex justify-center">
         <ProductTable
           headers={headers}
           products={filterProducts(products)}
@@ -252,6 +263,7 @@ const AdminProducts = () => {
           handleOpenRemoveProductModal={handleOpenRemoveProductModal}
           selectedFilter={selectedFilter}
         />
+        </div>
       </div>
       {showAddProductModal && (
         <AddProductModal

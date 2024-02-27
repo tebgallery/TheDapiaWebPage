@@ -1,30 +1,49 @@
-import React from 'react';
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
 
-const ProductTable = ({ headers, products, handleOpenModifProductModal, handleOpenRemoveProductModal, selectedFilter }) => {
+const ProductTable = ({
+  headers,
+  products,
+  handleOpenModifProductModal,
+  handleOpenRemoveProductModal,
+  selectedFilter,
+}) => {
+
   const formatDate = (dateString) => {
-    const options = { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric', 
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: false,  
+    const options = {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour12: false,
     };
-    return new Date(dateString).toLocaleDateString([],options);
-  }
-  
-  const filteredProducts = selectedFilter === "none"
-    ? products
-    : products.filter(product => product.seccionenpagina === selectedFilter);
+    return new Date(dateString).toLocaleDateString([], options);
+  };
 
-  return(
-  <div className="w-11/12 m-auto">
-    <table className="table-auto border-2 border-slate-100 border-separate border-spacing-1 w-full bg-slate-500 ">
+  const formatProductStatus = (status) => {
+    let stringStatus = "";
+    if (status) {
+      stringStatus = "Activo";
+    } else {
+      stringStatus = "Inactivo";
+    }
+
+    return stringStatus;
+  };
+
+  const filteredProducts =
+    selectedFilter === "none"
+      ? products
+      : products.filter(
+          (product) => product.seccionenpagina === selectedFilter
+        );
+
+  return (
+    <table className="table-auto border-collapse rounded-2xl">
       <thead>
         <tr>
           {headers.map((header, index) => (
-            <th key={index} className="border-black p-2">
+            <th key={index} className="text-lg border-b-4 py-4 px-4 text-left">
               {header}
             </th>
           ))}
@@ -32,46 +51,60 @@ const ProductTable = ({ headers, products, handleOpenModifProductModal, handleOp
       </thead>
       <tbody>
         {filteredProducts.map((product) => (
-          <tr key={product._id} className="bg-slate-300 border-black hover:bg-slate-200">
-            {headers.map((header, idx) => (
-              <td key={idx} className="border border-white p-2 ">
-                {header === 'Imagen' ? (
-                  <img
-                    src={product.imagen}
-                    alt={`Imagen de ${product.nombre}`}
-                    className="w-16 h-16 object-cover"
-                  />
-                ) : header === 'Acciones' ? (
-                  <div className="flex space-x-2">
-                    <button
-                      className="bg-amber-400 text-white px-2 py-1 rounded"
-                      onClick={() => handleOpenModifProductModal(product)}
-                    >
-                      Modificar
-                    </button>
-                    <button
-                      className="bg-red-500 text-white px-2 py-1 rounded"
-                      onClick={() => handleOpenRemoveProductModal(product)}
-                    >
-                      Eliminar
-                    </button>
-                  </div>
-                ) : header === 'PrecioTotal' ? (
-                    product[header.toLowerCase()] = product.precio - (product.precio * product.descuento) / 100
-                ) : header === 'FechaModificacion' ? (
-                    formatDate(product[header.toLowerCase()])
-                ) : header === 'Estado' ? (
-                  product[header.toLowerCase()] ? 'Activo' : 'Desactivado'
-                ) : (
-                  product[header.toLowerCase()]
-                )}
-              </td>
-            ))}
+          <tr
+            key={product._id}
+            className="hover:bg-slate-200 duration-500 transition-transform transform hover:scale-102"
+          >
+            <td className="border-b-4 px-2 py-2 capitalize">{product.nombre}</td>
+            <td className="border-b-4 px-2 py-2">
+              <img
+                src={product.imagen}
+                alt={`Imagen de ${product.nombre}`}
+                className="w-14 h-14 border border-black rounded-full object-cover"
+              />
+            </td>
+            <td className="border-b-4 px-2 py-2 capitalize">{product.marca}</td>
+            <td className="border-b-4 px-2 py-2 font-semibold">
+              ${product.precio}
+            </td>
+            <td className="border-b-4 px-2 py-2 text-gray-500 font-semibold">
+              {product.descuento} %
+            </td>
+            <td className="border-b-4 px-2 py-2 text-blue-600 font-semibold">
+              ${product.preciototal}
+            </td>
+            <td className="border-b-4 px-2 py-2">{product.cantidad}</td>
+            <td className="border-b-4 px-2 py-2">{product.categoria}</td>
+            <td className="border-b-4 px-2 py-2">
+              {formatDate(product.fechamodificacion)}
+            </td>
+            <td className="border-b-4 px-2 py-2">
+              {formatProductStatus(product.estado)}
+            </td>
+            <td className="border-b-4 px-2 py-2">
+              <div className="flex items-center justify-around">
+                <FontAwesomeIcon
+                  icon={faPenToSquare}
+                  className="w-6 h-6 hover:cursor-pointer hover:text-amber-400"
+                  onClick={() => handleOpenModifProductModal(product)}
+                />
+                <FontAwesomeIcon
+                  icon={faXmark}
+                  className="w-6 h-6 hover:cursor-pointer hover:text-red-500"
+                  onClick={() => handleOpenRemoveProductModal(product)}
+                />
+              </div>
+            </td>
+            <td className="border-b-4 px-2 py-2">
+              <button className="border-2 border-pink-400 text-pink-400 rounded-xl px-4 py-1 hover:bg-white-500 flex items-center justify-center hover:bg-pink-400 hover:text-white">
+                Ver
+              </button>
+            </td>
           </tr>
         ))}
       </tbody>
     </table>
-  </div>
-)};
+  );
+};
 
 export default ProductTable;
