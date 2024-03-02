@@ -1,12 +1,31 @@
 import React,{useState}  from 'react';
+import OptionArtistica from './OptionSubCategoria/OptionArtistica'
+import OptionLibreria from './OptionCategoria/OptionLibreria';
+import OptionJuguetes from './OptionCategoria/OptionJuguetes';
+import OptionMochilas from './OptionCategoria/OptionMochilas';
+import OptionAgendas from './OptionSubCategoria/OptionAgendas';
+import OptionComercial from './OptionSubCategoria/OptionComercial';
+import OptionEscolar from './OptionSubCategoria/OptionEscolar';
+import OptionRegaleria from './OptionSubCategoria/OptionRegaleria';
+import OptionResmaPapeles from './OptionSubCategoria/OptionResmaPapeles'
+import OptionTecnico from './OptionSubCategoria/OptionTecnico'
+import OptionTecnologia from './OptionSubCategoria/OptionTecnologia'
+// import OptionNone from './OptionSubCategoria/OptionNone'
 
 const ModifyProductModalForm = ({ handleChange, values }) => {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('');
+  const [subcategoriaSeleccionada, setSubcategoriaSeleccionada] = useState('');
 
   const handleCategoriaChange = (e) => {
     const categoria = e.target.value;
     setCategoriaSeleccionada(categoria);
     handleChange('categoria', categoria);
+    handleChange('subcategoria', '');
+  };
+  const handleSubcategoriaChange = (e) => {
+    const subcategoria = e.target.value;
+    setSubcategoriaSeleccionada(subcategoria);
+    handleChange('subcategoria', subcategoria);
   };
 
   return (
@@ -75,39 +94,55 @@ const ModifyProductModalForm = ({ handleChange, values }) => {
       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
       id="subcategoria"
       name="subCategoria"
-      value={values.subcategoria}
-      onChange={(e) => handleChange('subcategoria', e.target.value)}
+      value={subcategoriaSeleccionada}
+      onChange={handleSubcategoriaChange}
     >
       <option value="" disabled hidden>Selecciona una subCategoria</option>
       {categoriaSeleccionada === 'Libreria' &&(
-        <>
-          <option value="Agendas">Agendas</option>
-          <option value="Artistica">Artistica</option>
-          <option value="Comercial">Comercial</option>
-          <option value="Escolar">Escolar</option>
-          <option value="Regaleria">Regaleria</option>
-          <option value="ResmasPapeleria">Resmas y Papeleria</option>
-          <option value="Tecnico">Tecnico</option>
-          <option value="Tecnologia">Tecnologia</option>
-        </>
+        <OptionLibreria></OptionLibreria>
       )}
       {categoriaSeleccionada === 'Juguetes' &&(
-        <>
-          <option value="JuegosDeMesa">Juegos de Mesa</option>
-          <option value="JuguetesBebes">Juguetes para Bebes</option>
-          <option value="PuzzlesRompecabezas">Puzzles y Rompecabezas</option>
-          <option value="DeportesAireLibre">Deportes y Aire Libre</option>
-          <option value="Peluches">Peluches</option>
-          <option value="Personajes">Personajes</option>
-        </>
+        <OptionJuguetes></OptionJuguetes>
       )}
       {categoriaSeleccionada === 'Mochilas' &&(
-        <>
-          <option value="Cresko">Cresko</option>
-          <option value="Mooving">Mooving</option>
-        </>
+        <OptionMochilas></OptionMochilas>
       )}
-      
+    </select>
+    <select
+      className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
+      id="item"
+      name="Item"
+      value={values.item}
+      onChange={(e) => handleChange('item', e.target.value)}
+    >
+      <option value="" disabled hidden>Selecciona un Item</option>
+      {subcategoriaSeleccionada === 'Agendas' &&(
+        <OptionAgendas></OptionAgendas>
+      )}
+      {subcategoriaSeleccionada === 'Artistica' &&(
+        <OptionArtistica></OptionArtistica>
+      )}
+      {subcategoriaSeleccionada === 'Comercial' &&(
+        <OptionComercial></OptionComercial>
+      )}
+      {subcategoriaSeleccionada === 'Escolar' &&(
+        <OptionEscolar></OptionEscolar>
+      )}
+      {subcategoriaSeleccionada === 'Regaleria' &&(
+        <OptionRegaleria></OptionRegaleria>
+      )}
+      {subcategoriaSeleccionada === 'Resmas y Papeleria' &&(
+        <OptionResmaPapeles></OptionResmaPapeles>
+      )}
+      {subcategoriaSeleccionada === 'Tecnico' &&(
+        <OptionTecnico></OptionTecnico>
+      )}
+      {subcategoriaSeleccionada === 'Tecnologia' &&(
+        <OptionTecnologia></OptionTecnologia>
+      )}
+      {/* {subcategoriaSeleccionada === 'JuegosDeMesa' &&(
+        <OptionNone></OptionNone>
+      )} */}
     </select>
     <select
       className="w-5/12 border-2 rounded-xl border-gray-400 mx-2 my-4 px-3 py-2 hover:border-sky-500"
@@ -160,5 +195,4 @@ const ModifyProductModalForm = ({ handleChange, values }) => {
   </form>
   );
 };
-
 export default ModifyProductModalForm;
