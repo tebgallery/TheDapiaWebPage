@@ -27,37 +27,39 @@ const ArticulosGrid = ({products, onCartClick, onAddToCartClick,cart}) => {
   };
 
   return (
-    <div className="w-4/5 py-16 px-8 mx-8">
-      <div className="grid grid-cols-4 gap-10 place-content-center">
+    <div className="w-4/5 py-16 px-16">
+      <div className="grid grid-cols-4 gap-12 place-content-center">
         {currentArticulos.map((producto, _id) => (
           <div key={_id} 
-          className="flex-none w-auto border-gray-200  border-x-2 border-t-2 rounded-xl cursor-pointer hover:shadow-2xl hover:border-gray-300"
+          className="w-auto border border-gray-300 rounded-3xl shadow-xl pb-6 bg-white cursor-pointer hover:shadow-2xl hover:border-gray-400"
           >
             <div onClick={() => handleCardClick(producto)}>
               <img
                 src={producto.imagen}
                 alt={producto.nombre}
-                className="w-full h-60 p-2 object-contain duration-500 transition-transform transform hover:scale-105 "
+                className="w-full h-64 p-5 object-contain duration-500 transition-transform transform hover:scale-105"
               />
-              <div className="h-36 p-4 border-black border-t-2 ">
-                <h3 className="text-lg text-gray-500 text-center font-semibold block mb-4">{producto.nombre}</h3>
+              <div className="border-t border-gray-200 pt-4">
+                <h3 className="min-h-20 max-h-20 p-2 text-lg text-black text-center uppercase font-semibold">{producto.nombre}</h3>
+                <div className="min-h-16 max-h-16 flex items-center justify-center pb-2 mb-2">
                   {producto.descuento!=null && producto.descuento!=0  ?(
-                    <div className="flex items-center justify-center">
+                    <>
                       <p className="text-center text-fuchsia-500 text-lg line-through">${producto.precio}</p>
                       <p className="text-center text-black text-2xl ml-5">${producto.preciototal}</p>
-                    </div>
+                      </>
                   ): <p className="text-center text-black text-2xl">${producto.preciototal}</p>}
+                  </div>
               </div>
             </div>
-
-            <div className="relative flex items-center w-full h-10" onClick={() => { onAddToCartClick(producto); onCartClick(); }}>
+            <div className="w-full px-8">
               <button 
-              className="absolute bottom-0 rounded-b-xl flex items-center justify-center text-base text-white bg-fuchsia-300 w-full h-10 hover:bg-fuchsia-500 duration-300" >
+              className="flex items-center justify-center text-base text-white bg-fuchsia-300 w-full h-10 rounded-xl hover:bg-fuchsia-500 duration-300 hover:scale-105"
+              onClick={() => { onAddToCartClick(producto); onCartClick(); }} >
                 AGREGAR
                 <FontAwesomeIcon className="text-black ml-2" icon={faCartPlus} />
               </button>
+              </div>
             </div>             
-        </div>
         ))}
       </div>
 

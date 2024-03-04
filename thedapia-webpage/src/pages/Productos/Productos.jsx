@@ -110,15 +110,10 @@ const Productos = ({categoria,palabra}) => {
       )}
 
       <section className="w-full">
-        <div className="flex justify-center p-4">
+        <div className="flex justify-center">
             {showFiltros && (
             <Filtros/>
           )}
-          <div className="mt-16">
-            <button className="py-1 px-2" onClick={() => setShowFiltros(!showFiltros)}>
-              <FontAwesomeIcon className= "h-6 w-6 "icon={faBars}/>
-            </button>
-          </div>
             <ArticulosGrid onCartClick = {toggleCartModal} products = {products} onAddToCartClick = {handleAddProductToCart} cart = {cart}/>
         </div>
       </section>
