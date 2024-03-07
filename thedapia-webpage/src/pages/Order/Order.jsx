@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import OrderForm from "../../components/Order/OrderForm";
 import OrderFormInput from "../../components/Order/OrderFormInput";
-import OrderFormErrorMessage from "../../components/Order/ErrorMessage";
 import CartColumn from "../../components/CartColumn/CartColumn";
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import axios from "axios";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faShoppingCart, faTruckFast, faCreditCard} from '@fortawesome/free-solid-svg-icons';
 
 
 import cardsLogo from '../../img/PaymentLogos/cardslogo.jpg';
@@ -188,6 +189,22 @@ const Order = () => {
                 <div className="grid grid-cols-12 gap-2 mt-8">
                     <div className="col-span-8 m-auto flex items-center justify-center">
                         <div className="w-9/12 mr-2 p-2">
+                        <div className="w-full h-24 mb-16 flex items-center justify-center">
+                            <div className="rounded-full w-10 h-10 bg-green-400 flex items-center justify-center">
+                                <FontAwesomeIcon icon={faShoppingCart} size="1x" className="absolute text-white text-center" />
+                            </div>
+                            <div className="w-72 h-1 bg-green-500">
+                            </div>
+                            <div className="rounded-full w-12 h-12 bg-sky-500 flex items-center justify-center">
+                                <FontAwesomeIcon icon={faTruckFast} size="1x" className="absolute text-white text-center" />
+                            </div>
+                            <div className="w-72 h-1 bg-gray-300">
+                            </div>
+                            <div className="rounded-full w-10 h-10 bg-gray-300 flex items-center justify-center">
+                                <FontAwesomeIcon icon={faCreditCard} size="1x" className="absolute text-white text-center" />
+                            </div>
+                        </div>
+                            
                             {orderForm && (
                                 <>
                                     <OrderForm title="Datos del contacto">
