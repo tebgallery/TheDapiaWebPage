@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'map': "url('./src/img/map.png')",
+      },
       height: {
         104: '26rem',
         128: '32rem',

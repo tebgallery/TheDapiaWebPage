@@ -14,7 +14,6 @@ const Productos = ({categoria,palabra}) => {
   const getCatUrl = "http://localhost:3000/productos/"+categoria;
   const getWordUrl = "http://localhost:3000/productos/buscar"+palabra;
   const [products, setProducts] = useState([]);
-  const [showFiltros,setShowFiltros] = useState(true);
   const [showCartModal, setShowCartModal] = useState(false);
   const [cart, setCart] = useState([]);
 
@@ -111,9 +110,7 @@ const Productos = ({categoria,palabra}) => {
 
       <section className="w-full">
         <div className="flex justify-center">
-            {showFiltros && (
             <Filtros/>
-          )}
             <ArticulosGrid onCartClick = {toggleCartModal} products = {products} onAddToCartClick = {handleAddProductToCart} cart = {cart}/>
         </div>
       </section>

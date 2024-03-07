@@ -31,7 +31,7 @@ const ArticulosGrid = ({products, onCartClick, onAddToCartClick,cart}) => {
       <div className="grid grid-cols-4 gap-12 place-content-center">
         {currentArticulos.map((producto, _id) => (
           <div key={_id} 
-          className="w-auto border border-gray-300 rounded-3xl shadow-xl pb-6 bg-white cursor-pointer hover:shadow-2xl hover:border-gray-400"
+          className="w-auto border border-gray-300 rounded-3xl shadow-lg pb-6 bg-white cursor-pointer hover:shadow-2xl hover:border-gray-400"
           >
             <div onClick={() => handleCardClick(producto)}>
               <img

@@ -28,17 +28,17 @@ const CartModal = ({onClose, cart, onClickMinus,onClickPlus,onClickRemove }) => 
   };
 
   return (
-    <div className="fixed w-full h-full top-0 bg-opacity-50 flex items-center justify-end z-50">
-      <div className="bg-white p-8 border border-black rounded-2xl w-3/12 h-full">
+    <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-end z-50" onClick={onClose}>
+      <div className="bg-white p-8 w-3/12 h-full  ">
       {cart.length > 0 ? (
       <>
           <div className="flex items-center mb-12">
           <FontAwesomeIcon
             icon={faXmark}
             onClick={onClose}
-            className="cursor-pointer"
+            className="cursor-pointer w-5 h-5"
           />
-          <h3 className="ml-10 text-2xl p-2">Carrito de Compras</h3>
+          <h3 className="ml-8 text-2xl font-semibold p-2">Carrito de compras</h3>
         </div>
         {cart.map((c) => (
           <div
@@ -94,12 +94,9 @@ const CartModal = ({onClose, cart, onClickMinus,onClickPlus,onClickRemove }) => 
             <p>${total}</p>
           </div>
 
-          <div className="mt-16">
-            <button className="bg-blue-500 text-white px-4 py-2 rounded w-full mb-4" onClick={handleNavigateToOrderPage}>
+          <div className="mt-16 w-full px-4">
+            <button className="w-full bg-black text-white px-4 py-2 rounded- mb-6 hover:bg-opacity-65" onClick={handleNavigateToOrderPage}>
               Continuar Compra
-            </button>
-            <button className="bg-gray-400 text-white px-4 py-2 rounded w-full">
-              Seguir Comprando
             </button>
           </div>
         </div>
