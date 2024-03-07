@@ -82,7 +82,7 @@ const Navbar = ( {onCartClick, cart} ) => {
               </a>
             </li>
             <li className="inline-block"> 
-              <a onClick={() => handleNavigateToSection('contact-section')} className="hover:text-white cursor-pointer" >
+              <a onClick={() => navigate('contact')} className="hover:text-white cursor-pointer" >
                 CONTACTO
               </a>
             </li>

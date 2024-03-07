@@ -6,7 +6,6 @@ import ProductosCarousel from '../../components/ProductosCarousel/ProductosCarou
 import Features from '../../components/Features/Features';
 import Aboutus from '../../components/Aboutus/Aboutus';
 import Marcas from '../../components/Marcas/Marcas';
-import Contact from '../../components/Contact/Form';
 import Footer from '../../components/Footer/Footer';
 import Navbar from '../../components/Navbar/Navbar';
 import CartModal from '../../components/CartModal/CartModal';
@@ -105,7 +104,6 @@ const Home = () => {
       <Marcas marcas = {marcasJuguetes}/>
       <ProductosCarousel titulo={"NUESTRAS OFERTAS"} productos={productosOfertas} />
       <Aboutus />
-      <Contact />
       <Footer />
     </>
   );
