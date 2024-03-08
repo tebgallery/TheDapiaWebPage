@@ -1,15 +1,10 @@
 import React from 'react';
-import EnvioLogo from '../../img/envio-logo.png';
-import LibroLogo from '../../img/libro-logo.png';
-import CreditCardLogo from '../../img/creditcard-logo.png';
-
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTruckFast,faBookOpen,faCreditCard} from '@fortawesome/free-solid-svg-icons';
 
 const Features = () => {
     return (
-        <section className="w-full h-36 bg-gray-100">
-            <div className="w-full h-36 flex items-center justify-center">
+            <div className="w-full h-36 flex items-center justify-center bg-gray-100 mt-6">
                 <div className =" flex items-center w-80 h-20 p-2 text-center">
                     <FontAwesomeIcon className='w-9 h-9' icon={faTruckFast}/>   
                     <div className="w-64">
@@ -32,7 +27,6 @@ const Features = () => {
                     </div>
                 </div>
             </div>
-        </section>
     );
 };
 

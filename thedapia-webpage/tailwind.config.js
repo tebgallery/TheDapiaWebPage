@@ -12,6 +12,7 @@ export default {
       height: {
         104: '26rem',
         128: '32rem',
+        136: '34rem',
         176: '44rem',
         192: '48rem',
         208: '52rem',
@@ -22,7 +23,7 @@ export default {
         '1800': '1800ms',
       },
       animation: {
-        'slide': 'slide 40s linear infinite',
+        'slide': 'slide 60s linear infinite',
       },
       keyframes: {
         slide: {

@@ -98,12 +98,13 @@ const Home = () => {
       )}
       <Carousel images = {Carouselimgs}/>
       <Features />
-      <ProductosCarousel titulo={"ULTIMOS INGRESOS"} productos={productosUltimosIngresos} />
+      <ProductosCarousel titulo={"Ultimos Ingresos"} productos={productosUltimosIngresos} />
       <Marcas marcas = {marcasLiberia}/>
-      <ProductosCarousel titulo={"LO MAS VENDIDO"} productos={productosMasVendidos} />
+      <ProductosCarousel titulo={"Lo Mas Vendido"} productos={productosMasVendidos} />
       <Marcas marcas = {marcasJuguetes}/>
-      <ProductosCarousel titulo={"NUESTRAS OFERTAS"} productos={productosOfertas} />
-      <Aboutus />
+      <ProductosCarousel titulo={"Nuestras Ofertas!"} productos={productosOfertas} />
+      {/*
+      <Aboutus />*/}
       <Footer />
     </>
   );
