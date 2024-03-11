@@ -19,7 +19,7 @@ const ContactMap = () => {
                     <h5 className='mb-4'> Como llegar:</h5>
                     <p className='mb-4'> Subte E, Estación Jose M. Moreno</p>
                     <p className='mb-4'> Colectivos: 4, 7, 25, 42, 134, 135 </p>
-                    <button className='px-16 py-2 bg-fuchsia-500 rounded-xl hover:scale-105 opacity-100'
+                    <button className='px-16 py-2 bg-violet-500 rounded-2xl hover:scale-105 opacity-100'
                         onClick={navigateToGoogleMap}
                     >
                         Ver en Google maps

@@ -8,9 +8,11 @@ const Contact = () => {
     return (
         <>
         <Navbar/>
-        <div className='w-full h-full py-20 px-56 flex items-center justify-center mb-20'>
+        <div className='w-full h-full py-20 px-56 bg-contactBg'>
+            <div className='flex items-center justify-center p-8 rounded-2xl bg-white'>
             <ContactForm/>
             <ContactMap/>
+            </div>
         </div>
         <Footer/>
         </>

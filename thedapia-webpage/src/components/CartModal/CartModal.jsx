@@ -8,16 +8,16 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {Link as RouterLink, useNavigate} from 'react-router-dom'
 
-const CartModal = ({onClose, cart, onClickMinus,onClickPlus,onClickRemove }) => {
+const CartModal = ({cart,onClose}) => {
   
-  const total = cart.reduce(
+  {/*const total = cart.reduce(
     (accumulator, currentValue) =>
       accumulator + currentValue.preciototal * currentValue.amount,
     0
-  );
-
+  );*/}
+{/*}
   const cartWithTotal = [...cart, { total }];
-  console.log(cartWithTotal);
+console.log(cartWithTotal);*/}
 
   const navigate = useNavigate();
 
@@ -28,15 +28,18 @@ const CartModal = ({onClose, cart, onClickMinus,onClickPlus,onClickRemove }) => 
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-end z-50" onClick={onClose}>
+    <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-end z-50">
+      <div className="w-9/12 h-full"
+      onClick={onClose}>
+      </div>
       <div className="bg-white p-8 w-3/12 h-full  ">
-      {cart.length > 0 ? (
+      {cart && cart.length > 0 ? (
       <>
           <div className="flex items-center mb-12">
           <FontAwesomeIcon
             icon={faXmark}
-            onClick={onClose}
             className="cursor-pointer w-5 h-5"
+            onClick={onClose}
           />
           <h3 className="ml-8 text-2xl font-semibold p-2">Carrito de compras</h3>
         </div>
@@ -55,7 +58,6 @@ const CartModal = ({onClose, cart, onClickMinus,onClickPlus,onClickRemove }) => 
                     <FontAwesomeIcon
                       icon={faMinus}
                       className="cursor-pointer w-3 h-3"
-                      onClick={() => onClickMinus(c)}
                     />
                     <input
                       type="text"
@@ -65,7 +67,6 @@ const CartModal = ({onClose, cart, onClickMinus,onClickPlus,onClickRemove }) => 
                     <FontAwesomeIcon
                       icon={faPlus}
                       className="cursor-pointer w-3 h-3"
-                      onClick={() => onClickPlus(c)}
                     />
                   </div>
                 </div>
@@ -84,7 +85,6 @@ const CartModal = ({onClose, cart, onClickMinus,onClickPlus,onClickRemove }) => 
             <FontAwesomeIcon
               icon={faTrashCan}
               className="cursor-pointer absolute top-0 right-0"
-              onClick={() => onClickRemove(c)}
             />
           </div>
         ))}
@@ -105,8 +105,8 @@ const CartModal = ({onClose, cart, onClickMinus,onClickPlus,onClickRemove }) => 
           <>
             <FontAwesomeIcon
               icon={faXmark}
-              onClick={onClose}
               className="cursor-pointer mb-10"
+              onClick={onClose}
             />
             <p className="text-xl">No agregaste nada!</p>
           </>

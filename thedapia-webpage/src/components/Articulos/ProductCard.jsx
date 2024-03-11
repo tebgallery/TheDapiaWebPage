@@ -2,14 +2,14 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
-const ProductCard = ({productos}) => {
+const ProductCard = ({productos,openModal}) => {
     return (
         <>
             {productos.map((producto, _id) => (
           <div key={_id} 
           className="w-auto border border-gray-300 rounded-3xl shadow-lg pb-6 bg-white cursor-pointer hover:shadow-2xl hover:border-gray-400"
           >
-            <div onClick={() => handleCardClick(producto)}>
+            <div onClick={() => openModal(producto)}>
               <img
                 src={producto.imagen}
                 alt={producto.nombre}

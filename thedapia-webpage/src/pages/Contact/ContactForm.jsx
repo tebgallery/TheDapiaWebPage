@@ -1,4 +1,6 @@
 import React from "react";
+import { FaUser } from "react-icons/fa";
+import { IoIosMail } from "react-icons/io";
 
 const ContactForm = () => {
 
@@ -27,29 +29,37 @@ const ContactForm = () => {
 
 
   return (
-    <div className="w-5/12 bg-fuchsia-300 rounded-2xl shadow-2xl p-16">
-      <h2 className="text-4xl text-black text-center mb-20 ">Envianos tu mensaje</h2>
-      <div className="px-12 mb-20">
-        <input
-          type="text"
-          className="w-full h-16 border-b-2 border-black bg-transparent outline-none pl-4 text-lg mb-8"
-          placeholder="Nombre"
-        />
-        <input
-          type="text"
-          className="w-full h-16 border-b-2 border-black bg-transparent outline-none pl-4 text-lg mb-8"
-          placeholder="Email"
-        />
-        <textarea
-          required
-          className="w-full h-16 border-b-2 border-black bg-transparent pl-4"
-          id="mensaje"
-          name="mensaje"
-          placeholder="Mensaje"
-        />
+    <div className="w-5/12 px-4 py-20 mr-12">
+      <h2 className="pl-16 text-4xl text-slate-700 font-semibold text-left mb-14">Envianos tu mensaje</h2>
+      <div className="px-12 mb-8">
+      <div className="relative mb-6">
+          <input
+            type="text"
+            className="w-full h-16 rounded-full bg-gray-200 outline-none pl-16 text-lg"
+            placeholder="Nombre"
+          />
+          <span className="absolute left-6 top-5"><FaUser className="w-6 h-6 text-gray-600" /></span>
+        </div>
+
+        <div className="relative mb-6">
+          <input
+            type="text"
+            className="w-full h-16 rounded-full bg-gray-200 outline-none pl-16 text-lg"
+            placeholder="Email"
+          />
+          <span className="absolute left-6 top-5"><IoIosMail  className="w-6 h-6 text-gray-600" /></span>
+        </div>
+
+        <div className="relative mb-6">
+          <input
+            type="text"
+            className="w-full h-36 rounded-3xl bg-gray-200 outline-none pl-8 pb-20 text-lg"
+            placeholder="Mensaje..."
+          />
+        </div>
       </div>
       <div className="w-full px-12 text-white">
-        <button className="w-full h-12 rounded-3xl bg-black hover:bg-white duration-300 hover:scale-105 hover:text-black"
+        <button className="w-full h-16 rounded-full bg-violet-400 text-lg hover:bg-violet-500 duration-300 hover:scale-105"
           onSubmit={onSubmit}
         >
           Enviar Mensaje

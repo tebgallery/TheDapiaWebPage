@@ -8,6 +8,7 @@ export default {
     extend: {
       backgroundImage: {
         'map': "url('./src/img/map.png')",
+        'contactBg': "url('./src/img/contactBg.jpg')"
       },
       height: {
         104: '26rem',

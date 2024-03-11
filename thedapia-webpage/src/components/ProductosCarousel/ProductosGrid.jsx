@@ -44,7 +44,7 @@ const ProductosGrid = ({ productos }) => {
       </button>
 
       <div className="grid grid-cols-4 gap-12 place-content-center mx-28">
-        <ProductCard productos = {productos.slice(currentIndex, currentIndex + 4)}/>
+        <ProductCard productos = {productos.slice(currentIndex, currentIndex + 4)} openModal= {() => handleCardClick(producto)}/>
       </div>
 
       <button
@@ -59,7 +59,7 @@ const ProductosGrid = ({ productos }) => {
       )}
 
       {showCartModal && (
-        <CartModal products = {showCartModal} onClose={() => setShowCartModal(false)}/>
+        <CartModal cart = {showCartModal} onClose={() => setShowCartModal(false)}/>
       )}
 
 
