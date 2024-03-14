@@ -4,15 +4,15 @@ import ArticulosGrid from '../../components/Articulos/ArticulosGrid';
 import CartModal from "../../components/CartModal/CartModal";
 import Footer from '../../components/Footer/Footer';
 import Filtros from '../../components/Filtros/Filtros';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faBars } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 
-const Productos = ({categoria,palabra}) => {
+const Productos = ({categoria}) => {
   const getUrl = 'http://localhost:3000/productos';
   const getCatUrl = "http://localhost:3000/productos/"+categoria;
-  const getWordUrl = "http://localhost:3000/productos/buscar"+palabra;
+  const { palabra } = useParams();
+  const getWordUrl = "http://localhost:3000/productos/buscar/"+palabra;
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
 

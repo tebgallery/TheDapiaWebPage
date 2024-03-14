@@ -29,12 +29,13 @@ const ProductCard = ({productos,openModal}) => {
             </div>
             <div className="w-full px-8">
               <button 
-              className="flex items-center justify-center text-base text-white bg-fuchsia-300 w-full h-10 rounded-xl hover:bg-fuchsia-500 duration-300 hover:scale-105"
-              onClick={() => { onAddToCartClick(producto); onCartClick(); }} >
-                AGREGAR
-                <FontAwesomeIcon className="text-black ml-2" icon={faCartPlus} />
+                className="flex items-center justify-around text-base text-white bg-fuchsia-300 w-full h-11 rounded-full hover:bg-gradient-to-r from-pink-400 to-fuchsia-600 duration-300 hover:scale-102"
+                onClick={() => { onAddToCartClick(producto); onCartClick(); }}
+              >
+                <span>AGREGAR</span>
+                <FontAwesomeIcon className="bg-white rounded-full text-fuchsia-400 p-2" icon={faCartPlus} />
               </button>
-              </div>
+            </div>
             </div>             
         ))}
         </>
