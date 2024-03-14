@@ -67,16 +67,16 @@ const AdminProducts = () => {
     "PrecioTotal",
     "Cantidad",
     "Categoria",
+    /*
     "SubCategoria",
     "Item",
     "SeccionEnPagina",
-    "Color",
-    "Imagen",
+    "Color",*/
     "FechaModificacion",
-    "Descripcion",
+    /*"Descripcion",*/
     "Estado",
     "Acciones",
-    ""
+    "Info"
   ];
 
   useEffect(() => {

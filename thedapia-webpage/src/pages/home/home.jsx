@@ -6,7 +6,6 @@ import ProductosCarousel from '../../components/ProductosCarousel/ProductosCarou
 import Features from '../../components/Features/Features';
 import Aboutus from '../../components/Aboutus/Aboutus';
 import Marcas from '../../components/Marcas/Marcas';
-import Contact from '../../components/Contact/Form';
 import Footer from '../../components/Footer/Footer';
 import Navbar from '../../components/Navbar/Navbar';
 import CartModal from '../../components/CartModal/CartModal';
@@ -99,13 +98,13 @@ const Home = () => {
       )}
       <Carousel images = {Carouselimgs}/>
       <Features />
-      <ProductosCarousel titulo={"ULTIMOS INGRESOS"} productos={productosUltimosIngresos} />
+      <ProductosCarousel titulo={"Ultimos Ingresos"} productos={productosUltimosIngresos} />
       <Marcas marcas = {marcasLiberia}/>
-      <ProductosCarousel titulo={"LO MAS VENDIDO"} productos={productosMasVendidos} />
+      <ProductosCarousel titulo={"Lo Mas Vendido"} productos={productosMasVendidos} />
       <Marcas marcas = {marcasJuguetes}/>
-      <ProductosCarousel titulo={"NUESTRAS OFERTAS"} productos={productosOfertas} />
-      <Aboutus />
-      <Contact />
+      <ProductosCarousel titulo={"Nuestras Ofertas!"} productos={productosOfertas} />
+      {/*
+      <Aboutus />*/}
       <Footer />
     </>
   );

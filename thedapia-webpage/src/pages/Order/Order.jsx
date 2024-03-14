@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import OrderForm from "../../components/Order/OrderForm";
 import OrderFormInput from "../../components/Order/OrderFormInput";
-import OrderFormErrorMessage from "../../components/Order/ErrorMessage";
 import CartColumn from "../../components/CartColumn/CartColumn";
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart, faTruckFast, faCreditCard, faMobileScreenButton } from '@fortawesome/free-solid-svg-icons';
 
 
 import cardsLogo from '../../img/PaymentLogos/cardslogo.jpg';
@@ -20,6 +21,7 @@ const Order = () => {
     const [paymentForm, setPaymentForm] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState(0);
     const [cardData, setCardData] = useState(false);
+    const [transferData,setTransferData] = useState(false);
     const { cart } = useParams();
 
     const decodedCart = decodeURIComponent(cart);
@@ -54,25 +56,25 @@ const Order = () => {
         setUserData({ ...userData, email: value });
         setErrors({ ...errors, email: value.trim() ? '' : 'Este campo es obligatorio' });
     };
-    
+
     const handleNombreChange = (e) => {
         const { value } = e.target;
         setUserData({ ...userData, nombre: value });
         setErrors({ ...errors, nombre: value.trim() ? '' : 'Este campo es obligatorio' });
     };
-    
+
     const handleApellidoChange = (e) => {
         const { value } = e.target;
         setUserData({ ...userData, apellido: value });
         setErrors({ ...errors, apellido: value.trim() ? '' : 'Este campo es obligatorio' });
     };
-    
+
     const handleTelefonoChange = (e) => {
         const { value } = e.target;
         setUserData({ ...userData, telefono: value });
         setErrors({ ...errors, telefono: value.trim() ? '' : 'Este campo es obligatorio' });
     };
-    
+
     const handleCalleChange = (e) => {
         const { value } = e.target;
         setUserData({ ...userData, calle: value });
@@ -84,11 +86,14 @@ const Order = () => {
         setUserData({ ...userData, numero: value });
         setErrors({ ...errors, numero: value.trim() ? '' : 'Este campo es obligatorio' });
     };
-    
+
     const handleDniChange = (e) => {
         const { value } = e.target;
+        const isNumeric = /^\d+$/;
         setUserData({ ...userData, dni: value });
-        setErrors({ ...errors, dni: value.trim() ? '' : 'Este campo es obligatorio' });
+        setErrors({ ...errors, 
+            dni: !isNumeric.test(value.trim()) ? 'Debe contener solo números' :  (value.trim().length !== 8 && value.trim().length !== 11 ? 'Cantidad de caracteres inválida' : (value.trim() ? '' : 'Este campo es obligatorio'))
+        });
     };
 
     const hasErrors = () => {
@@ -184,10 +189,65 @@ const Order = () => {
 
     return (
         <div>
-            <div className="m-auto">
-                <div className="grid grid-cols-12 gap-2 mt-8">
+            <div className="m-auto" /*
+            onClick={() =>{ 
+                setPaymentMethod(0);
+                setCardData(false);
+                setTransferData(false);
+            }}*/>
+                <div className="grid grid-cols-12 gap-2 mt-8 ">
                     <div className="col-span-8 m-auto flex items-center justify-center">
                         <div className="w-9/12 mr-2 p-2">
+                            <div className="w-full h-24 mb-16 flex items-center justify-center">
+                                <div>
+                                    <div className="rounded-full w-10 h-10 mb-2 bg-fuchsia-300 flex items-center justify-center">
+                                        <FontAwesomeIcon icon={faShoppingCart} size="1x" className="absolute text-white text-center" />
+                                    </div>
+                                    <p className="text-center text-sm">Carrito</p>
+                                </div>
+
+                                <div className="w-80 h-1 bg-fuchsia-300 mb-6">
+                                </div>
+                                {!paymentForm ? (
+                                    <>
+                                    <div>
+                                        <div className="rounded-full w-12 h-12 mb-2 bg-fuchsia-500 flex items-center justify-center">
+                                            <FontAwesomeIcon icon={faTruckFast} size="1x" className="absolute text-white text-center" />
+                                        </div>
+                                        <p className="text-center text-sm">Envío</p>
+                                    </div>
+
+                                    <div className="w-80 h-1 bg-gray-300 mb-6">
+                                    </div>
+                                    <div>
+                                        <div className="rounded-full w-10 h-10 mb-2 bg-gray-300 flex items-center justify-center">
+                                            <FontAwesomeIcon icon={faCreditCard} size="1x" className="absolute text-white text-center" />
+                                        </div>
+                                        <p className="text-center text-sm">Pago</p>
+                                    </div>
+                                </>
+                              ) : (
+                                <>
+                                <div>
+                                    <div className="rounded-full w-10 h-10 mb-2 bg-fuchsia-300 flex items-center justify-center">
+                                        <FontAwesomeIcon icon={faTruckFast} size="1x" className="absolute text-white text-center" />
+                                    </div>
+                                    <p className="text-center text-sm">Envío</p>
+                                </div>
+
+                                <div className="w-80 h-1 bg-fuchsia-300 mb-6">
+                                </div>
+                                <div>
+                                    <div className="rounded-full w-12 h-12 mb-2 bg-fuchsia-500 flex items-center justify-center">
+                                        <FontAwesomeIcon icon={faCreditCard} size="1x" className="absolute text-white text-center" />
+                                    </div>
+                                    <p className="text-center text-sm">Pago</p>
+                                </div>
+                            </>
+
+                              ) }
+                            </div>
+
                             {orderForm && (
                                 <>
                                     <OrderForm title="Datos del contacto">
@@ -199,7 +259,7 @@ const Order = () => {
                                             onChange={handleEmailChange}
                                         ></OrderFormInput>
                                         {errors.email &&
-                                        <ErrorMessage error = {errors.email}/>
+                                            <ErrorMessage error={errors.email} />
                                         }
                                         <OrderFormInput
                                             id="nombre"
@@ -208,8 +268,8 @@ const Order = () => {
                                             value={userData.nombre}
                                             onChange={handleNombreChange}
                                         ></OrderFormInput>
-                                        {errors.nombre && 
-                                        <ErrorMessage error = {errors.nombre}/>
+                                        {errors.nombre &&
+                                            <ErrorMessage error={errors.nombre} />
                                         }
                                         <OrderFormInput
                                             id="apellido"
@@ -218,8 +278,8 @@ const Order = () => {
                                             value={userData.apellido}
                                             onChange={handleApellidoChange}
                                         ></OrderFormInput>
-                                        {errors.apellido && 
-                                        <ErrorMessage error = {errors.apellido}/>
+                                        {errors.apellido &&
+                                            <ErrorMessage error={errors.apellido} />
                                         }
                                         <OrderFormInput
                                             id="telefono"
@@ -228,8 +288,8 @@ const Order = () => {
                                             value={userData.telefono}
                                             onChange={handleTelefonoChange}
                                         ></OrderFormInput>
-                                        {errors.telefono && 
-                                        <ErrorMessage error = {errors.telefono}/>
+                                        {errors.telefono &&
+                                            <ErrorMessage error={errors.telefono} />
                                         }
                                         <OrderFormInput
                                             id="dni"
@@ -238,8 +298,8 @@ const Order = () => {
                                             value={userData.dni}
                                             onChange={handleDniChange}
                                         ></OrderFormInput>
-                                        {errors.dni && 
-                                        <ErrorMessage error = {errors.dni}/>
+                                        {errors.dni &&
+                                            <ErrorMessage error={errors.dni} />
                                         }
                                     </OrderForm>
 
@@ -255,7 +315,7 @@ const Order = () => {
                                                         setShippingCost(4800);
                                                         setReceiverForm(true);
                                                         setUserData({ ...userData, retiro: "Envío a Domicilio - Correo Argentino Clásico" });
-                                                        setErrors({ ...errors, calle:'Este campo es obligatorio', numero:'Este campo es obligatorio' });
+                                                        setErrors({ ...errors, calle: 'Este campo es obligatorio', numero: 'Este campo es obligatorio' });
                                                     }}
                                                 />
                                                 <p className="font-bold">
@@ -275,7 +335,7 @@ const Order = () => {
                                                         setShippingCost(5500);
                                                         setReceiverForm(true);
                                                         setUserData({ ...userData, retiro: "Envío a Domicilio - Correo Argentino Express" });
-                                                        setErrors({ ...errors, calle:'Este campo es obligatorio', numero:'Este campo es obligatorio' });
+                                                        setErrors({ ...errors, calle: 'Este campo es obligatorio', numero: 'Este campo es obligatorio' });
                                                     }}
                                                 />
                                                 <p className="font-bold">
@@ -298,7 +358,7 @@ const Order = () => {
                                                             setShippingCost(0);
                                                             setReceiverForm(false);
                                                             setUserData({ ...userData, retiro: "Retiro en Persona" });
-                                                            setErrors({ ...errors, calle:'', numero:'' });
+                                                            setErrors({ ...errors, calle: '', numero: '' });
                                                         }}
                                                     />
                                                     <p className="font-bold inline-block">Retiro en Persona</p>
@@ -327,8 +387,8 @@ const Order = () => {
                                                 value={userData.calle}
                                                 onChange={handleCalleChange}
                                             ></OrderFormInput>
-                                            {errors.calle && 
-                                            <ErrorMessage error = {errors.calle}/>
+                                            {errors.calle &&
+                                                <ErrorMessage error={errors.calle} />
                                             }
                                             <OrderFormInput
                                                 id="numero"
@@ -337,8 +397,8 @@ const Order = () => {
                                                 value={userData.numero}
                                                 onChange={handleNumeroChange}
                                             ></OrderFormInput>
-                                            {errors.numero && 
-                                            <ErrorMessage error = {errors.numero}/>
+                                            {errors.numero &&
+                                                <ErrorMessage error={errors.numero} />
                                             }
                                             <OrderFormInput
                                                 id="departamento"
@@ -369,23 +429,7 @@ const Order = () => {
 
                             {paymentForm && (
                                 <>
-                                    <h3 className="text-2xl uppercase font-semibold mb-3">Medios de pago</h3>
-                                    <div className="w-full border border-black flex items-center p-4 my-4">
-                                        <input
-                                            type="radio"
-                                            id="pago1"
-                                            name="pago"
-                                            value="pago1"
-                                            className="mx-4 my-4"
-                                            onClick={() => {
-                                                setPaymentMethod(1);
-                                                setCardData(true);
-                                            }}
-
-                                        />
-                                        <img src={cardsLogo} alt="cards-logo" className="w-32 h-12 mx-4" />
-                                        <p className="mx-4 font-semibold">Tarjeta de Crédito/Débito</p>
-                                    </div>
+                                    <h3 className="text-2xl uppercase font-semibold mb-8">Medios de pago</h3>
 
                                     {cardData && (
                                         <>
@@ -435,24 +479,50 @@ const Order = () => {
 
                                     )}
 
-                                    <div className="w-full border border-black flex items-center p-4 my-4">
-                                        <input
-                                            type="radio"
-                                            id="pago2"
-                                            name="pago"
-                                            value="pago2"
-                                            className="mx-4 my-4"
-                                            onClick={() => {
+                                    <div className="w-full border border-black flex items-center p-4 mb-14 hover:border-2 hover:cursor-pointer" 
+                                    onClick={() => {
                                                 setPaymentMethod(2);
                                                 setCardData(false);
+                                                setTransferData(false);
                                                 handleBuy();
                                                 handlecreateOrder();
-                                            }}
-
-                                        />
+                                            }}>
                                         <img src={mpLogo} alt="mp-logo" className="w-16 h-16 mx-4" />
                                         <p className="mx-4">Utilizando la opción Pagar a través de Mercado Pago serás redirigido y podrás pagar de las siguientes formas: Tarjeta de crédito - Tarjeta de Débito - Efectivo - Saldo en la cuenta de Mercado Pago</p>
                                     </div>
+
+                                    <div className="w-full border border-black flex items-center p-6 mb-4 hover:border-2 hover:cursor-pointer"
+                                    onClick={() => {
+                                        setPaymentMethod(3);
+                                        setCardData(false);
+                                    }}>
+                                        <FontAwesomeIcon icon={faMobileScreenButton} size="2x" className="mx-8" />
+                                        <p className="mx-4">Transferencia CBU/CVU</p>
+                                    </div>
+
+                                    { paymentMethod === 3 && (
+                                        <div className="w-full bg-gray-200 p-8 mb-8">
+                                            <p className="text-center text-lg italic">A continuación le daremos los datos para realizar la transferencia.
+                                            Una vez realizada tiene que darle al botón "Confirmar transferencia" y recibirá un mail con todos los detalles de su compra.
+                                                Una vez transferido el dinero, validaremos que haya llegado correctamente y le llegara un mail
+                                                de confirmacion para que sepa que la orden esta aceptada.
+                                            </p>
+                                        </div>
+                                    )}
+
+                                    { transferData && (
+                                        <div className="w-full flex items-center justify-center mb-8">
+                                            <div className="w-1/2 bg-gray-100 rounded-2xl text-center p-8">
+                                                <p className="text-2xl "> Email: thedapia@gmail.com <br/>
+                                                    Nombre y Apellido: Patricio Tevez <br/>
+                                                    Alias: Suerte21 <br/>
+                                                    CVU: 00054504030493940304 <br/>
+                                                    Importe a pagar: ${totalPrice}
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                    )}
 
                                     <div className="flex justify-between items-center">
                                         <button className="bg-black text-white uppercase px-2 py-2 w-1/3 h-12 my-10 hover:opacity-65"
@@ -465,13 +535,22 @@ const Order = () => {
                                         >
                                             Volver hacia atrás
                                         </button>
-                                        {paymentMethod === 1 && (
+                                        {paymentMethod === 3 && !transferData && (
                                             <button className="bg-black text-white uppercase px-2 py-2 w-1/3 h-12 my-10 hover:opacity-65"
-
+                                                    onClick={() => {setTransferData(true)}}
                                             >
-                                                Continuar con el pedido
+                                                Continuar con la transferencia
                                             </button>
                                         )}
+
+                                        {paymentMethod === 3 && transferData && (
+                                            <button className="bg-fuchsia-400 text-white rounded-2xl uppercase px-2 py-2 w-1/3 h-12 my-10 hover:bg-fuchsia-500"
+                                            >
+                                                Confirmar transferencia
+                                            </button>
+                                        )}
+
+
                                         {paymentMethod === 2 && preferenceId && (
                                             <Wallet initialization={{ preferenceId: preferenceId }}
                                                 customization={{ texts: { valueProp: 'smart_option' } }}

@@ -14,8 +14,6 @@ const Productos = ({categoria,palabra}) => {
   const getCatUrl = "http://localhost:3000/productos/"+categoria;
   const getWordUrl = "http://localhost:3000/productos/buscar"+palabra;
   const [products, setProducts] = useState([]);
-  const [showFiltros,setShowFiltros] = useState(true);
-  const [showCartModal, setShowCartModal] = useState(false);
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
@@ -67,58 +65,15 @@ const Productos = ({categoria,palabra}) => {
 
   };
 
-  const handleDecrementProductAmount = (product) => {
-    setCart(
-    cart.map((item) =>
-        item._id === product._id
-        ? { ...item, amount: item.amount > 1 ? item.amount - 1 : item.amount }
-        : item
-      )
-    );
-  };
-
-  const handleIncrementProductAmount = (product) => {
-    setCart(
-    cart.map((item) =>
-        item._id === product._id
-        ? { ...item, amount: item.amount < product.cantidad ? item.amount + 1 : item.amount}
-        : item
-      )
-    );
-  };
-
-  const handleRemoveProduct = (product) => {
-    setCart(
-      cart.filter((item) =>
-          item._id !== product._id
-        )
-      );
-  };
 
   
   return (
     <>
       <Navbar onCartClick = {toggleCartModal} cart={cart} />
 
-      {showCartModal && (
-        <CartModal 
-          onClose={() => setShowCartModal(false)} 
-          cart = {cart} 
-          onClickMinus = {handleDecrementProductAmount} 
-          onClickPlus = {handleIncrementProductAmount} 
-          onClickRemove = {handleRemoveProduct}/>
-      )}
-
       <section className="w-full">
-        <div className="flex justify-center p-4">
-            {showFiltros && (
+        <div className="flex justify-center">
             <Filtros/>
-          )}
-          <div className="mt-16">
-            <button className="py-1 px-2" onClick={() => setShowFiltros(!showFiltros)}>
-              <FontAwesomeIcon className= "h-6 w-6 "icon={faBars}/>
-            </button>
-          </div>
             <ArticulosGrid onCartClick = {toggleCartModal} products = {products} onAddToCartClick = {handleAddProductToCart} cart = {cart}/>
         </div>
       </section>

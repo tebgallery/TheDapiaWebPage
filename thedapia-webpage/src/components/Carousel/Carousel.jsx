@@ -12,14 +12,14 @@ const Carousel = ({ images }) => {
   }, [images.length]);
 
   return (
-    <section className="w-full h-128">
+    <section className="w-full h-136">
       <div className="relative w-full h-full">
         {images.map((image, i) => (
           <img
             key={i}
             src={image}
             alt={`Slide ${i+1}`}
-            className={`absolute transition-opacity duration-1000 w-full h-128 object-cover ${
+            className={`absolute transition-opacity duration-1000 w-full h-136 object-cover ${
               i === index ? 'opacity-100' : 'opacity-0'
             }`}
             

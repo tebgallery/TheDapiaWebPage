@@ -1,121 +1,487 @@
 import { React, useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookOpen, faChessKnight, faSortDown, faBars,faBox } from '@fortawesome/free-solid-svg-icons';
+import MainFilters from "./MainFilters/MainFilters";
+import CategoryList from "./Categories/CategoryList";
 
 const Filtros = () => {
-  const [libreriaVisible, setLibreriaVisible] = useState(true);
-  const [agendasVisible, setAgendasVisible] = useState(false);
-  const [artisticaVisible, setArtisticaVisible] = useState(false);
-  const [comercialVisible, setComercialVisible] = useState(false);
-  const [escolarVisible, setEscolarVisible] = useState(false);
-  const [regaleriaVisible, setRegaleriaVisible] = useState(false);
-  const [resmasVisible, setResmasVisible] = useState(false);
-  const [tecnicoVisible, setTecnicoVisible] = useState(false);
-  const [tecnologiaVisible, setTecnologiaVisible] = useState(false);
+  const [libreriaCategories, setLibreriaCategories] = useState(false);
+  const [agendasCategory, setAgendasCategory] = useState(false);
 
-  const [mochilasVisible, setMochilasVisible] = useState(false);
-  const [mochilasCreskoVisible, setMochilasCreskoVisible] = useState(false);
-  const [mochilasMoovingVisible, setMochilasMoovingVisible] = useState(false);
-  
+  const [mochilasCategories, setMochilasCategories] = useState(false);
 
-  const [jugueteriaVisible, setJugueteriaVisible] = useState(false);
-  const [juegosMesaVisible, setJuegosMesaVisible] = useState(false);
-  const [juguetesBebeVisible, setJuguetesBebeVisible] = useState(false);
-  const [puzzlesVisible, setPuzzlesVisible] = useState(false);
-  const [deportesVisible, setDeportesVisible] = useState(false);
-  const [peluchesVisible, setPeluchesVisible] = useState(false);
-  const [personajesVisible, setPersonajesVisible] = useState(false);
+  const [juguetesCaegories, setJuguetesCategories] = useState(false);
 
-  const toggleLibreria = () => {
-    setLibreriaVisible(!libreriaVisible);
-    setAgendasVisible(false); // Oculta las subopciones al cambiar de categoría
+  const toggleLibreriaCategories = () => {
+    setLibreriaCategories(!libreriaCategories);
+    setMochilasCategories(false);
+    setJuguetesCategories(false);
   };
 
-  const toggleAgendas = () => {
-    setAgendasVisible(!agendasVisible);
+  const toggleMochilasCategories = () => {
+    setMochilasCategories(!mochilasCategories);
+    setLibreriaCategories(false);
+    setJuguetesCategories(false);
   };
 
-  const toggleArtistica = () => {
-    setArtisticaVisible(!artisticaVisible);
+  const toggleJuguetesCategories = () => {
+    setJuguetesCategories(!juguetesCaegories);
+    setLibreriaCategories(false);
+    setMochilasCategories(false);
   };
 
-  const toggleComercial = () => {
-    setComercialVisible(!comercialVisible);
-  };
+  const libCategories = [
+    "Todo",
+    "Agendas",
+    "Artistica",
+    "Comercial",
+    "Escolar",
+    "Regaleria",
+    "Resmas y Papeleria",
+    "Tecnico",
+    "Tecnologia",
+  ];
 
-  const toggleEscolar = () => {
-    setEscolarVisible(!escolarVisible);
-  };
+  const agendasList = [
+    "Todo",
+    "Diarias",
+    "Dos Dias x Pagina",
+    "Semana a La Vista",
+  ];
 
-  const toggleRegaleria = () => {
-    setRegaleriaVisible(!regaleriaVisible);
-  };
+  const artisticaList = [
+    "Todo",
+    "Accesorios para Manualidadas",
+    "Accesorios de Madera",
+    "Accesorios para Pizarras y Pizarrones",
+    "Accesorios para Artistica",
+    "Acetatos",
+    "Acrilicos Profesionales",
+    "Acuarelas",
+    "Adhesivos Escolares",
+    "Adhesivos Varios",
+    "Atriles",
+    "Bastidores",
+    "Blocks",
+    "Brillantina/Gibre/Purpurina",
+    "Carbonicos",
+    "Carteleras y Planchas de Corchos",
+    "Carton",
+    "Carton Enetelado",
+    "Cartulinas",
+    "Cizallas y Guillotinas",
+    "Crayones y Pasteles",
+    "Engrampadoras",
+    "Fibrofacil",
+    "Goma Eva",
+    "Gomas de Borrar",
+    "Imanes",
+    "Lapices Acuarelables",
+    "Lapices de Colores",
+    "Lapices de Grafito",
+    "Letrografos",
+    "Maquinas Varias",
+    "Marcadores",
+    "Masas para Moldear",
+    "Mezcladores",
+    "Oleos y Temperas Profesionales",
+    "Palitos Helado y Brochettes",
+    "Papel",
+    "Papel para Dibujo",
+    "Pinceles",
+    "Pinturas",
+    "Pistolas Encoladoras",
+    "Plastilinas",
+    "Plumines y Repuestos de Plumas",
+    "Portaminas",
+    "Respuestos de Dibujos",
+    "Resmas",
+    "Rollos de PVC",
+    "Sobres",
+    "Telgopor",
+    "Temperas Escolares",
+    "Tintas Varias",
+  ];
 
-  const toggleResmas = () => {
-    setResmasVisible(!resmasVisible);
-  };
+  const comercialList = [
+    "Todo",
+    "Abrochadoras de Mesa",
+    "Accesorios para Pizarras y Pizarrones",
+    "Accesorios para Artistica",
+    "Adhesivos Escolares",
+    "Adhesivos Varios",
+    "Alfileres y Chinches",
+    "Almohadillas",
+    "Anotadores",
+    "Aprietapapeles",
+    "Arandelas y Tornillos",
+    "Atriles",
+    "Bandas Elasticas",
+    "Bandejas para Papeles",
+    "Banderas Escarapelas y Cintas",
+    "Biblioratos",
+    "Blocks",
+    "Bobinas de Papel para Regalos",
+    "Boligrafos",
+    "Bolsas para Regalos",
+    "Broches para Abrochadoras",
+    "Broches Varios",
+    "Cajas",
+    "Cajas con Elastico",
+    "Calculadoras",
+    "Calendarios",
+    "Carbonicos",
+    "Carpetas",
+    "Carteleras y Planchas de Corchos",
+    "Cartuchos y Tanques",
+    "Cestos Papeleros",
+    "Chinches y Alfileres",
+    "Cintas Adhesivas",
+    "Cintas para Maquina e Impresoras",
+    "Cintas y Rodillos",
+    "Cizallas y Guillotinas",
+    "Clasificadores",
+    "Clips",
+    "Cofres",
+    "Correctores",
+    "Cortantes y Cuchillas",
+    "Cuadernillos",
+    "Cuadernos 16/21",
+    "Cuadernos 16/21 Forrados",
+    "Cuadernos 19/24",
+    "Cuadernos 21/27",
+    "Cuadernos 29/7",
+    "Cuadernos Comerciales",
+    "Cuadernos Especiales",
+    "Detector de Billetes",
+    "Engrampadoras",
+    "Espirales para Anillados",
+    "Etiquetas Autoadhesivas",
+    "Etiquetas Manila",
+    "Exhibidores",
+    "Fichas y Ficheros",
+    "Folios",
+    "Formularios Comerciales",
+    "Formularios Continuos",
+    "Globos Terraqueos",
+    "Gomas de Borrar",
+    "Hilos",
+    "Imanes",
+    "Indices",
+    "Lapiceras Pluma",
+    "Lapices de Grafito",
+    "Libretas",
+    "Libros Comerciales",
+    "Lupas",
+    "Mapas",
+    "Maquinas Varias",
+    "Marcadores",
+    "Minas",
+    "Mojadedos",
+    "Notas Adhesivas",
+    "Ojalillo",
+    "Organizadores y Planificadores",
+    "Papel",
+    "Perforadoras",
+    "Pincha Papeles",
+    "Pinza Abrochadora",
+    "Pizarras y Pizarrones",
+    "Placas Portapapeles",
+    "Portaclips",
+    "Portacredenciales y Accesorios",
+    "Portalaminas",
+    "Portalapices y Portatarjetas",
+    "Portaminas",
+    "Portarrollos",
+    "Portatacos para Papeles",
+    "Respuestos Especiales",
+    "Respuestos Rayados y Cuadriculados",
+    "Resaltadores",
+    "Resmas",
+    "Rollers Ball",
+    "Rollos de PVC",
+    "Rollos para Maquina",
+    "Rollos Varios",
+    "Sacabroches",
+    "Sacapuntas",
+    "Sellos",
+    "Separadores",
+    "Sobres",
+    "Sobres para Plastificar",
+    "Talonarios Comerciales",
+    "Tapas para Anillado",
+    "Tarjetas Opalinas y Tacos",
+    "Tijeras",
+    "Tintas Varias",
+    "Tizas para Pizarra",
+  ];
 
-  const toggleTecnico = () => {
-    setTecnicoVisible(!tecnicoVisible);
-  };
+  const escolarList = [
+    "Todo",
+    "Abrochadoras de Mesa",
+    "Accesorios para Dibujo Tecnico",
+    "Accesorios para Manualidades",
+    "Accesorios de Madera",
+    "Accesorios para Pizarras y Pizarrones",
+    "Accesorios para Artistica",
+    "Acetatos",
+    "Acuarelas",
+    "Adhesivos Escolares",
+    "Adhesivos Varios",
+    "Alfileres y Chinches",
+    "Anotadores",
+    "Aros para Carpetas",
+    "Atriles",
+    "Bandas Elasticas",
+    "Banderas Escarapelas y Cintas",
+    "Bastidores",
+    "Biblioratos",
+    "Blocks",
+    "Boligrafos",
+    "Borratintas",
+    "Botellas y Termos",
+    "Brillantina/Gibre/Purpurina",
+    "Broches para Abrochadoras",
+    "Broches Varios",
+    "Cajas con Elastico",
+    "Calculadoras",
+    "Canoplas",
+    "Carpetas",
+    "Carpetas Escolares",
+    "Carteleras y Planchas de Corchos",
+    "Carton",
+    "Carton Enetelado",
+    "Cartuchos y Tanques",
+    "Cartulina",
+    "Chinches y Alfileres",
+    "Cintas Adhesivas",
+    "Clips",
+    "Compases",
+    "Conjuntos Geometricos",
+    "Constituciones y Reglamentos",
+    "Correctores",
+    "Crayones y Pasteles",
+    "Cuadernillos",
+    "Cuadernos 16/21",
+    "Cuadernos 16/21 Forrados",
+    "Cuadernos 19/24",
+    "Cuadernos 21/27",
+    "Cuadernos 29/7",
+    "Cuadernos Comerciales",
+    "Cuadernos Especiales",
+    "Diccionarios",
+    "Escuadras",
+    "Espirales para Anillados",
+    "Etiquetas Autoadhesivas",
+    "Fibrofacil",
+    "Fichas y Ficheros",
+    "Flautas",
+    "Folios",
+    "Fundas y Laminas para Forrar",
+    "Globos Terraqueos",
+    "Goma Eva",
+    "Gomas de Borrar",
+    "Hilos",
+    "Imanes",
+    "Indices",
+    "Juegos",
+    "Kits y Set Infantiles",
+    "Laminas y Albumes Educativos",
+    "Lapiceras Pluma",
+    "Lapices de Colores",
+    "Lapices de Grafito",
+    "Libretas",
+    "Libros Infantiles",
+    "Luncheras y Tuppers",
+    "Lupas",
+    "Mapas",
+    "Maquinas Varias",
+    "Marcadores",
+    "Masas para Moldear",
+    "Mezcladores",
+    "Minas",
+    "Mochilas",
+    "Notas Adhesivas",
+    "Ojalillo",
+    "Oleos y Temperas Profecionales",
+    "Palitos Helado y Brochetas",
+    "Papel",
+    "Perforadoras",
+    "Pinceles",
+    "Pintorcitos",
+    "Pinturas",
+    "Pinza Abrochadora",
+    "Pistolas Encoladoras",
+    "Pizarras y Pizarrones",
+    "Placas Portapapeles",
+    "Plastilinas",
+    "Plastipinturitas",
+    "Plumines y Respuestos de Plumas",
+    "Portaminas",
+    "Portalapices y Portatarjetas",
+    "Portaminas",
+    "Portarrollos",
+    "Reglas",
+    "Respuestos de Dibujos",
+    "Respuestos Especiales",
+    "Respuestos Rayados y Cuadriculados",
+    "Resaltadores",
+    "Resmas",
+    "Rollers Ball",
+    "Rollos de PVC",
+    "Sacapuntas",
+    "Separadores",
+    "Sobres para Plastificar",
+    "Tablas Periodicas",
+    "Telgopor",
+    "Temperas Escolares",
+    "Tijeras",
+    "Tintas Varias",
+    "Tizas para Pizarra",
+    "Transportadores",
+    "Vasos y Tazas",
+  ];
 
-  const toggleTecnologia = () => {
-    setTecnologiaVisible(!tecnologiaVisible);
-  };
+  const regaleriaList = [
+    "Todo",
+    "Accesorios para Manualidades",
+    "Accesorios para Artistica",
+    "Adhesivos Escolares",
+    "Anotadores",
+    "Bandas Elasticas",
+    "Bobinas de Papel para Regalos",
+    "Boligrafos",
+    "Bolsas para Regalos",
+    "Botellas y Termos",
+    "Canoplas",
+    "Carpetas",
+    "Carpetas Escolares",
+    "Cartuchos y Tanques",
+    "Chinches y Alfileres",
+    "Cintas Adhesivas",
+    "Clips",
+    "Compases",
+    "Crayones y Pasteles",
+    "Cuadernos 16/21",
+    "Cuadernos 29/7",
+    "Cuadernos Especiales",
+    "Diarios Intimos",
+    "Flautas",
+    "Globos Terraqueos",
+    "Goma Eva",
+    "Gomas de Borrar",
+    "Imanes",
+    "Juegos",
+    "Kits y Set Infantiles",
+    "Lapiceras Pluma",
+    "Lapices Acuarelables",
+    "Lapices de Colores",
+    "Lapices de Grafito",
+    "Libretas",
+    "Libros Infantiles",
+    "Luncheras y Tuppers",
+    "Mapas",
+    "Marcadores",
+    "Masas para Moldear",
+    "Mochilas",
+    "Moños y Cintas para Regalo",
+    "Notas Adhesivas",
+    "Papel",
+    "Pinturas",
+    "Placas Portapapeles",
+    "Portaclips",
+    "Reglas",
+    "Resaltadores",
+    "Rollers Ball",
+    "Sacapuntas",
+    "Separadores",
+    "Sobres",
+    "Stickers",
+    "Tableros y Portatableros para Dibujo",
+    "Tintas Varias",
+    "Tizas para Pizarra",
+    "Vasos y Tazas",
+  ];
 
-  const toggleMochilas = () => {
-    setMochilasVisible(!mochilasVisible);
-  };
+  const resmasList = [
+    "Todo",
+    "Carbonicos",
+    "Papel",
+    "Papel para Dibujo",
+    "Resmas",
+  ];
 
-  const toggleMochilasCresko = () => {
-    setMochilasCreskoVisible(!mochilasCreskoVisible);
-  };
+  const tecnicoList = [
+    "Todo",
+    "Accesorios para Dibujo Tecnico",
+    "Accesorios para Artistica",
+    "Carpetas",
+    "Compases",
+    "Cuadernos Especiales",
+    "Escuadras",
+    "Gomas de Borrar",
+    "Lapices de Grafito",
+    "Letrografos",
+    "Marcadores",
+    "Minas",
+    "Papel",
+    "Plantillas y Accesorios para Dibujo Tecnico",
+    "Portalaminas",
+    "Portaminas",
+    "Reglas",
+    "Tableros y Portatableros para Dibujo",
+  ];
+  const tecnologiaList = [
+    "Todo",
+    "Accesorios para Dispositivos Moviles",
+    "Calculadoras",
+  ];
 
-  const toggleMochilasMooving = () => {
-    setMochilasMoovingVisible(!mochilasMoovingVisible);
-  };
+  const mochilaCategories = ["Todo", "Escolar", "Informal"];
 
-  const toggleJugueteria = () => {
-    setJugueteriaVisible(!jugueteriaVisible);
-  };
-
-  const toggleJuegosMesa = () => {
-    setJuegosMesaVisible(!juegosMesaVisible);
-  };
-
-  const toggleJuguetesBebe = () => {
-    setJuguetesBebeVisible(!juguetesBebeVisible);
-  };
-
-  const togglePuzzles = () => {
-    setPuzzlesVisible(!puzzlesVisible);
-  };
-
-  const toggleDeportes = () => {
-    setDeportesVisible(!deportesVisible);
-  };
-
-  const togglePeluches = () => {
-    setPeluchesVisible(!peluchesVisible);
-  };
-
-  const togglePersonajes = () => {
-    setPersonajesVisible(!personajesVisible);
-  };
+  const jugueteCategories = [
+    "Todo",
+    "Juegos de Mesa",
+    "Juguetes para Bebes",
+    "Puzzles y Rompecabezas",
+    "Deportes y Aire Libre",
+    "Peluches",
+    "Personajes",
+  ];
 
   return (
-    <div className="w-1/5 py-16 ml-8 mr-4">
-      <div className="pl-2 flex items-center justify-between">
-        <h2 className="text-2xl text-center mb-2">Filtros</h2>
-      </div>
-      <div className="border border-black">
-      <div className='p-3 flex items-center hover:text-white cursor-pointer bg-purple-400' onClick={toggleLibreria}>
-        <FontAwesomeIcon icon={faBookOpen} className="w-8 h-8 mr-2" />
-        <h4 className="text-xl" >Libreria</h4>
-        <FontAwesomeIcon icon={faSortDown} className="ml-2 mb-2 " />
-      </div>
+    <div className="sticky top-0 w-1/5 py-16 px-8">
+      <MainFilters />
+
+      {libCategories && (
+        <CategoryList title="Libreria" categories={libCategories} />
+      )}
+
+      {mochilasCategories && (
+        <CategoryList title="Mochilas" categories={mochilaCategories} />
+      )}
+
+      {juguetesCaegories && (
+        <CategoryList title="Juguetes" categories={jugueteCategories} />
+      )}
+
+      <CategoryList title="Libreria > Agendas" categories={agendasList} />
+
+      <CategoryList title="Libreria > Artistica" categories={artisticaList} />
+
+      <CategoryList title="Libreria > Comercial" categories={comercialList} />
+
+      <CategoryList title="Libreria > Escolar" categories={escolarList} />
+
+      <CategoryList title="Libreria > Regaleria" categories={regaleriaList} />
+
+      <CategoryList title="Libreria > Resmas y Papeles" categories={resmasList}/>
+
+      <CategoryList title="Libreria > Tecnico" categories={tecnicoList} />
+
+      <CategoryList title="Libreria > Tecnologia" categories={tecnologiaList} />
+
+      {/*
       {libreriaVisible && (
-        <ul className="text-base text-white bg-pink-400 ">
+        <ul className="text-base text-black ">
 
           <div className="mb-2 flex items-center cursor-pointer hover:text-black hover:bg-white" onClick={toggleAgendas}>
             <li className="p-2">Agendas</li>
@@ -203,15 +569,11 @@ const Filtros = () => {
         </ul>
       )}
       </div>
+      
 
-      <div className="border border-black">
-      <div className='p-3 flex items-center hover:text-white cursor-pointer bg-purple-400' onClick={toggleMochilas}>
-        <FontAwesomeIcon icon={faBox} className="w-8 h-8 mr-2" />
-        <h4 className="text-xl" >Mochilas</h4>
-        <FontAwesomeIcon icon={faSortDown} className="ml-2 mb-2 " />
-      </div>
+      <div className="">
       {mochilasVisible && (
-        <ul className="text-base text-white bg-pink-400">
+        <ul className="text-base text-black">
 
           <div className="flex items-center cursor-pointer hover:text-black hover:bg-white" onClick={toggleMochilasCresko}>
             <li className="p-2">Cresko</li>
@@ -243,14 +605,9 @@ const Filtros = () => {
       )}
       </div>
 
-      <div className="border border-black">
-      <div className='p-3 flex items-center hover:text-white cursor-pointer bg-purple-400' onClick={toggleJugueteria}>
-        <FontAwesomeIcon icon={faChessKnight} className="w-8 h-8 mr-2" />
-        <h4 className="text-xl" >Juguetes</h4>
-        <FontAwesomeIcon icon={faSortDown} className="ml-2 mb-2 " />
-      </div>
+      <div className="">
       {jugueteriaVisible && (
-        <ul className="text-base text-white bg-pink-400">
+        <ul className="text-base text-black">
           
           <div className="mb-2 flex items-center cursor-pointer hover:text-black hover:bg-white" onClick={toggleJuegosMesa}>
             <li className="p-2">Juegos De Mesa</li>
@@ -313,9 +670,7 @@ const Filtros = () => {
           )}
         </ul>
       )}
-      </div>
-
-      
+          </div>*/}
     </div>
   );
 };
