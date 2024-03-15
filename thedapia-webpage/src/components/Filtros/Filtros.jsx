@@ -16,6 +16,7 @@ const Filtros = () => {
     setJuguetesCategories(false);
   };
 
+
   const toggleMochilasCategories = () => {
     setMochilasCategories(!mochilasCategories);
     setLibreriaCategories(false);
@@ -449,9 +450,9 @@ const Filtros = () => {
 
   return (
     <div className="sticky top-0 w-1/5 py-16 px-8">
-      <MainFilters />
+      <MainFilters toggleLibCat = {toggleLibreriaCategories} toggleMochCat = {toggleMochilasCategories} toggleJugCat= {toggleJuguetesCategories}/>
 
-      {libCategories && (
+      {libreriaCategories && (
         <CategoryList title="Libreria" categories={libCategories} />
       )}
 
@@ -462,9 +463,8 @@ const Filtros = () => {
       {juguetesCaegories && (
         <CategoryList title="Juguetes" categories={jugueteCategories} />
       )}
-
       <CategoryList title="Libreria > Agendas" categories={agendasList} />
-
+{/*
       <CategoryList title="Libreria > Artistica" categories={artisticaList} />
 
       <CategoryList title="Libreria > Comercial" categories={comercialList} />
@@ -478,7 +478,7 @@ const Filtros = () => {
       <CategoryList title="Libreria > Tecnico" categories={tecnicoList} />
 
       <CategoryList title="Libreria > Tecnologia" categories={tecnologiaList} />
-
+      */}
       {/*
       {libreriaVisible && (
         <ul className="text-base text-black ">

@@ -85,17 +85,9 @@ const Home = () => {
     {url: MarcasJuguetes.toptoys, alt: "toptoys-logo"}
 
   ]
-
-  const toggleCartModal = () => {
-    setShowCartModal(!showCartModal)
-  };
-
   return (
     <>
-      <Navbar onCartClick = {toggleCartModal}/>
-      {showCartModal && (
-        <CartModal onClose={() => setShowCartModal(false)}/>
-      )}
+      <Navbar/>
       <Carousel images = {Carouselimgs}/>
       <Features />
       <ProductosCarousel titulo={"Ultimos Ingresos"} productos={productosUltimosIngresos} />

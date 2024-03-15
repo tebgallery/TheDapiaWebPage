@@ -9,7 +9,7 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { MdAddShoppingCart } from "react-icons/md";
 import CartModal from '../CartModal/CartModal';
 
-const Navbar = ( {onCartClick, cart} ) => {
+const Navbar = () => {
 
   const [showMarcasModal, setShowMarcasModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
