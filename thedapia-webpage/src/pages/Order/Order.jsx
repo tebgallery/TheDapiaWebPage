@@ -8,13 +8,12 @@ import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faTruckFast, faCreditCard, faMobileScreenButton } from '@fortawesome/free-solid-svg-icons';
 
-
 import cardsLogo from '../../img/PaymentLogos/cardslogo.jpg';
 import mpLogo from '../../img/PaymentLogos/mplogo.png';
 import ErrorMessage from "../../components/Order/ErrorMessage";
 
 
-const Order = () => {
+const Order = ({cart}) => {
     const [shippingCost, setShippingCost] = useState(0);
     const [orderForm, setOrderForm] = useState(true);
     const [receiverForm, setReceiverForm] = useState(false);
@@ -22,11 +21,8 @@ const Order = () => {
     const [paymentMethod, setPaymentMethod] = useState(0);
     const [cardData, setCardData] = useState(false);
     const [transferData,setTransferData] = useState(false);
-    const { cart } = useParams();
 
-    const decodedCart = decodeURIComponent(cart);
-    const parsedCart = JSON.parse(decodedCart);
-    const totalPrice = parsedCart[parsedCart.length - 1].total + shippingCost;
+    const totalPrice = cart.total + shippingCost;
 
     const [preferenceId, setPreferenceId] = useState(null);
 
@@ -112,7 +108,7 @@ const Order = () => {
 
     const createPreference = async () => {
         try {
-            const cartWithoutLastItem = [...parsedCart.slice(0, parsedCart.length - 1)];
+            const cartWithoutLastItem = [...cart.slice(0, cart.length - 1)];
             const products = cartWithoutLastItem.map(product => ({
                 title: product.nombre,
                 quantity: product.amount,
@@ -156,7 +152,7 @@ const Order = () => {
 
     const handlecreateOrder = async () => {
 
-        const cartWithoutLastItem = [...parsedCart.slice(0, parsedCart.length - 1)];
+        const cartWithoutLastItem = [...cart.slice(0, cart.length - 1)];
         // Construir la lista de productos para la orden
         const products = cartWithoutLastItem.map(product => ({
             nombreProducto: product.nombre,
@@ -186,6 +182,8 @@ const Order = () => {
         // Enviar la orden al backend
         await createOrder(orderData);
     };
+
+    console.log(cart);
 
     return (
         <div>
@@ -566,7 +564,7 @@ const Order = () => {
 
                         </div>
                     </div>
-                    <CartColumn cart={parsedCart} shippingCost={shippingCost} />
+                    <CartColumn cart={cart} shippingCost={shippingCost} />
                 </div>
             </div>
         </div>

@@ -13,8 +13,7 @@ import CartModal from '../../components/CartModal/CartModal';
 import * as MarcasLibreria from '../../img/MarcasLibreria';
 import * as MarcasJuguetes from '../../img/MarcasJuguetes';
 
-const Home = () => {
-  const [showCartModal, setShowCartModal] = useState(false);
+const Home = ({addToCartClick,cart,cartModal, toggleCartModal}) => {
   const [productosUltimosIngresos, setProductosUltimosIngresos] = useState([]);
   const [productosMasVendidos, setProductosMasVendidos] = useState([]);
   const [productosOfertas, setProductosOfertas] = useState([]);
@@ -85,12 +84,17 @@ const Home = () => {
     {url: MarcasJuguetes.toptoys, alt: "toptoys-logo"}
 
   ]
+
+
   return (
     <>
-      <Navbar/>
+      <Navbar onClickCart={toggleCartModal} />
+      {cartModal && (
+      <CartModal cart= {cart} onClose={toggleCartModal}/>
+    )}
       <Carousel images = {Carouselimgs}/>
       <Features />
-      <ProductosCarousel titulo={"Ultimos Ingresos"} productos={productosUltimosIngresos} />
+      <ProductosCarousel titulo={"Ultimos Ingresos"} productos={productosUltimosIngresos} addToCartClick = { addToCartClick}/>
       <Marcas marcas = {marcasLiberia}/>
       <ProductosCarousel titulo={"Lo Mas Vendido"} productos={productosMasVendidos} />
       <Marcas marcas = {marcasJuguetes}/>

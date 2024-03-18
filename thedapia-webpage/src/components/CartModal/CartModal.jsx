@@ -6,25 +6,22 @@ import {
   faPlus,
   faMinus,
 } from "@fortawesome/free-solid-svg-icons";
-import {Link as RouterLink, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 const CartModal = ({cart,onClose}) => {
   
-  {/*const total = cart.reduce(
-    (accumulator, currentValue) =>
-      accumulator + currentValue.preciototal * currentValue.amount,
-    0
-  );*/}
-{/*}
-  const cartWithTotal = [...cart, { total }];
-console.log(cartWithTotal);*/}
+  const [subTotal, setSubTotal] = useState(0);
+
+  useEffect(() => {
+    setSubTotal(cart.reduce(
+    (accumulator, currentValue) => accumulator + currentValue.preciototal * currentValue.amount, 0));
+  },[subTotal])
 
   const navigate = useNavigate();
 
   const handleNavigateToOrderPage = () => {
-    // Supongamos que 'cart' es tu lista de productos en formato JSON
-    const cartParameter = encodeURIComponent(JSON.stringify(cartWithTotal));
-    navigate(`/order/${cartParameter}`);
+    
+    navigate('/order');
   };
 
   return (
@@ -49,8 +46,8 @@ console.log(cartWithTotal);*/}
             className="relative flex items-center justify-between border-b border-stone-400 mb-4 p-2"
           >
             <div className="flex items-center">
-              <img src={c.imagen} alt={c.nombre} className="h-16 w-auto mr-4" />
-              <div>
+              <img src={c.imagen} alt={c.nombre} className="h-16 w-16 mr-4" />
+              <div className="mx-2">
                 <p className="font-bold mb-1">{c.nombre}</p>
                 <div className="flex items-center justify-between w-40">
                   <p>Cantidad: </p>
@@ -90,8 +87,8 @@ console.log(cartWithTotal);*/}
         ))}
         <div>
           <div className="flex items-center justify-around">
-            <p className="font-bold">Total:</p>
-            <p>${total}</p>
+            <p className="font-bold">Subtotal:</p>
+            <p>${subTotal}</p>
           </div>
 
           <div className="mt-16 w-full px-4">

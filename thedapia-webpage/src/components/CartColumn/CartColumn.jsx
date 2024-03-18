@@ -4,7 +4,7 @@ const CartColumn = ({cart, shippingCost}) => {
     return (
         <div className="col-span-4">
             <div className="sticky top-12 w-9/12 border-t border-gray-300 p-2">
-                {cart.slice(0, -1).map((producto, _id) => (
+                {cart.map((producto, _id) => (
                     <div key={_id}>
                         <div className="flex items-center justify-between border-b border-gray-300 py-2">
                             <img
@@ -21,7 +21,7 @@ const CartColumn = ({cart, shippingCost}) => {
                 <div className="border-b border-gray-300 py-2">
                     <div className="flex justify-between items-start my-2">
                         <p>Subtotal: </p>
-                        <p className="font-semibold ">${cart[cart.length - 1].total}</p>
+                        <p className="font-semibold ">${cart.subtotal}</p>
                     </div>
                     <div className="flex justify-between items-start my-2">
                         <p>Costo del envío: </p>
@@ -30,7 +30,7 @@ const CartColumn = ({cart, shippingCost}) => {
                 </div>
                 <div className="flex items-center justify-between border-b border-gray-300 py-5">
                     <p className="text-2xl font-semibold">Total: </p>
-                    <p className="font-semibold ">${cart[cart.length - 1].total + shippingCost} </p>
+                    <p className="font-semibold ">${cart.total + shippingCost} </p>
                 </div>
             </div>
         </div>

@@ -7,13 +7,11 @@ import {Link as RouterLink, useNavigate} from 'react-router-dom';
 import ModalMarcas from './ModalMarcas';
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdAddShoppingCart } from "react-icons/md";
-import CartModal from '../CartModal/CartModal';
 
-const Navbar = () => {
+const Navbar = ({onClickCart}) => {
 
   const [showMarcasModal, setShowMarcasModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [cartModal,setCartModal] = useState(false);
   const {user, logOutUser} = useContext(AuthContext);
   const [searchBarValue,setSearchBarValue] = useState(null);
   const navigate = useNavigate();
@@ -68,7 +66,7 @@ const Navbar = () => {
         </div>
 
         <div className="py-2 px-4 cursor-pointer text-white hover:text-slate-800">
-          <MdAddShoppingCart className='w-8 h-8 m-auto mb-1' onClick={() => setCartModal(true)} />
+          <MdAddShoppingCart className='w-8 h-8 m-auto mb-1' onClick={onClickCart} />
           <p>Carrito</p> {/* Texto debajo del icono del carrito */}
         </div>
       </div>
@@ -114,9 +112,6 @@ const Navbar = () => {
         </div>
       )}
     </nav>
-    {cartModal && (
-      <CartModal cart= {cart} onClose={() => setCartModal(false)} />
-    )}
   </>
   )
 };

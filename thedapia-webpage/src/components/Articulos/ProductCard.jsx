@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
-const ProductCard = ({productos,openModal}) => {
+const ProductCard = ({productos,openModal,addToCartClick}) => {
+
     return (
         <>
             {productos.map((producto, _id) => (
@@ -30,7 +31,7 @@ const ProductCard = ({productos,openModal}) => {
             <div className="w-full px-8">
               <button 
                 className="flex items-center justify-around text-base text-white bg-fuchsia-300 w-full h-11 rounded-full hover:bg-gradient-to-r from-pink-400 to-fuchsia-600 duration-300 hover:scale-102"
-                onClick={() => { onAddToCartClick(producto); onCartClick(); }}
+                onClick={() => addToCartClick(producto)}
               >
                 <span>AGREGAR</span>
                 <FontAwesomeIcon className="bg-white rounded-full text-fuchsia-400 p-2" icon={faCartPlus} />

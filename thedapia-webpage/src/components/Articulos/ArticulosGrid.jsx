@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import ProductCard from "./ProductCard";
 
-const ArticulosGrid = ({products, onCartClick, onAddToCartClick,cart}) => {
+const ArticulosGrid = ({products, addToCartClick}) => {
   const itemsPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedArticulo, setSelectedArticulo] = useState(null);
@@ -30,7 +30,7 @@ const ArticulosGrid = ({products, onCartClick, onAddToCartClick,cart}) => {
   return (
     <div className="w-4/5 py-16 px-16">
       <div className="grid grid-cols-4 gap-12 place-content-center">
-        <ProductCard productos = {currentArticulos} />
+        <ProductCard productos = {currentArticulos} addToCartClick={addToCartClick} />
       </div>
 
       {selectedArticulo && (
