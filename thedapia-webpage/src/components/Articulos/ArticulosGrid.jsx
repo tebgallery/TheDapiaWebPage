@@ -5,7 +5,7 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import ProductCard from "./ProductCard";
 
 const ArticulosGrid = ({products, addToCartClick}) => {
-  const itemsPerPage = 12;
+  const itemsPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedArticulo, setSelectedArticulo] = useState(null);
 
@@ -37,12 +37,12 @@ const ArticulosGrid = ({products, addToCartClick}) => {
         <ModalArticulo producto={selectedArticulo} onClose={handleCloseModal} />
       )}
 
-      <div className="mt-16 h-10 flex items-center justify-center">
+      <div className="mt-32 h-10 flex items-center justify-center">
         <ul className="flex space-x-4">
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
             <li
               key={page}
-              className= {`cursor-pointer ${currentPage === page ? 'font-bold' : '' } h-10 w-10 text-xl text-center border-2 border-white bg-emerald-400`}
+              className= {`cursor-pointer ${currentPage === page ? 'font-bold' : '' }  py-2 px-4 rounded-full text-lg text-center text-white bg-fuchsia-400 border hover:border hover:border-gray-600`}
               onClick={() => paginate(page)}
             >
               {page}

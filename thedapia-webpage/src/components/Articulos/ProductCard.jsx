@@ -17,14 +17,14 @@ const ProductCard = ({productos,openModal,addToCartClick}) => {
                 className="w-full h-64 p-5 object-contain duration-500 transition-transform transform hover:scale-105"
               />
               <div className="border-t border-gray-200 pt-4">
-                <h3 className="min-h-20 max-h-20 p-2 text-lg text-black text-center uppercase font-semibold">{producto.nombre}</h3>
+                <h3 className="min-h-20 max-h-20 py-2 px-4 text-lg text-black text-center uppercase font-semibold mb-3">{producto.nombre}</h3>
                 <div className="min-h-16 max-h-16 flex items-center justify-center pb-2 mb-2">
                   {producto.descuento!=null && producto.descuento!=0  ?(
                     <>
                       <p className="text-center text-fuchsia-500 text-lg line-through">${producto.precio}</p>
-                      <p className="text-center text-black text-2xl ml-5">${producto.preciototal}</p>
+                      <p className="text-center text-slate-500 font-bold text-2xl ml-5">${producto.preciototal}</p>
                       </>
-                  ): <p className="text-center text-black text-2xl">${producto.preciototal}</p>}
+                  ): <p className="text-center text-slate-500 font-bold text-2xl">${producto.preciototal}</p>}
                   </div>
               </div>
             </div>

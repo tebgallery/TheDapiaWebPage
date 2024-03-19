@@ -17,28 +17,59 @@ const App = () => {
 
   const addToCartClick = (producto) => {
     const existingProductIndex = cart.findIndex((item) => item._id === producto._id);
-
-    // Si el producto ya está en el carrito, aumentar su cantidad en 1
     if (existingProductIndex !== -1) {
       const updatedCart = cart.map((item, index) => {
-        if (index === existingProductIndex) {
+        if (index === existingProductIndex && item.amount < item.cantidad) {
+          setSubTotal(subTotal+item.preciototal)
           return { ...item, amount: item.amount + 1 };
         }
         return item;
       });
       setCart(updatedCart);
     } else {
-      // Si el producto no está en el carrito, agregarlo con cantidad igual a 1
+      setSubTotal(subTotal+producto.preciototal)
       setCart([...cart, { ...producto, amount: 1 }]);
     }
+
     setCartModal(true);
-    setSubTotal(subTotal + producto.preciototal);
   };
 
 
   const toggleCartModal = () => {
     setCartModal(!cartModal);
   }
+
+  const increaseAmount = (productId) => {
+    const updatedCart = cart.map((item) => {
+      if (item._id === productId && item.amount < item.cantidad) {
+        setSubTotal(subTotal+item.preciototal)
+        return { ...item, amount: item.amount + 1 };
+      }
+      return item;
+    });
+    setCart(updatedCart);
+  };
+  
+  const decreaseAmount = (productId) => {
+    const updatedCart = cart.map((item) => {
+      if (item._id === productId && item.amount > 1) {
+        setSubTotal(subTotal-item.preciototal)
+        return { ...item, amount: item.amount - 1 };
+      }
+      return item;
+    });
+    setCart(updatedCart);
+  };
+
+  const removeFromCart = (productId) => {
+    const updatedCart = cart.filter((item) => item._id !== productId);
+    setCart(updatedCart);
+  }
+
+  console.log(cart);
+  console.log("subtotal:",subTotal);
+
+
   return (
     <>
       <Router>
@@ -47,12 +78,12 @@ const App = () => {
             {/* rutas protegidas
             ej: <Route path="/adminpage" element = {<AdminPage/>}/> */}
           </Route>
-          <Route path="/" element={<Home addToCartClick={addToCartClick} cart={cart} cartModal={cartModal} toggleCartModal={toggleCartModal} />} />
-          <Route path="/productos" element={<Productos addToCartClick={addToCartClick} cart={cart} cartModal={cartModal} toggleCartModal={toggleCartModal} />} />
-          <Route path="/productos/libreria" element={<Productos addToCartClick={addToCartClick} cart={cart} cartModal={cartModal} toggleCartModal={toggleCartModal} categoria = "Libreria" />} />
-          <Route path="/productos/mochilas" element={<Productos addToCartClick={addToCartClick} cart={cart} cartModal={cartModal} toggleCartModal={toggleCartModal} categoria = "Mochilas" />} />
-          <Route path="/productos/juguetes" element={<Productos addToCartClick={addToCartClick} cart={cart} cartModal={cartModal} toggleCartModal={toggleCartModal} categoria = "Juguetes" />} />
-          <Route path="/productos/buscar/:palabra" element={<Productos addToCartClick={addToCartClick} cart={cart} cartModal={cartModal} toggleCartModal={toggleCartModal} />} />
+          <Route path="/" element={<Home addToCartClick={addToCartClick} cart={cart} cartModal={cartModal} toggleCartModal={toggleCartModal} onMinus={decreaseAmount} onPlus={increaseAmount} onDelete = {removeFromCart}/>} />
+          <Route path="/productos" element={<Productos addToCartClick={addToCartClick} cart={cart} cartModal={cartModal} toggleCartModal={toggleCartModal} onMinus={decreaseAmount} onPlus={increaseAmount} onDelete = {removeFromCart}/>} />
+          <Route path="/productos/libreria" element={<Productos addToCartClick={addToCartClick} cart={cart} cartModal={cartModal} toggleCartModal={toggleCartModal} onMinus={decreaseAmount} onPlus={increaseAmount} onDelete = {removeFromCart} categoria = "Libreria" />} />
+          <Route path="/productos/mochilas" element={<Productos addToCartClick={addToCartClick} cart={cart} cartModal={cartModal} toggleCartModal={toggleCartModal} onMinus={decreaseAmount} onPlus={increaseAmount} onDelete = {removeFromCart} categoria = "Mochilas" />} />
+          <Route path="/productos/juguetes" element={<Productos addToCartClick={addToCartClick} cart={cart} cartModal={cartModal} toggleCartModal={toggleCartModal} onMinus={decreaseAmount} onPlus={increaseAmount} onDelete = {removeFromCart} categoria = "Juguetes" />} />
+          <Route path="/productos/buscar/:palabra" element={<Productos addToCartClick={addToCartClick} cart={cart} cartModal={cartModal} toggleCartModal={toggleCartModal} onMinus={decreaseAmount} onPlus={increaseAmount} onDelete = {removeFromCart}/>} />
           <Route path="/adminpage" element = {<AdminPage/>}/>
           <Route path="/adminpage/orders" element = {<AdminOrders/>}/>
           <Route path="/order" element={<Order cart = {cart}/>} />

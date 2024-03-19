@@ -8,7 +8,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 
-const Productos = ({categoria,addToCartClick,cart,cartModal, toggleCartModal}) => {
+const Productos = ({categoria,addToCartClick,cart,cartModal, toggleCartModal,onMinus,onPlus,onDelete}) => {
   const getUrl = 'http://localhost:3000/productos';
   const getCatUrl = "http://localhost:3000/productos/"+categoria;
   const { palabra } = useParams();
@@ -48,7 +48,7 @@ const Productos = ({categoria,addToCartClick,cart,cartModal, toggleCartModal}) =
     <>
       <Navbar onClickCart={toggleCartModal} />
       {cartModal && (
-      <CartModal cart= {cart} onClose={toggleCartModal}/>
+      <CartModal cart= {cart} onClose={toggleCartModal} onMinus={onMinus} onPlus={onPlus} onDelete={onDelete}/>
     )}
       <section className="w-full">
         <div className="flex justify-center">

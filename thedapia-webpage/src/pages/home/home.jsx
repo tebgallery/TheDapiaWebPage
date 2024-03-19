@@ -13,7 +13,7 @@ import CartModal from '../../components/CartModal/CartModal';
 import * as MarcasLibreria from '../../img/MarcasLibreria';
 import * as MarcasJuguetes from '../../img/MarcasJuguetes';
 
-const Home = ({addToCartClick,cart,cartModal, toggleCartModal}) => {
+const Home = ({addToCartClick,cart,cartModal, toggleCartModal,onMinus,onPlus,onDelete}) => {
   const [productosUltimosIngresos, setProductosUltimosIngresos] = useState([]);
   const [productosMasVendidos, setProductosMasVendidos] = useState([]);
   const [productosOfertas, setProductosOfertas] = useState([]);
@@ -90,7 +90,7 @@ const Home = ({addToCartClick,cart,cartModal, toggleCartModal}) => {
     <>
       <Navbar onClickCart={toggleCartModal} />
       {cartModal && (
-      <CartModal cart= {cart} onClose={toggleCartModal}/>
+      <CartModal cart= {cart} onClose={toggleCartModal} onMinus={onMinus} onPlus={onPlus} onDelete={onDelete}/>
     )}
       <Carousel images = {Carouselimgs}/>
       <Features />
