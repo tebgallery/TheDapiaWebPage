@@ -5,7 +5,7 @@ import ModalArticulo from '../Articulos/ModalArticulo'
 import CartModal from "../CartModal/CartModal"
 import ProductCard from "../Articulos/ProductCard";
 
-const ProductosGrid = ({ productos }) => {
+const ProductosGrid = ({ productos,addToCartClick }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedArticulo, setSelectedArticulo] = useState(null);
   const [showCartModal, setShowCartModal] = useState(false);
@@ -44,7 +44,7 @@ const ProductosGrid = ({ productos }) => {
       </button>
 
       <div className="grid grid-cols-4 gap-12 place-content-center mx-28">
-        <ProductCard productos = {productos.slice(currentIndex, currentIndex + 4)} openModal= {() => handleCardClick(producto)}/>
+        <ProductCard productos = {productos.slice(currentIndex, currentIndex + 4)} addToCartClick={addToCartClick}/>
       </div>
 
       <button

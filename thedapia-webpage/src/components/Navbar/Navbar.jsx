@@ -7,14 +7,13 @@ import {Link as RouterLink, useNavigate} from 'react-router-dom';
 import ModalMarcas from './ModalMarcas';
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdAddShoppingCart } from "react-icons/md";
-import CartModal from '../CartModal/CartModal';
 
-const Navbar = ( {onCartClick, cart} ) => {
+const Navbar = ({onClickCart}) => {
 
   const [showMarcasModal, setShowMarcasModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [cartModal,setCartModal] = useState(false);
   const {user, logOutUser} = useContext(AuthContext);
+  const [searchBarValue,setSearchBarValue] = useState(null);
   const navigate = useNavigate();
 
 
@@ -29,6 +28,10 @@ const Navbar = ( {onCartClick, cart} ) => {
     navigate('/', { state: { sectionId } });
   }; 
 
+  const handleSearch = () => {
+    navigate(`/productos/buscar/${searchBarValue}`);
+  };
+
   const marcas = ['marca1', 'marca2', 'marca3', 'marca4','marca5', 'marca6', 'marca7', 'marca8','marca9', 'marca10', 'marca11', 'marca12','marca13', 'marca14', 'marca15', 'marca16','marca17', 'marca18', 'marca19', 'marca20'];
   return (
     <>
@@ -36,7 +39,7 @@ const Navbar = ( {onCartClick, cart} ) => {
       <div className="absolute top-0 flex items-center w-full h-24 bg-gradient-to-r from-fuchsia-300 to-fuchsia-400 justify-between">
         <div className="w-1/4 flex items-center justify-center">
           <RouterLink  to='/' >
-            <img className = "w-16 h-16" src={Logo} alt="thedapia-logo" />
+            <img className = "w-20 h-20 " src={Logo} alt="thedapia-logo" />
           </RouterLink>
         </div>
 
@@ -45,28 +48,32 @@ const Navbar = ( {onCartClick, cart} ) => {
             type="search"
             className="w-full pl-8 outline-none rounded-l-3xl"
             placeholder="Buscar productos..."
+            onChange={(e) => setSearchBarValue(e.target.value)}
           />
           <button
             className="w-16 bg-white flex items-center justify-center rounded-r-3xl "
             type="button"
+            onClick={handleSearch}
           >
             <FontAwesomeIcon icon={faMagnifyingGlass} className="w-6 h-6 text-slate-700 hover:text-emerald-400" />
           </button>
         </div>
 
-        <div className="w-1/4 pl-10 flex justify-center ">
-          <div className="cursor-pointer pl-10" onClick={() => handleCloseOpenLoginModal()}>
-              <FaRegUserCircle className='text-white w-8 h-8 hover:text-slate-800' />
-          </div>
+        <div className="w-1/4 pl-10 flex justify-center mt-2">
+        <div className="py-2 px-4 cursor-pointer text-white hover:text-slate-800" onClick={() => handleCloseOpenLoginModal()}>
+          <FaRegUserCircle className='w-8 h-8 m-auto mb-1' />
+          <p>Mi Usuario</p> {/* Texto debajo del icono de usuario */}
+        </div>
 
-          <div className="cursor-pointer pl-10 relative" >
-             <MdAddShoppingCart className='text-white w-8 h-8 hover:text-slate-800' onClick={() => setCartModal(true)} />
-          </div>
+        <div className="py-2 px-4 cursor-pointer text-white hover:text-slate-800">
+          <MdAddShoppingCart className='w-8 h-8 m-auto mb-1' onClick={onClickCart} />
+          <p>Carrito</p> {/* Texto debajo del icono del carrito */}
         </div>
       </div>
+      </div>
       <div className="absolute bottom-0 flex w-full h-12 bg-slate-800 flex items-center justify-center">
-        <ul className= "space-x-16 text-white">
-            <li className="inline-block"> <RouterLink to='/' className="hover:text-emerald-400 cursor-pointer">Inicio</RouterLink> </li>
+        <ul className= "space-x-20 text-white">
+            <li className="inline-block"> <RouterLink to='/' className="hover:text-emerald-400 cursor-pointer hover:border-b-2">Inicio</RouterLink> </li>
             <li className="inline-block"> <RouterLink to='/productos' className="hover:text-emerald-400 cursor-pointer">Catálogo</RouterLink> </li>
             <li className="inline-block"> <RouterLink to='/productos/libreria' className="hover:text-emerald-400 cursor-pointer">Librería</RouterLink> </li>
             <li className="inline-block"> <RouterLink to='/productos/mochilas' className="hover:text-emerald-400 cursor-pointer">Mochilas</RouterLink> </li>
@@ -79,12 +86,7 @@ const Navbar = ( {onCartClick, cart} ) => {
             </li>*/}
 
             <li className="inline-block"> 
-              <a onClick={() => handleNavigateToSection('aboutus-section')} className="hover:text-emerald-400 cursor-pointer"  >
-                Nosotros
-              </a>
-            </li>
-            <li className="inline-block"> 
-              <a onClick={() => navigate('/contact')} className="hover:text-emerald-400 cursor-pointer" >
+              <a onClick={() => navigate('/contact')} className="cursor-pointer bg-gradient-to-r from-purple-400 to-indigo-500 py-2 px-4 rounded-full hover:opacity-80" >
                 Contacto
               </a>
             </li>
@@ -110,9 +112,6 @@ const Navbar = ( {onCartClick, cart} ) => {
         </div>
       )}
     </nav>
-    {cartModal && (
-      <CartModal cart= {cart} onClose={() => setCartModal(false)} />
-    )}
   </>
   )
 };

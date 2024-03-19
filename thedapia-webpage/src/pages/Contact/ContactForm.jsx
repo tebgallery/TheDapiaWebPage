@@ -59,7 +59,7 @@ const ContactForm = () => {
         </div>
       </div>
       <div className="w-full px-12 text-white">
-        <button className="w-full h-16 rounded-full bg-violet-400 text-lg hover:bg-violet-500 duration-300 hover:scale-105"
+        <button className="w-full h-16 rounded-full bg-violet-400 text-lg hover:bg-gradient-to-r from-purple-400 to-indigo-500 duration-300 hover:scale-105"
           onSubmit={onSubmit}
         >
           Enviar Mensaje

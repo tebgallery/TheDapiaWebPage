@@ -8,12 +8,12 @@ import cors from 'cors'
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 
 
-mongoose.connect('mongodb://localhost:27017/thedapia', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect('mongodb://localhost:27017/thedapia', {useNewUrlParser: true})
 .then(()=>{
     console.log('Conectado con la DB')
 })
-.catch(()=>{
-    console.log('Error al conectar con la DB')
+.catch((error)=>{
+    console.log('Error al conectar con la DB',error)
 })
 
 const client = new MercadoPagoConfig({ 

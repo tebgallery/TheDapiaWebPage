@@ -9,12 +9,12 @@ const ContactMap = () => {
 
     return (
         <div 
-            className="w-6/12 h-96 bg-map bg-no-repeat bg-center bg-cover rounded-r-2xl shadow-2xl hover:cursor-pointer"
+            className="w-6/12 h-96 bg-map bg-no-repeat bg-center bg-cover rounded-2xl shadow-2xl hover:cursor-pointer"
             onMouseEnter={() => {setModalMap(true)}}
             onMouseLeave={() => {setModalMap(false)}}
         >
             {modalMap && (
-                <div className='w-full bg-gray-950 opacity-70 rounded-r-2xl w-full h-full flex items-center justify-center'>
+                <div className='w-full bg-gray-950 opacity-70 rounded-2xl w-full h-full flex items-center justify-center'>
                 <div className='text-center text-white text-lg'>
                     <h5 className='mb-4'> Como llegar:</h5>
                     <p className='mb-4'> Subte E, Estación Jose M. Moreno</p>

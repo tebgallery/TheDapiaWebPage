@@ -13,8 +13,7 @@ import CartModal from '../../components/CartModal/CartModal';
 import * as MarcasLibreria from '../../img/MarcasLibreria';
 import * as MarcasJuguetes from '../../img/MarcasJuguetes';
 
-const Home = () => {
-  const [showCartModal, setShowCartModal] = useState(false);
+const Home = ({addToCartClick,cart,cartModal, toggleCartModal,onMinus,onPlus,onDelete}) => {
   const [productosUltimosIngresos, setProductosUltimosIngresos] = useState([]);
   const [productosMasVendidos, setProductosMasVendidos] = useState([]);
   const [productosOfertas, setProductosOfertas] = useState([]);
@@ -86,19 +85,16 @@ const Home = () => {
 
   ]
 
-  const toggleCartModal = () => {
-    setShowCartModal(!showCartModal)
-  };
 
   return (
     <>
-      <Navbar onCartClick = {toggleCartModal}/>
-      {showCartModal && (
-        <CartModal onClose={() => setShowCartModal(false)}/>
-      )}
+      <Navbar onClickCart={toggleCartModal} />
+      {cartModal && (
+      <CartModal cart= {cart} onClose={toggleCartModal} onMinus={onMinus} onPlus={onPlus} onDelete={onDelete}/>
+    )}
       <Carousel images = {Carouselimgs}/>
       <Features />
-      <ProductosCarousel titulo={"Ultimos Ingresos"} productos={productosUltimosIngresos} />
+      <ProductosCarousel titulo={"Ultimos Ingresos"} productos={productosUltimosIngresos} addToCartClick = { addToCartClick}/>
       <Marcas marcas = {marcasLiberia}/>
       <ProductosCarousel titulo={"Lo Mas Vendido"} productos={productosMasVendidos} />
       <Marcas marcas = {marcasJuguetes}/>

@@ -4,7 +4,7 @@ import {faTruckFast,faBookOpen,faCreditCard} from '@fortawesome/free-solid-svg-i
 
 const Features = () => {
     return (
-            <div className="w-full h-36 flex items-center justify-center bg-gray-100 mt-6">
+            <div className="w-full h-36 flex items-center justify-center bg-slate-200 mt-6">
                 <div className =" flex items-center w-80 h-20 p-2 text-center">
                     <FontAwesomeIcon className='w-9 h-9' icon={faTruckFast}/>   
                     <div className="w-64">
